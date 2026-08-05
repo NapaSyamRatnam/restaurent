@@ -36,9 +36,6 @@ export function renderLandingView(container) {
           <button class="btn btn-secondary btn-lg" id="landing-locations-btn">
             <i class="fa-solid fa-location-dot"></i> Book a Table
           </button>
-          <button class="btn btn-outline btn-lg landing-admin-quick-btn" id="landing-admin-btn">
-            <i class="fa-solid fa-user-shield"></i> Admin Portal
-          </button>
         </div>
 
         <div class="landing-stats-row">
@@ -202,9 +199,6 @@ export function renderLandingView(container) {
               <button class="btn btn-light btn-lg" id="promo-order-now-btn">
                 <i class="fa-solid fa-cart-shopping"></i> Order Now
               </button>
-              <button class="btn btn-outline-light btn-lg" id="promo-admin-link">
-                <i class="fa-solid fa-user-gear"></i> Admin & Staff Login
-              </button>
             </div>
           </div>
         </div>
@@ -221,25 +215,6 @@ export function renderLandingView(container) {
 
   const locBtn = document.getElementById('landing-locations-btn');
   if (locBtn) locBtn.onclick = () => state.setView('location');
-
-  const adminBtn = document.getElementById('landing-admin-btn');
-  if (adminBtn) adminBtn.onclick = () => {
-    if (state.isAdmin()) {
-      state.setView('admin');
-    } else {
-      showToast('Please log in with Admin credentials to access Admin Portal.', 'info');
-      state.setView('login');
-    }
-  };
-
-  const promoAdminBtn = document.getElementById('promo-admin-link');
-  if (promoAdminBtn) promoAdminBtn.onclick = () => {
-    if (state.isAdmin()) {
-      state.setView('admin');
-    } else {
-      state.setView('login');
-    }
-  };
 
   const promoOrderBtn = document.getElementById('promo-order-now-btn');
   if (promoOrderBtn) promoOrderBtn.onclick = () => state.setView('menu');

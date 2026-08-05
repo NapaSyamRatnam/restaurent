@@ -9,7 +9,7 @@ export function renderLoginView(container) {
   if (!container) return;
 
   const currentUser = state.currentUser;
-  let activeTab = 'user'; // 'user', 'admin', 'register'
+  let activeTab = state.loginTab || 'user'; // 'user', 'admin', 'register'
 
   container.innerHTML = `
     <div class="auth-view-container">
@@ -52,13 +52,13 @@ export function renderLoginView(container) {
         ` : `
           <!-- Auth Tabs Header -->
           <div class="auth-tabs">
-            <button class="auth-tab active" id="tab-user-btn" data-tab="user">
+            <button class="auth-tab ${activeTab === 'user' ? 'active' : ''}" id="tab-user-btn" data-tab="user">
               <i class="fa-solid fa-user"></i> Customer Login
             </button>
-            <button class="auth-tab" id="tab-admin-btn" data-tab="admin">
+            <button class="auth-tab ${activeTab === 'admin' ? 'active' : ''}" id="tab-admin-btn" data-tab="admin">
               <i class="fa-solid fa-user-shield"></i> Admin Portal
             </button>
-            <button class="auth-tab" id="tab-register-btn" data-tab="register">
+            <button class="auth-tab ${activeTab === 'register' ? 'active' : ''}" id="tab-register-btn" data-tab="register">
               <i class="fa-solid fa-user-plus"></i> New Account
             </button>
           </div>
@@ -67,10 +67,10 @@ export function renderLoginView(container) {
           <div class="auth-quick-demo">
             <span class="quick-demo-title"><i class="fa-solid fa-bolt"></i> One-Click Demo Access:</span>
             <div class="quick-demo-buttons">
-              <button class="btn btn-outline btn-sm demo-btn" id="demo-user-btn" title="Log in as Customer Syam">
+              <button class="btn btn-outline btn-sm demo-btn" id="demo-user-btn" title="Log in as Customer Syam" style="display: ${activeTab === 'user' ? 'inline-flex' : 'none'};">
                 <i class="fa-solid fa-user"></i> Customer: syam@gmail.com
               </button>
-              <button class="btn btn-outline btn-sm demo-btn admin-demo-btn" id="demo-admin-btn" title="Log in as Admin Manager">
+              <button class="btn btn-outline btn-sm demo-btn admin-demo-btn" id="demo-admin-btn" title="Log in as Admin Manager" style="display: ${activeTab === 'admin' ? 'inline-flex' : 'none'};">
                 <i class="fa-solid fa-crown"></i> Admin: admin@savorybites.com
               </button>
             </div>
@@ -153,7 +153,11 @@ export function renderLoginView(container) {
 
   function updateTabs(selectedTab) {
     activeTab = selectedTab;
+    state.loginTab = selectedTab;
     [tabUser, tabAdmin, tabRegister].forEach(t => t && t.classList.remove('active'));
+
+    const demoUserBtnEl = document.getElementById('demo-user-btn');
+    const demoAdminBtnEl = document.getElementById('demo-admin-btn');
 
     if (selectedTab === 'user') {
       if (tabUser) tabUser.classList.add('active');
@@ -162,6 +166,8 @@ export function renderLoginView(container) {
       if (passInput) passInput.value = 'user123';
       if (btnText) btnText.textContent = 'Sign In as Customer';
       if (subtitle) subtitle.textContent = 'Log in to manage orders, wishlist, and account preferences';
+      if (demoUserBtnEl) demoUserBtnEl.style.display = 'inline-flex';
+      if (demoAdminBtnEl) demoAdminBtnEl.style.display = 'none';
     } else if (selectedTab === 'admin') {
       if (tabAdmin) tabAdmin.classList.add('active');
       if (nameGroup) nameGroup.style.display = 'none';
@@ -169,6 +175,8 @@ export function renderLoginView(container) {
       if (passInput) passInput.value = 'admin123';
       if (btnText) btnText.textContent = 'Sign In to Admin Portal';
       if (subtitle) subtitle.textContent = 'Restricted access for restaurant managers & item control';
+      if (demoUserBtnEl) demoUserBtnEl.style.display = 'none';
+      if (demoAdminBtnEl) demoAdminBtnEl.style.display = 'inline-flex';
     } else if (selectedTab === 'register') {
       if (tabRegister) tabRegister.classList.add('active');
       if (nameGroup) nameGroup.style.display = 'block';
@@ -176,8 +184,13 @@ export function renderLoginView(container) {
       if (passInput) passInput.value = '';
       if (btnText) btnText.textContent = 'Create Customer Account';
       if (subtitle) subtitle.textContent = 'Join Savory Bites Bistro for rewards, express checkout & tracking';
+      if (demoUserBtnEl) demoUserBtnEl.style.display = 'none';
+      if (demoAdminBtnEl) demoAdminBtnEl.style.display = 'none';
     }
   }
+
+  // Set initial tab state
+  updateTabs(activeTab);
 
   if (tabUser) tabUser.onclick = () => updateTabs('user');
   if (tabAdmin) tabAdmin.onclick = () => updateTabs('admin');

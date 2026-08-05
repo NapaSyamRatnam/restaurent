@@ -42,9 +42,11 @@ export function renderNavbar() {
         <button class="nav-link ${activeView === 'location' ? 'active' : ''}" data-nav="location">
           <i class="fa-solid fa-location-dot"></i> Locations
         </button>
-        <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Dashboard Page">
-          <i class="fa-solid fa-user-shield"></i> Admin Page
-        </button>
+        ${isAdmin ? `
+          <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Dashboard Page">
+            <i class="fa-solid fa-user-shield"></i> Admin Page
+          </button>
+        ` : ''}
       </nav>
 
       <div class="nav-actions">

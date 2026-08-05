@@ -212,8 +212,11 @@ class AppState {
   }
 
   // View Navigation
-  setView(viewName) {
+  setView(viewName, tab = 'user') {
     this.activeView = viewName;
+    if (viewName === 'login') {
+      this.loginTab = tab;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.notify('VIEW_CHANGED', viewName);
   }
