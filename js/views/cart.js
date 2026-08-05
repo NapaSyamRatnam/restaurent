@@ -265,8 +265,8 @@ function openCheckoutModal() {
         deliveryFee: totals.deliveryFee,
         total: totals.grandTotal,
         estimatedEta: '20-25 minutes',
-        driverName: 'Marcus Bennett',
-        driverPhone: '+1 (555) 888-9900'
+        driverName: 'Srinivas Rao',
+        driverPhone: '+91 98480 88990'
       });
 
       closeModal();

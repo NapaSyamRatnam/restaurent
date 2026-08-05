@@ -139,66 +139,66 @@ export const INITIAL_DISHES = [
 export const RESTAURANT_LOCATIONS = [
   {
     id: 'loc-1',
-    name: 'Downtown Central (Flagship)',
-    address: '742 Culinary Boulevard, Suite 100, Downtown',
-    phone: '+1 (555) 234-8901',
+    name: 'GT Road Central (Flagship)',
+    address: 'Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001',
+    phone: '+91 861 234 8901',
     hours: 'Daily: 11:00 AM - 11:00 PM',
-    deliveryRadius: '5 miles',
+    deliveryRadius: '8 km',
     avgDeliveryTime: '20-30 min',
     rating: 4.9,
-    mapLat: 40.7128,
-    mapLng: -74.0060,
-    features: ['Valet Parking', 'Outdoor Terrace', 'Full Bar', 'Private Dining']
+    mapLat: 14.4426,
+    mapLng: 79.9865,
+    features: ['Valet Parking', 'Air Conditioned Dining', 'Full Bar & Mocktail Lounge', 'Private Family Section']
   },
   {
     id: 'loc-2',
-    name: 'Uptown Bistro & Lounge',
-    address: '129 Northside Avenue, Uptown Quarter',
-    phone: '+1 (555) 987-6543',
+    name: 'Magunta Layout Bistro',
+    address: '16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003',
+    phone: '+91 861 239 8765',
     hours: 'Mon-Sat: 11:30 AM - 10:30 PM',
-    deliveryRadius: '4.5 miles',
+    deliveryRadius: '6 km',
     avgDeliveryTime: '25-35 min',
     rating: 4.8,
-    mapLat: 40.7589,
-    mapLng: -73.9851,
-    features: ['Rooftop Seating', 'Live Jazz Fridays', 'Craft Beer Taps']
+    mapLat: 14.4350,
+    mapLng: 79.9780,
+    features: ['Rooftop Seating', 'Weekend Special Buffet', 'Craft Beverage Counter']
   },
   {
     id: 'loc-3',
-    name: 'Waterfront Bay Promenade',
-    address: '45 Harbour Lights Pier, Bayfront',
-    phone: '+1 (555) 456-7890',
+    name: 'Pogathota Plaza',
+    address: "Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001",
+    phone: '+91 861 230 4567',
     hours: 'Daily: 10:00 AM - 11:30 PM',
-    deliveryRadius: '6 miles',
+    deliveryRadius: '7 km',
     avgDeliveryTime: '15-25 min',
     rating: 4.95,
-    mapLat: 40.7061,
-    mapLng: -74.0088,
-    features: ['Sea View Dining', 'Pet Friendly Patio', 'Sommelier Selection']
+    mapLat: 14.4480,
+    mapLng: 79.9890,
+    features: ['Garden Dining', 'Family Dining Tables', 'Spicy Nellore Specials & Fusion Menu']
   }
 ];
 
 export const DEFAULT_USER_PROFILE = {
   name: 'Alex Vance',
   email: 'alex.vance@example.com',
-  phone: '+1 (555) 432-1098',
+  phone: '+91 98480 12345',
   rewardPoints: 480,
   loyaltyTier: 'Gold Gourmet',
   addresses: [
     {
       id: 'addr-1',
       label: 'Home',
-      street: '458 Oakwood Avenue, Apt 4B',
-      city: 'Metropolis',
-      zip: '10001',
+      street: 'Door No. 24-2-154, Dargamitta',
+      city: 'Nellore, Andhra Pradesh',
+      zip: '524003',
       isDefault: true
     },
     {
       id: 'addr-2',
       label: 'Work / Tech Hub',
-      street: '800 Innovation Way, Floor 7',
-      city: 'Metropolis',
-      zip: '10005',
+      street: 'Plot 45, Auto Nagar Industrial Area',
+      city: 'Nellore, Andhra Pradesh',
+      zip: '524004',
       isDefault: false
     }
   ]
@@ -219,11 +219,11 @@ export const INITIAL_ORDERS = [
     deliveryFee: 3.50,
     discount: 13.30, // WELCOME20 applied
     total: 62.01,
-    deliveryAddress: '458 Oakwood Avenue, Apt 4B',
+    deliveryAddress: 'Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003',
     fulfillmentType: 'Delivery',
     estimatedEta: '18 minutes',
-    driverName: 'Marcus Bennett',
-    driverPhone: '+1 (555) 888-9900'
+    driverName: 'Srinivas Rao',
+    driverPhone: '+91 98480 88990'
   },
   {
     id: 'ORD-7210',
@@ -238,10 +238,10 @@ export const INITIAL_ORDERS = [
     deliveryFee: 0.00,
     discount: 0.00,
     total: 69.22,
-    deliveryAddress: '458 Oakwood Avenue, Apt 4B',
+    deliveryAddress: 'Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003',
     fulfillmentType: 'Delivery',
     estimatedEta: 'Delivered',
-    driverName: 'Sarah Jenkins',
-    driverPhone: '+1 (555) 777-1122'
+    driverName: 'Kalyan Kumar',
+    driverPhone: '+91 98480 77112'
   }
 ];

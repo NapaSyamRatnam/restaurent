@@ -159,12 +159,12 @@ function openAddAddressModal(container) {
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
       <div class="form-group">
-        <label class="form-label">City</label>
-        <input type="text" id="new-addr-city" class="form-input" placeholder="e.g. Metropolis">
+        <label class="form-label">City & State</label>
+        <input type="text" id="new-addr-city" class="form-input" placeholder="e.g. Nellore, Andhra Pradesh">
       </div>
       <div class="form-group">
-        <label class="form-label">ZIP Code</label>
-        <input type="text" id="new-addr-zip" class="form-input" placeholder="e.g. 10001">
+        <label class="form-label">PIN Code</label>
+        <input type="text" id="new-addr-zip" class="form-input" placeholder="e.g. 524001">
       </div>
     </div>
 
@@ -188,8 +188,8 @@ function openAddAddressModal(container) {
   document.getElementById('modal-save-addr').onclick = () => {
     const label = document.getElementById('new-addr-label').value.trim() || 'Other';
     const street = document.getElementById('new-addr-street').value.trim();
-    const city = document.getElementById('new-addr-city').value.trim() || 'Metropolis';
-    const zip = document.getElementById('new-addr-zip').value.trim() || '10001';
+    const city = document.getElementById('new-addr-city').value.trim() || 'Nellore, Andhra Pradesh';
+    const zip = document.getElementById('new-addr-zip').value.trim() || '524001';
     const isDefault = document.getElementById('new-addr-default').checked;
 
     if (!street) {
