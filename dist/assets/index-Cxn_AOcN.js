@@ -32,8 +32,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Price ($ / ₹ equivalent) *</label>
-          <input type="number" step="0.01" id="dish-price" class="form-input" required value="${n?t.price:`15.99`}">
+          <label class="form-label">Price (₹) *</label>
+          <input type="number" step="0.01" id="dish-price" class="form-input" required value="${n?t.price:`250.00`}">
         </div>
       </div>
 
@@ -296,7 +296,7 @@
               <div class="dish-content">
                 <div class="dish-header-row">
                   <h3 class="dish-title">${e.name}</h3>
-                  <span class="dish-price">$${e.price.toFixed(2)}</span>
+                  <span class="dish-price">₹${e.price.toFixed(2)}</span>
                 </div>
 
                 <p class="dish-desc">${e.description}</p>
@@ -330,7 +330,7 @@
       <div style="flex: 1;">
         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem;">${t.name}</h3>
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">${t.description}</p>
-        <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">$${t.price.toFixed(2)}</span>
+        <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${t.price.toFixed(2)}</span>
       </div>
     </div>
 
@@ -347,13 +347,13 @@
       <label class="form-label"><i class="fa-solid fa-cheese"></i> Custom Add-Ons & Toppings</label>
       <div style="display: flex; flex-direction: column; gap: 0.5rem;">
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-cheese" value="Extra Buffalo Cheese (+$2.50)"> Extra Buffalo Cheese (+$2.50)
+          <input type="checkbox" id="addon-cheese" value="Extra Buffalo Cheese (+₹2.50)"> Extra Buffalo Cheese (+₹2.50)
         </label>
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-sauce" value="Truffle Garlic Dip (+$1.75)"> Truffle Garlic Dip (+$1.75)
+          <input type="checkbox" id="addon-sauce" value="Truffle Garlic Dip (+₹1.75)"> Truffle Garlic Dip (+₹1.75)
         </label>
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-gf" value="Gluten-Free Crust/Bun (+$2.00)"> Gluten-Free Option (+$2.00)
+          <input type="checkbox" id="addon-gf" value="Gluten-Free Crust/Bun (+₹2.00)"> Gluten-Free Option (+₹2.00)
         </label>
       </div>
     </div>
@@ -409,7 +409,7 @@
               <div class="dish-content">
                 <div class="dish-header-row">
                   <h3 class="dish-title">${e.name}</h3>
-                  <span class="dish-price">$${e.price.toFixed(2)}</span>
+                  <span class="dish-price">₹${e.price.toFixed(2)}</span>
                 </div>
 
                 <p class="dish-desc">${e.description}</p>
@@ -457,7 +457,7 @@
                 ${e.options?`<p class="cart-item-opts"><i class="fa-solid fa-sliders"></i> ${e.options}</p>`:``}
                 
                 <div class="cart-item-price-row">
-                  <span style="font-weight: 700; color: var(--primary);">$${(e.price*e.qty).toFixed(2)}</span>
+                  <span style="font-weight: 700; color: var(--primary);">₹${(e.price*e.qty).toFixed(2)}</span>
 
                   <div class="qty-control">
                     <button class="qty-btn" data-qty-change="${t}" data-delta="-1"><i class="fa-solid fa-minus"></i></button>
@@ -489,26 +489,26 @@
       <div class="cart-footer">
         <div class="bill-row">
           <span>Subtotal</span>
-          <span>$${t.subtotal.toFixed(2)}</span>
+          <span>₹${t.subtotal.toFixed(2)}</span>
         </div>
         ${t.discountAmount>0?`
           <div class="bill-row" style="color: var(--accent-green);">
             <span>Discount (${a.appliedCoupon.code})</span>
-            <span>-$${t.discountAmount.toFixed(2)}</span>
+            <span>-₹${t.discountAmount.toFixed(2)}</span>
           </div>
         `:``}
         <div class="bill-row">
           <span>Service Tax (8%)</span>
-          <span>$${t.tax.toFixed(2)}</span>
+          <span>₹${t.tax.toFixed(2)}</span>
         </div>
         <div class="bill-row">
           <span>Local Delivery Fee</span>
-          <span>$${t.deliveryFee.toFixed(2)}</span>
+          <span>₹${t.deliveryFee.toFixed(2)}</span>
         </div>
 
         <div class="bill-row total">
           <span>Grand Total</span>
-          <span class="price">$${t.grandTotal.toFixed(2)}</span>
+          <span class="price">₹${t.grandTotal.toFixed(2)}</span>
         </div>
 
         <button class="btn btn-primary btn-lg btn-full" id="checkout-trigger-btn" style="margin-top: 1.25rem;">
@@ -575,13 +575,13 @@
     <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
       <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem;">
         <span>Total Payable</span>
-        <span style="color: var(--primary);">$${e.grandTotal.toFixed(2)}</span>
+        <span style="color: var(--primary);">₹${e.grandTotal.toFixed(2)}</span>
       </div>
     </div>
   `,footerHTML:`
     <button class="btn btn-secondary" id="checkout-cancel-btn">Cancel</button>
     <button class="btn btn-primary btn-lg" id="confirm-pay-btn">
-      <i class="fa-solid fa-lock"></i> Place Order ($${e.grandTotal.toFixed(2)})
+      <i class="fa-solid fa-lock"></i> Place Order (₹${e.grandTotal.toFixed(2)})
     </button>
   `});let n=document.getElementById(`checkout-cancel-btn`);n&&(n.onclick=c);let r=document.getElementById(`confirm-pay-btn`);r&&(r.onclick=()=>{let t=document.getElementById(`checkout-address-select`).value,n=document.querySelector(`input[name="fulfillment"]:checked`).value,r=a.placeOrder({deliveryAddress:t,fulfillmentType:n,subtotal:e.subtotal,discount:e.discountAmount,tax:e.tax,deliveryFee:e.deliveryFee,total:e.grandTotal,estimatedEta:`20-25 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`});c(),o(`Order #${r.id} Placed Successfully!`,`success`),a.setView(`orders`)})}function _(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.filter(e=>e.status===`delivered`);e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
@@ -633,7 +633,7 @@
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 1.5rem;">
-                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">$${e.total.toFixed(2)}</span>
+                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${e.total.toFixed(2)}</span>
                   <button class="btn btn-outline btn-sm reorder-btn" data-reorder-id="${e.id}">
                     <i class="fa-solid fa-rotate-right"></i> Reorder Items
                   </button>
@@ -701,7 +701,7 @@
           <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-sub);">Ordered Items Summary</h4>
           <ul style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.3rem;">
             ${e.items.map(e=>`
-              <li><strong style="color: var(--text-main);">${e.qty}x</strong> ${e.name} ${e.opts?`(${e.opts})`:``} - <strong>$${(e.price*e.qty).toFixed(2)}</strong></li>
+              <li><strong style="color: var(--text-main);">${e.qty}x</strong> ${e.name} ${e.opts?`(${e.opts})`:``} - <strong>₹${(e.price*e.qty).toFixed(2)}</strong></li>
             `).join(``)}
           </ul>
         </div>
@@ -711,7 +711,7 @@
           <div style="font-size: 0.88rem; color: var(--text-muted);">
             <div><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> ${e.deliveryAddress}</div>
             <div style="margin-top: 0.4rem;"><i class="fa-solid fa-user-ninja"></i> Driver: <strong>${e.driverName}</strong> (${e.driverPhone})</div>
-            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: $${e.total.toFixed(2)}</div>
+            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: ₹${e.total.toFixed(2)}</div>
           </div>
         </div>
       </div>
@@ -751,7 +751,7 @@
               </div>
               <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold);">${t.rewardPoints} Points</div>
               <div style="font-size: 0.78rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem; margin-bottom: 0.75rem;">
-                = $${n} Redeemable Discount Cash
+                = ₹${n} Redeemable Discount Cash
               </div>
 
               <button class="btn btn-primary btn-sm btn-full" id="redeem-points-btn" ${t.rewardPoints<100?`disabled`:``}>
@@ -961,34 +961,34 @@
     <button class="btn btn-primary" id="modal-save-pay">Save Payment Method</button>
   `});let t=document.getElementById(`pay-type`);t.onchange=e=>{e.target.value===`card`?(document.getElementById(`card-fields`).style.display=`block`,document.getElementById(`upi-fields`).style.display=`none`):(document.getElementById(`card-fields`).style.display=`none`,document.getElementById(`upi-fields`).style.display=`block`)},document.getElementById(`modal-cancel-pay`).onclick=c,document.getElementById(`modal-save-pay`).onclick=()=>{let e=t.value,n=document.getElementById(`pay-title`).value.trim()||(e===`card`?`Credit Card`:`UPI ID`),r=document.getElementById(`pay-primary`).checked;if(e===`card`){let e=document.getElementById(`pay-card-num`).value.trim()||`5678`,t=e.length===4?`•••• •••• •••• ${e}`:e,i=document.getElementById(`pay-expiry`).value.trim()||`12/28`;a.addPaymentMethod({type:`card`,title:n,cardNumber:t,expiry:i,isPrimary:r})}else{let e=document.getElementById(`pay-upi-id`).value.trim()||`user@upi`;a.addPaymentMethod({type:`upi`,title:n,upiId:e,isPrimary:r})}c(),o(`New Payment Method Saved!`,`success`)}}function C(e){let t=a.profile;s({title:`Redeem Loyalty Points for Discount Cash`,bodyHTML:`
     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-      You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${t.rewardPoints} Reward Points</strong>. Every 100 Points = $10.00 Discount Cash!
+      You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${t.rewardPoints} Reward Points</strong>. Every 100 Points = ₹10.00 Discount Cash!
     </p>
 
     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
       ${t.rewardPoints>=100?`
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="100" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 100 Points</span>
-          <strong style="color: var(--accent-green);">$10.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹10.00 Voucher</strong>
         </button>
       `:``}
 
       ${t.rewardPoints>=200?`
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="200" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 200 Points</span>
-          <strong style="color: var(--accent-green);">$20.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹20.00 Voucher</strong>
         </button>
       `:``}
 
       ${t.rewardPoints>=400?`
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="400" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 400 Points</span>
-          <strong style="color: var(--accent-green);">$40.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹40.00 Voucher</strong>
         </button>
       `:``}
     </div>
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-redeem">Close</button>
-  `}),document.getElementById(`modal-cancel-redeem`).onclick=c,document.querySelectorAll(`[data-redeem-pts]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-redeem-pts`)),n=a.redeemRewardPoints(t);n.success?(a.applyCoupon(`WELCOME20`),o(`Redeemed ${t} Points! $${n.discountCash} discount applied to your active order!`,`success`,6e3),c()):o(n.message,`info`)}})}function w(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
+  `}),document.getElementById(`modal-cancel-redeem`).onclick=c,document.querySelectorAll(`[data-redeem-pts]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-redeem-pts`)),n=a.redeemRewardPoints(t);n.success?(a.applyCoupon(`WELCOME20`),o(`Redeemed ${t} Points! ₹${n.discountCash} discount applied to your active order!`,`success`,6e3),c()):o(n.message,`info`)}})}function w(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <div>
@@ -1123,7 +1123,7 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
           <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Daily Revenue</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">$${n.toFixed(2)}</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">₹${n.toFixed(2)}</div>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
@@ -1222,7 +1222,7 @@
                 <img src="${e.image}" alt="${e.name}" style="width: 64px; height: 64px; border-radius: var(--radius-md); object-fit: cover;">
                 <div style="flex: 1;">
                   <div style="font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 0.2rem;">${e.name}</div>
-                  <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">$${e.price.toFixed(2)} • <span style="color: var(--text-muted); font-weight: 400; text-transform: capitalize;">${e.category}</span></div>
+                  <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">₹${e.price.toFixed(2)} • <span style="color: var(--text-muted); font-weight: 400; text-transform: capitalize;">${e.category}</span></div>
                   <div style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                     ${e.description}
                   </div>

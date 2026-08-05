@@ -59,7 +59,7 @@ export function renderOrdersView(container) {
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 1.5rem;">
-                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">$${order.total.toFixed(2)}</span>
+                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${order.total.toFixed(2)}</span>
                   <button class="btn btn-outline btn-sm reorder-btn" data-reorder-id="${order.id}">
                     <i class="fa-solid fa-rotate-right"></i> Reorder Items
                   </button>
@@ -155,7 +155,7 @@ function renderActiveOrderCard(order) {
           <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-sub);">Ordered Items Summary</h4>
           <ul style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.3rem;">
             ${order.items.map(item => `
-              <li><strong style="color: var(--text-main);">${item.qty}x</strong> ${item.name} ${item.opts ? `(${item.opts})` : ''} - <strong>$${(item.price * item.qty).toFixed(2)}</strong></li>
+              <li><strong style="color: var(--text-main);">${item.qty}x</strong> ${item.name} ${item.opts ? `(${item.opts})` : ''} - <strong>₹${(item.price * item.qty).toFixed(2)}</strong></li>
             `).join('')}
           </ul>
         </div>
@@ -165,7 +165,7 @@ function renderActiveOrderCard(order) {
           <div style="font-size: 0.88rem; color: var(--text-muted);">
             <div><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> ${order.deliveryAddress}</div>
             <div style="margin-top: 0.4rem;"><i class="fa-solid fa-user-ninja"></i> Driver: <strong>${order.driverName}</strong> (${order.driverPhone})</div>
-            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: $${order.total.toFixed(2)}</div>
+            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: ₹${order.total.toFixed(2)}</div>
           </div>
         </div>
       </div>

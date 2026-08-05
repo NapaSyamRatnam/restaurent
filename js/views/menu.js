@@ -143,7 +143,7 @@ export function renderMenuView(container) {
               <div class="dish-content">
                 <div class="dish-header-row">
                   <h3 class="dish-title">${dish.name}</h3>
-                  <span class="dish-price">$${dish.price.toFixed(2)}</span>
+                  <span class="dish-price">₹${dish.price.toFixed(2)}</span>
                 </div>
 
                 <p class="dish-desc">${dish.description}</p>
@@ -273,7 +273,7 @@ function openDishCustomizationModal(dishId) {
       <div style="flex: 1;">
         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem;">${dish.name}</h3>
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">${dish.description}</p>
-        <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">$${dish.price.toFixed(2)}</span>
+        <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${dish.price.toFixed(2)}</span>
       </div>
     </div>
 
@@ -290,13 +290,13 @@ function openDishCustomizationModal(dishId) {
       <label class="form-label"><i class="fa-solid fa-cheese"></i> Custom Add-Ons & Toppings</label>
       <div style="display: flex; flex-direction: column; gap: 0.5rem;">
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-cheese" value="Extra Buffalo Cheese (+$2.50)"> Extra Buffalo Cheese (+$2.50)
+          <input type="checkbox" id="addon-cheese" value="Extra Buffalo Cheese (+₹2.50)"> Extra Buffalo Cheese (+₹2.50)
         </label>
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-sauce" value="Truffle Garlic Dip (+$1.75)"> Truffle Garlic Dip (+$1.75)
+          <input type="checkbox" id="addon-sauce" value="Truffle Garlic Dip (+₹1.75)"> Truffle Garlic Dip (+₹1.75)
         </label>
         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub);">
-          <input type="checkbox" id="addon-gf" value="Gluten-Free Crust/Bun (+$2.00)"> Gluten-Free Option (+$2.00)
+          <input type="checkbox" id="addon-gf" value="Gluten-Free Crust/Bun (+₹2.00)"> Gluten-Free Option (+₹2.00)
         </label>
       </div>
     </div>

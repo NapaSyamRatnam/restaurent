@@ -43,7 +43,7 @@ export function renderCartDrawer() {
                 ${item.options ? `<p class="cart-item-opts"><i class="fa-solid fa-sliders"></i> ${item.options}</p>` : ''}
                 
                 <div class="cart-item-price-row">
-                  <span style="font-weight: 700; color: var(--primary);">$${(item.price * item.qty).toFixed(2)}</span>
+                  <span style="font-weight: 700; color: var(--primary);">₹${(item.price * item.qty).toFixed(2)}</span>
 
                   <div class="qty-control">
                     <button class="qty-btn" data-qty-change="${index}" data-delta="-1"><i class="fa-solid fa-minus"></i></button>
@@ -76,26 +76,26 @@ export function renderCartDrawer() {
       <div class="cart-footer">
         <div class="bill-row">
           <span>Subtotal</span>
-          <span>$${totals.subtotal.toFixed(2)}</span>
+          <span>₹${totals.subtotal.toFixed(2)}</span>
         </div>
         ${totals.discountAmount > 0 ? `
           <div class="bill-row" style="color: var(--accent-green);">
             <span>Discount (${state.appliedCoupon.code})</span>
-            <span>-$${totals.discountAmount.toFixed(2)}</span>
+            <span>-₹${totals.discountAmount.toFixed(2)}</span>
           </div>
         ` : ''}
         <div class="bill-row">
           <span>Service Tax (8%)</span>
-          <span>$${totals.tax.toFixed(2)}</span>
+          <span>₹${totals.tax.toFixed(2)}</span>
         </div>
         <div class="bill-row">
           <span>Local Delivery Fee</span>
-          <span>$${totals.deliveryFee.toFixed(2)}</span>
+          <span>₹${totals.deliveryFee.toFixed(2)}</span>
         </div>
 
         <div class="bill-row total">
           <span>Grand Total</span>
-          <span class="price">$${totals.grandTotal.toFixed(2)}</span>
+          <span class="price">₹${totals.grandTotal.toFixed(2)}</span>
         </div>
 
         <button class="btn btn-primary btn-lg btn-full" id="checkout-trigger-btn" style="margin-top: 1.25rem;">
@@ -229,7 +229,7 @@ function openCheckoutModal() {
     <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
       <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem;">
         <span>Total Payable</span>
-        <span style="color: var(--primary);">$${totals.grandTotal.toFixed(2)}</span>
+        <span style="color: var(--primary);">₹${totals.grandTotal.toFixed(2)}</span>
       </div>
     </div>
   `;
@@ -237,7 +237,7 @@ function openCheckoutModal() {
   const footerHTML = `
     <button class="btn btn-secondary" id="checkout-cancel-btn">Cancel</button>
     <button class="btn btn-primary btn-lg" id="confirm-pay-btn">
-      <i class="fa-solid fa-lock"></i> Place Order ($${totals.grandTotal.toFixed(2)})
+      <i class="fa-solid fa-lock"></i> Place Order (₹${totals.grandTotal.toFixed(2)})
     </button>
   `;
 

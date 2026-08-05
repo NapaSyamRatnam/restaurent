@@ -29,8 +29,8 @@ export function openDishModal(dishToEdit = null) {
         </div>
 
         <div class="form-group">
-          <label class="form-label">Price ($ / ₹ equivalent) *</label>
-          <input type="number" step="0.01" id="dish-price" class="form-input" required value="${isEdit ? dishToEdit.price : '15.99'}">
+          <label class="form-label">Price (₹) *</label>
+          <input type="number" step="0.01" id="dish-price" class="form-input" required value="${isEdit ? dishToEdit.price : '250.00'}">
         </div>
       </div>
 

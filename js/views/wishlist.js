@@ -43,7 +43,7 @@ export function renderWishlistView(container) {
               <div class="dish-content">
                 <div class="dish-header-row">
                   <h3 class="dish-title">${dish.name}</h3>
-                  <span class="dish-price">$${dish.price.toFixed(2)}</span>
+                  <span class="dish-price">₹${dish.price.toFixed(2)}</span>
                 </div>
 
                 <p class="dish-desc">${dish.description}</p>

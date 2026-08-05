@@ -42,7 +42,7 @@ export function renderStaffView(container) {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
           <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Daily Revenue</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">$${totalRevenue.toFixed(2)}</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">₹${totalRevenue.toFixed(2)}</div>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
@@ -141,7 +141,7 @@ export function renderStaffView(container) {
                 <img src="${dish.image}" alt="${dish.name}" style="width: 64px; height: 64px; border-radius: var(--radius-md); object-fit: cover;">
                 <div style="flex: 1;">
                   <div style="font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 0.2rem;">${dish.name}</div>
-                  <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">$${dish.price.toFixed(2)} • <span style="color: var(--text-muted); font-weight: 400; text-transform: capitalize;">${dish.category}</span></div>
+                  <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">₹${dish.price.toFixed(2)} • <span style="color: var(--text-muted); font-weight: 400; text-transform: capitalize;">${dish.category}</span></div>
                   <div style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                     ${dish.description}
                   </div>

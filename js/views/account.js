@@ -47,7 +47,7 @@ export function renderAccountView(container) {
               </div>
               <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold);">${profile.rewardPoints} Points</div>
               <div style="font-size: 0.78rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem; margin-bottom: 0.75rem;">
-                = $${rewardCash} Redeemable Discount Cash
+                = ₹${rewardCash} Redeemable Discount Cash
               </div>
 
               <button class="btn btn-primary btn-sm btn-full" id="redeem-points-btn" ${profile.rewardPoints < 100 ? 'disabled' : ''}>
@@ -453,28 +453,28 @@ function openRedeemPointsModal(container) {
 
   const bodyHTML = `
     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-      You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${profile.rewardPoints} Reward Points</strong>. Every 100 Points = $10.00 Discount Cash!
+      You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${profile.rewardPoints} Reward Points</strong>. Every 100 Points = ₹10.00 Discount Cash!
     </p>
 
     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
       ${profile.rewardPoints >= 100 ? `
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="100" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 100 Points</span>
-          <strong style="color: var(--accent-green);">$10.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹10.00 Voucher</strong>
         </button>
       ` : ''}
 
       ${profile.rewardPoints >= 200 ? `
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="200" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 200 Points</span>
-          <strong style="color: var(--accent-green);">$20.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹20.00 Voucher</strong>
         </button>
       ` : ''}
 
       ${profile.rewardPoints >= 400 ? `
         <button class="btn btn-outline redeem-option-btn" data-redeem-pts="400" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
           <span>Redeem 400 Points</span>
-          <strong style="color: var(--accent-green);">$40.00 Voucher</strong>
+          <strong style="color: var(--accent-green);">₹40.00 Voucher</strong>
         </button>
       ` : ''}
     </div>
@@ -498,7 +498,7 @@ function openRedeemPointsModal(container) {
       const res = state.redeemRewardPoints(pts);
       if (res.success) {
         state.applyCoupon('WELCOME20');
-        showToast(`Redeemed ${pts} Points! $${res.discountCash} discount applied to your active order!`, 'success', 6000);
+        showToast(`Redeemed ${pts} Points! ₹${res.discountCash} discount applied to your active order!`, 'success', 6000);
         closeModal();
       } else {
         showToast(res.message, 'info');
