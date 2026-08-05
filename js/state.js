@@ -32,7 +32,10 @@ class AppState {
     const savedOrders = localStorage.getItem('sb_orders');
     this.orders = savedOrders ? JSON.parse(savedOrders) : INITIAL_ORDERS;
 
-    this.selectedLocation = RESTAURANT_LOCATIONS[0];
+    const savedLocations = localStorage.getItem('sb_locations');
+    this.locations = savedLocations ? JSON.parse(savedLocations) : RESTAURANT_LOCATIONS;
+    this.selectedLocation = this.locations[0] || RESTAURANT_LOCATIONS[0];
+
     this.appliedCoupon = { code: 'WELCOME20', discountPercent: 20 };
     this.searchQuery = '';
     this.selectedCategory = 'all';
@@ -200,14 +203,93 @@ class AppState {
     }
   }
 
-  // Stock Control (Staff)
+  // Stock & Dish Admin Management
   toggleDishStock(dishId) {
     const dish = this.dishes.find(d => d.id === dishId);
     if (dish) {
       dish.inStock = !dish.inStock;
-      localStorage.setItem('sb_dishes', JSON.stringify(this.dishes));
+      this.saveDishes();
       this.notify('STOCK_UPDATED', dish);
     }
+  }
+
+  addDish(dishObj) {
+    const newDish = {
+      id: `dish-${Date.now()}`,
+      rating: 4.8,
+      reviews: 1,
+      inStock: true,
+      tags: [],
+      ...dishObj
+    };
+    this.dishes.unshift(newDish);
+    this.saveDishes();
+    this.notify('STOCK_UPDATED', newDish);
+    return newDish;
+  }
+
+  updateDish(dishId, updatedFields) {
+    const idx = this.dishes.findIndex(d => d.id === dishId);
+    if (idx > -1) {
+      this.dishes[idx] = { ...this.dishes[idx], ...updatedFields };
+      this.saveDishes();
+      this.notify('STOCK_UPDATED', this.dishes[idx]);
+    }
+  }
+
+  deleteDish(dishId) {
+    this.dishes = this.dishes.filter(d => d.id !== dishId);
+    this.saveDishes();
+    this.notify('STOCK_UPDATED', dishId);
+  }
+
+  saveDishes() {
+    localStorage.setItem('sb_dishes', JSON.stringify(this.dishes));
+  }
+
+  // Location Admin Management
+  addLocation(locObj) {
+    const newLoc = {
+      id: `loc-${Date.now()}`,
+      rating: 4.8,
+      mapLat: 14.4426,
+      mapLng: 79.9865,
+      features: [],
+      ...locObj
+    };
+    this.locations.push(newLoc);
+    this.saveLocations();
+    this.notify('LOCATIONS_UPDATED', newLoc);
+    return newLoc;
+  }
+
+  updateLocation(locId, updatedFields) {
+    const idx = this.locations.findIndex(l => l.id === locId);
+    if (idx > -1) {
+      this.locations[idx] = { ...this.locations[idx], ...updatedFields };
+      if (this.selectedLocation.id === locId) {
+        this.selectedLocation = this.locations[idx];
+      }
+      this.saveLocations();
+      this.notify('LOCATIONS_UPDATED', this.locations[idx]);
+    }
+  }
+
+  deleteLocation(locId) {
+    if (this.locations.length <= 1) {
+      return { success: false, message: 'Cannot delete the only branch location!' };
+    }
+    this.locations = this.locations.filter(l => l.id !== locId);
+    if (this.selectedLocation.id === locId) {
+      this.selectedLocation = this.locations[0];
+    }
+    this.saveLocations();
+    this.notify('LOCATIONS_UPDATED', locId);
+    return { success: true };
+  }
+
+  saveLocations() {
+    localStorage.setItem('sb_locations', JSON.stringify(this.locations));
   }
 
   // Address Control (Account)

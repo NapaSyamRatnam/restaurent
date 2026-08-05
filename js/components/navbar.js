@@ -3,6 +3,7 @@
    ========================================================================== */
 
 import { state } from '../state.js';
+import { openDishModal, openLocationModal } from './adminModal.js';
 
 export function renderNavbar() {
   const header = document.getElementById('main-header');
@@ -41,6 +42,15 @@ export function renderNavbar() {
       </nav>
 
       <div class="nav-actions">
+        <!-- Quick Admin Action Buttons -->
+        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
+          <i class="fa-solid fa-plus"></i> Add Item
+        </button>
+
+        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+          <i class="fa-solid fa-building-circle-check"></i> Add Branch
+        </button>
+
         <button class="btn-icon" id="theme-toggle-btn" title="Toggle Theme">
           <i class="fa-solid ${state.theme === 'dark' ? 'fa-sun' : 'fa-moon'}"></i>
         </button>
@@ -53,7 +63,7 @@ export function renderNavbar() {
 
         <button class="btn ${activeView === 'staff' ? 'btn-primary' : 'btn-outline'} btn-sm" id="staff-portal-nav-btn">
           <i class="fa-solid fa-kitchen-set"></i>
-          <span>${activeView === 'staff' ? 'Exit Staff Portal' : 'Kitchen Portal'}</span>
+          <span>${activeView === 'staff' ? 'Exit Staff Portal' : 'Admin Portal'}</span>
         </button>
       </div>
     </div>
@@ -89,6 +99,16 @@ export function renderNavbar() {
       const drawer = document.getElementById('cart-drawer');
       if (drawer) drawer.classList.remove('hidden');
     };
+  }
+
+  const addDishBtn = document.getElementById('nav-add-dish-btn');
+  if (addDishBtn) {
+    addDishBtn.onclick = () => openDishModal();
+  }
+
+  const addBranchBtn = document.getElementById('nav-add-branch-btn');
+  if (addBranchBtn) {
+    addBranchBtn.onclick = () => openLocationModal();
   }
 
   const staffBtn = document.getElementById('staff-portal-nav-btn');

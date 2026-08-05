@@ -2,18 +2,24 @@
    RESTAURANT LOCATION & TABLE RESERVATION VIEW
    ========================================================================== */
 
-import { RESTAURANT_LOCATIONS } from '../data.js';
 import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
+import { openLocationModal } from '../components/adminModal.js';
 
 export function renderLocationView(container) {
-  const selectedLoc = state.selectedLocation;
+  const selectedLoc = state.selectedLocation || state.locations[0];
 
   container.innerHTML = `
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
-      <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-        <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Restaurant Locations & Table Booking</h1>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Find your nearest Savory Bites Bistro branch or reserve a dining table online.</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <div>
+          <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Restaurant Locations & Table Booking</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Find your nearest Savory Bites Bistro branch in Nellore or reserve a dining table online.</p>
+        </div>
+
+        <button class="btn btn-outline btn-sm" id="view-add-branch-btn" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+          <i class="fa-solid fa-plus"></i> Add New Branch (Admin)
+        </button>
       </div>
 
       <div class="locations-grid">
@@ -22,11 +28,16 @@ export function renderLocationView(container) {
           <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.25rem;">Select Bistro Branch</h2>
           
           <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
-            ${RESTAURANT_LOCATIONS.map(loc => `
+            ${state.locations.map(loc => `
               <div class="branch-card ${loc.id === selectedLoc.id ? 'active' : ''}" data-select-loc="${loc.id}" style="${loc.id === selectedLoc.id ? 'border-color: var(--primary); background: rgba(255, 107, 53, 0.04);' : ''} cursor: pointer;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                   <h3 style="font-size: 1.15rem; font-weight: 700;">${loc.name}</h3>
-                  <span class="badge badge-gold"><i class="fa-solid fa-star"></i> ${loc.rating}</span>
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="badge badge-gold"><i class="fa-solid fa-star"></i> ${loc.rating || '4.9'}</span>
+                    <button class="btn btn-secondary btn-sm edit-branch-direct-btn" data-edit-loc-id="${loc.id}" title="Edit Branch (Admin)">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div style="font-size: 0.9rem; color: var(--text-sub); display: flex; flex-direction: column; gap: 0.4rem;">
@@ -108,9 +119,10 @@ export function renderLocationView(container) {
 
   // Branch Selector listeners
   document.querySelectorAll('[data-select-loc]').forEach(card => {
-    card.onclick = () => {
+    card.onclick = (e) => {
+      if (e.target.closest('.edit-branch-direct-btn')) return; // ignore edit click
       const id = card.getAttribute('data-select-loc');
-      const loc = RESTAURANT_LOCATIONS.find(l => l.id === id);
+      const loc = state.locations.find(l => l.id === id);
       if (loc) {
         state.selectedLocation = loc;
         const locHeader = document.getElementById('header-location-name');
@@ -119,6 +131,20 @@ export function renderLocationView(container) {
       }
     };
   });
+
+  // Edit branch button listeners
+  document.querySelectorAll('.edit-branch-direct-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const locId = btn.getAttribute('data-edit-loc-id');
+      const loc = state.locations.find(l => l.id === locId);
+      if (loc) openLocationModal(loc);
+    };
+  });
+
+  // Add Branch Admin button
+  const addBtn = document.getElementById('view-add-branch-btn');
+  if (addBtn) addBtn.onclick = () => openLocationModal();
 
   // Form submission
   const form = document.getElementById('reservation-form');

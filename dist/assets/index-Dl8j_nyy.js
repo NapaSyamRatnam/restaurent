@@ -1,4 +1,150 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`Alex Vance`,email:`alex.vance@example.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`menu`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_wishlist`);this.wishlist=e?JSON.parse(e):[`dish-1`,`dish-4`];let a=localStorage.getItem(`sb_cart`);this.cart=a?JSON.parse(a):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let o=localStorage.getItem(`sb_dishes`);this.dishes=o?JSON.parse(o):t;let s=localStorage.getItem(`sb_profile`);this.profile=s?JSON.parse(s):r;let c=localStorage.getItem(`sb_orders`);this.orders=c?JSON.parse(c):i,this.selectedLocation=n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){let t=this.dishes.find(t=>t.id===e);t&&(t.inStock=!t.inStock,localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes)),this.notify(`STOCK_UPDATED`,t))}addAddress(e){let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),localStorage.setItem(`sb_profile`,JSON.stringify(this.profile)),this.notify(`PROFILE_UPDATED`,this.profile)}};function o(){let e=document.getElementById(`main-header`);if(!e)return;let t=a.cart.reduce((e,t)=>e+t.qty,0),n=a.wishlist.length,r=a.activeView;e.innerHTML=`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`Alex Vance`,email:`alex.vance@example.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`menu`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_wishlist`);this.wishlist=e?JSON.parse(e):[`dish-1`,`dish-4`];let a=localStorage.getItem(`sb_cart`);this.cart=a?JSON.parse(a):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let o=localStorage.getItem(`sb_dishes`);this.dishes=o?JSON.parse(o):t;let s=localStorage.getItem(`sb_profile`);this.profile=s?JSON.parse(s):r;let c=localStorage.getItem(`sb_orders`);this.orders=c?JSON.parse(c):i;let l=localStorage.getItem(`sb_locations`);this.locations=l?JSON.parse(l):n,this.selectedLocation=this.locations[0]||n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){let t=this.dishes.find(t=>t.id===e);t&&(t.inStock=!t.inStock,this.saveDishes(),this.notify(`STOCK_UPDATED`,t))}addDish(e){let t={id:`dish-${Date.now()}`,rating:4.8,reviews:1,inStock:!0,tags:[],...e};return this.dishes.unshift(t),this.saveDishes(),this.notify(`STOCK_UPDATED`,t),t}updateDish(e,t){let n=this.dishes.findIndex(t=>t.id===e);n>-1&&(this.dishes[n]={...this.dishes[n],...t},this.saveDishes(),this.notify(`STOCK_UPDATED`,this.dishes[n]))}deleteDish(e){this.dishes=this.dishes.filter(t=>t.id!==e),this.saveDishes(),this.notify(`STOCK_UPDATED`,e)}saveDishes(){localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes))}addLocation(e){let t={id:`loc-${Date.now()}`,rating:4.8,mapLat:14.4426,mapLng:79.9865,features:[],...e};return this.locations.push(t),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,t),t}updateLocation(e,t){let n=this.locations.findIndex(t=>t.id===e);n>-1&&(this.locations[n]={...this.locations[n],...t},this.selectedLocation.id===e&&(this.selectedLocation=this.locations[n]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,this.locations[n]))}deleteLocation(e){return this.locations.length<=1?{success:!1,message:`Cannot delete the only branch location!`}:(this.locations=this.locations.filter(t=>t.id!==e),this.selectedLocation.id===e&&(this.selectedLocation=this.locations[0]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,e),{success:!0})}saveLocations(){localStorage.setItem(`sb_locations`,JSON.stringify(this.locations))}addAddress(e){let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),localStorage.setItem(`sb_profile`,JSON.stringify(this.profile)),this.notify(`PROFILE_UPDATED`,this.profile)}};function o(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
+    <i class="${t===`success`?`fa-solid fa-circle-check`:t===`info`?`fa-solid fa-circle-info`:`fa-solid fa-triangle-exclamation`}"></i>
+    <span class="toast-message">${e}</span>
+  `,r.appendChild(i),setTimeout(()=>{i.style.opacity=`0`,i.style.transform=`translateY(20px)`,setTimeout(()=>{i.parentNode&&i.parentNode.removeChild(i)},300)},n)}function s({title:e,bodyHTML:t,footerHTML:n=``}){let r=document.getElementById(`modal-container`);if(!r)return;r.innerHTML=`
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">${e}</h3>
+        <button class="modal-close" id="global-modal-close-btn" aria-label="Close Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        ${t}
+      </div>
+      ${n?`<div class="modal-footer">${n}</div>`:``}
+    </div>
+  `,r.classList.remove(`hidden`);let i=document.getElementById(`global-modal-close-btn`);i&&i.addEventListener(`click`,c),r.onclick=e=>{e.target===r&&c()}}function c(){let e=document.getElementById(`modal-container`);e&&(e.classList.add(`hidden`),e.innerHTML=``)}function l(t=null){let n=!!t;if(s({title:n?`Edit Menu Item: ${t.name}`:`Add New Menu Item`,bodyHTML:`
+    <form id="admin-dish-form">
+      <div class="form-group">
+        <label class="form-label">Dish Name *</label>
+        <input type="text" id="dish-name" class="form-input" required value="${n?t.name:``}" placeholder="e.g. Nellore Special Royyala Biryani">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Category *</label>
+          <select id="dish-category" class="form-select">
+            ${e.filter(e=>e.id!==`all`&&e.id!==`specials`).map(e=>`
+              <option value="${e.id}" ${n&&t.category===e.id?`selected`:``}>${e.name}</option>
+            `).join(``)}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Price ($ / ₹ equivalent) *</label>
+          <input type="number" step="0.01" id="dish-price" class="form-input" required value="${n?t.price:`15.99`}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Description *</label>
+        <textarea id="dish-desc" class="form-input" rows="3" required placeholder="Describe the flavors, ingredients, and preparation...">${n?t.description:``}</textarea>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Preparation Time</label>
+          <input type="text" id="dish-prep" class="form-input" value="${n?t.prepTime:`15-20 min`}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Calories</label>
+          <input type="text" id="dish-calories" class="form-input" value="${n?t.calories:`650 kcal`}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Image URL / Asset Path</label>
+        <input type="text" id="dish-image" class="form-input" value="${n?t.image:`./assets/woodfired-pizza.png`}" placeholder="e.g. ./assets/woodfired-pizza.png or image URL">
+      </div>
+
+      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem; background: var(--bg-input); padding: 0.75rem; border-radius: var(--radius-md);">
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; cursor: pointer;">
+          <input type="checkbox" id="dish-tag-special" ${n&&t.tags?.includes(`chefSpecial`)?`checked`:``}> Chef's Special
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; cursor: pointer;">
+          <input type="checkbox" id="dish-tag-veg" ${n&&t.tags?.includes(`veg`)?`checked`:``}> Vegetarian
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; cursor: pointer;">
+          <input type="checkbox" id="dish-tag-gf" ${n&&t.tags?.includes(`gf`)?`checked`:``}> Gluten-Free
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; cursor: pointer;">
+          <input type="checkbox" id="dish-instock" ${!n||t.inStock?`checked`:``}> In Stock
+        </label>
+      </div>
+    </form>
+  `,footerHTML:`
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+      ${n?`
+        <button class="btn btn-outline" id="modal-delete-dish-btn" style="color: #ef4444; border-color: #ef4444;">
+          <i class="fa-solid fa-trash"></i> Delete Dish
+        </button>
+      `:`<div></div>`}
+      
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-secondary" id="modal-cancel-dish">Cancel</button>
+        <button class="btn btn-primary" id="modal-save-dish">${n?`Save Changes`:`Create Dish`}</button>
+      </div>
+    </div>
+  `}),document.getElementById(`modal-cancel-dish`).onclick=c,n){let e=document.getElementById(`modal-delete-dish-btn`);e&&(e.onclick=()=>{confirm(`Are you sure you want to delete "${t.name}"?`)&&(a.deleteDish(t.id),c(),o(`Deleted ${t.name}`,`info`))})}document.getElementById(`modal-save-dish`).onclick=()=>{let e=document.getElementById(`dish-name`).value.trim(),r=document.getElementById(`dish-category`).value,i=parseFloat(document.getElementById(`dish-price`).value)||0,s=document.getElementById(`dish-desc`).value.trim(),l=document.getElementById(`dish-prep`).value.trim(),u=document.getElementById(`dish-calories`).value.trim(),d=document.getElementById(`dish-image`).value.trim(),f=[];document.getElementById(`dish-tag-special`).checked&&f.push(`chefSpecial`),document.getElementById(`dish-tag-veg`).checked&&f.push(`veg`),document.getElementById(`dish-tag-gf`).checked&&f.push(`gf`);let p=document.getElementById(`dish-instock`).checked;if(!e||!s||i<=0){o(`Please fill in dish name, price and description`,`info`);return}let m={name:e,category:r,price:i,description:s,prepTime:l,calories:u,image:d||`./assets/woodfired-pizza.png`,tags:f,inStock:p};n?(a.updateDish(t.id,m),o(`Updated dish: ${e}`,`success`)):(a.addDish(m),o(`Added new dish: ${e}`,`success`)),c()}}function u(e=null){let t=!!e;if(s({title:t?`Edit Branch: ${e.name}`:`Add New Restaurant Branch`,bodyHTML:`
+    <form id="admin-loc-form">
+      <div class="form-group">
+        <label class="form-label">Branch Name *</label>
+        <input type="text" id="loc-name" class="form-input" required value="${t?e.name:``}" placeholder="e.g. Trunk Road Plaza, Nellore">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Full Address *</label>
+        <input type="text" id="loc-address" class="form-input" required value="${t?e.address:``}" placeholder="e.g. Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input type="text" id="loc-phone" class="form-input" required value="${t?e.phone:`+91 861 234 5678`}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Opening Hours</label>
+          <input type="text" id="loc-hours" class="form-input" value="${t?e.hours:`Daily: 10:30 AM - 11:00 PM`}">
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Delivery Radius</label>
+          <input type="text" id="loc-radius" class="form-input" value="${t?e.deliveryRadius:`7 km`}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Avg Delivery Time</label>
+          <input type="text" id="loc-time" class="form-input" value="${t?e.avgDeliveryTime:`20-30 min`}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Features / Amenities (comma separated)</label>
+        <input type="text" id="loc-features" class="form-input" value="${t?e.features.join(`, `):`AC Dining, Valet Parking, Family Section`}" placeholder="e.g. AC Dining, Rooftop, Parking">
+      </div>
+    </form>
+  `,footerHTML:`
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+      ${t?`
+        <button class="btn btn-outline" id="modal-delete-loc-btn" style="color: #ef4444; border-color: #ef4444;">
+          <i class="fa-solid fa-trash"></i> Delete Branch
+        </button>
+      `:`<div></div>`}
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-secondary" id="modal-cancel-loc">Cancel</button>
+        <button class="btn btn-primary" id="modal-save-loc">${t?`Save Branch`:`Add Branch`}</button>
+      </div>
+    </div>
+  `}),document.getElementById(`modal-cancel-loc`).onclick=c,t){let t=document.getElementById(`modal-delete-loc-btn`);t&&(t.onclick=()=>{if(confirm(`Are you sure you want to delete branch "${e.name}"?`)){let t=a.deleteLocation(e.id);t.success?(c(),o(`Deleted branch ${e.name}`,`info`)):o(t.message,`info`)}})}document.getElementById(`modal-save-loc`).onclick=()=>{let n=document.getElementById(`loc-name`).value.trim(),r=document.getElementById(`loc-address`).value.trim(),i=document.getElementById(`loc-phone`).value.trim(),s=document.getElementById(`loc-hours`).value.trim(),l=document.getElementById(`loc-radius`).value.trim(),u=document.getElementById(`loc-time`).value.trim(),d=document.getElementById(`loc-features`).value.trim(),f=d?d.split(`,`).map(e=>e.trim()).filter(Boolean):[];if(!n||!r||!i){o(`Please fill in branch name, address and phone`,`info`);return}let p={name:n,address:r,phone:i,hours:s,deliveryRadius:l,avgDeliveryTime:u,features:f};t?(a.updateLocation(e.id,p),o(`Updated branch: ${n}`,`success`)):(a.addLocation(p),o(`Added branch: ${n}`,`success`)),c()}}function d(){let e=document.getElementById(`main-header`);if(!e)return;let t=a.cart.reduce((e,t)=>e+t.qty,0),n=a.wishlist.length,r=a.activeView;e.innerHTML=`
     <div class="nav-container">
       <a href="#" class="brand-logo" id="nav-brand-btn">
         <div class="brand-icon-wrapper">
@@ -27,6 +173,15 @@
       </nav>
 
       <div class="nav-actions">
+        <!-- Quick Admin Action Buttons -->
+        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
+          <i class="fa-solid fa-plus"></i> Add Item
+        </button>
+
+        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+          <i class="fa-solid fa-building-circle-check"></i> Add Branch
+        </button>
+
         <button class="btn-icon" id="theme-toggle-btn" title="Toggle Theme">
           <i class="fa-solid ${a.theme===`dark`?`fa-sun`:`fa-moon`}"></i>
         </button>
@@ -39,27 +194,11 @@
 
         <button class="btn ${r===`staff`?`btn-primary`:`btn-outline`} btn-sm" id="staff-portal-nav-btn">
           <i class="fa-solid fa-kitchen-set"></i>
-          <span>${r===`staff`?`Exit Staff Portal`:`Kitchen Portal`}</span>
+          <span>${r===`staff`?`Exit Staff Portal`:`Admin Portal`}</span>
         </button>
       </div>
     </div>
-  `,document.querySelectorAll(`[data-nav]`).forEach(e=>{e.onclick=t=>{t.preventDefault();let n=e.getAttribute(`data-nav`);a.setView(n)}});let i=document.getElementById(`nav-brand-btn`);i&&(i.onclick=e=>{e.preventDefault(),a.setView(`menu`)});let o=document.getElementById(`theme-toggle-btn`);o&&(o.onclick=()=>{a.setTheme(a.theme===`dark`?`light`:`dark`)});let s=document.getElementById(`open-cart-btn`);s&&(s.onclick=()=>{let e=document.getElementById(`cart-drawer`);e&&e.classList.remove(`hidden`)});let c=document.getElementById(`staff-portal-nav-btn`);c&&(c.onclick=()=>{a.activeView===`staff`?a.setView(`menu`):a.setView(`staff`)})}function s(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
-    <i class="${t===`success`?`fa-solid fa-circle-check`:t===`info`?`fa-solid fa-circle-info`:`fa-solid fa-triangle-exclamation`}"></i>
-    <span class="toast-message">${e}</span>
-  `,r.appendChild(i),setTimeout(()=>{i.style.opacity=`0`,i.style.transform=`translateY(20px)`,setTimeout(()=>{i.parentNode&&i.parentNode.removeChild(i)},300)},n)}function c({title:e,bodyHTML:t,footerHTML:n=``}){let r=document.getElementById(`modal-container`);if(!r)return;r.innerHTML=`
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">${e}</h3>
-        <button class="modal-close" id="global-modal-close-btn" aria-label="Close Modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        ${t}
-      </div>
-      ${n?`<div class="modal-footer">${n}</div>`:``}
-    </div>
-  `,r.classList.remove(`hidden`);let i=document.getElementById(`global-modal-close-btn`);i&&i.addEventListener(`click`,l),r.onclick=e=>{e.target===r&&l()}}function l(){let e=document.getElementById(`modal-container`);e&&(e.classList.add(`hidden`),e.innerHTML=``)}function u(t){let n=e=>a.isWishlisted(e),r=a.dishes.filter(e=>{if(a.selectedCategory!==`all`){if(a.selectedCategory===`specials`){if(!e.tags.includes(`chefSpecial`))return!1}else if(e.category!==a.selectedCategory)return!1}if(a.searchQuery.trim()!==``){let t=a.searchQuery.toLowerCase(),n=e.name.toLowerCase().includes(t),r=e.description.toLowerCase().includes(t);if(!n&&!r)return!1}return!(a.dietaryFilter===`veg`&&!e.tags.includes(`veg`)||a.dietaryFilter===`gf`&&!e.tags.includes(`gf`)||a.dietaryFilter===`chefSpecial`&&!e.tags.includes(`chefSpecial`))});a.sortBy===`price-low`?r.sort((e,t)=>e.price-t.price):a.sortBy===`price-high`?r.sort((e,t)=>t.price-e.price):a.sortBy===`rating`&&r.sort((e,t)=>t.rating-e.rating),t.innerHTML=`
+  `,document.querySelectorAll(`[data-nav]`).forEach(e=>{e.onclick=t=>{t.preventDefault();let n=e.getAttribute(`data-nav`);a.setView(n)}});let i=document.getElementById(`nav-brand-btn`);i&&(i.onclick=e=>{e.preventDefault(),a.setView(`menu`)});let o=document.getElementById(`theme-toggle-btn`);o&&(o.onclick=()=>{a.setTheme(a.theme===`dark`?`light`:`dark`)});let s=document.getElementById(`open-cart-btn`);s&&(s.onclick=()=>{let e=document.getElementById(`cart-drawer`);e&&e.classList.remove(`hidden`)});let c=document.getElementById(`nav-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`nav-add-branch-btn`);d&&(d.onclick=()=>u());let f=document.getElementById(`staff-portal-nav-btn`);f&&(f.onclick=()=>{a.activeView===`staff`?a.setView(`menu`):a.setView(`staff`)})}function f(t){let n=e=>a.isWishlisted(e),r=a.dishes.filter(e=>{if(a.selectedCategory!==`all`){if(a.selectedCategory===`specials`){if(!e.tags.includes(`chefSpecial`))return!1}else if(e.category!==a.selectedCategory)return!1}if(a.searchQuery.trim()!==``){let t=a.searchQuery.toLowerCase(),n=e.name.toLowerCase().includes(t),r=e.description.toLowerCase().includes(t);if(!n&&!r)return!1}return!(a.dietaryFilter===`veg`&&!e.tags.includes(`veg`)||a.dietaryFilter===`gf`&&!e.tags.includes(`gf`)||a.dietaryFilter===`chefSpecial`&&!e.tags.includes(`chefSpecial`))});a.sortBy===`price-low`?r.sort((e,t)=>e.price-t.price):a.sortBy===`price-high`?r.sort((e,t)=>t.price-e.price):a.sortBy===`rating`&&r.sort((e,t)=>t.rating-e.rating),t.innerHTML=`
     <!-- Hero Banner -->
     <section class="hero-section">
       <div class="hero-content">
@@ -169,6 +308,9 @@
                 </div>
 
                 <div class="dish-card-actions">
+                  <button class="btn btn-outline btn-sm edit-dish-direct-btn" data-edit-dish-id="${e.id}" title="Edit Dish (Admin)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
                   <button class="btn btn-outline btn-sm dish-detail-btn" data-detail-id="${e.id}">
                     <i class="fa-solid fa-sliders"></i> Customize
                   </button>
@@ -182,7 +324,7 @@
         </div>
       `}
     </section>
-  `;let i=document.getElementById(`menu-search-input`);i&&(i.oninput=e=>{a.searchQuery=e.target.value,u(t)}),document.querySelectorAll(`.tag-btn`).forEach(e=>{e.onclick=()=>{a.searchQuery=e.getAttribute(`data-tag`),u(t)}}),document.querySelectorAll(`[data-cat]`).forEach(e=>{e.onclick=()=>{a.selectedCategory=e.getAttribute(`data-cat`),u(t)}}),document.querySelectorAll(`[data-diet]`).forEach(e=>{e.onclick=()=>{a.dietaryFilter=e.getAttribute(`data-diet`),u(t)}});let o=document.getElementById(`sort-select`);o&&(o.onchange=e=>{a.sortBy=e.target.value,u(t)}),document.querySelectorAll(`[data-wishlist-id]`).forEach(e=>{e.onclick=n=>{n.stopPropagation();let r=e.getAttribute(`data-wishlist-id`);a.toggleWishlist(r),s(a.isWishlisted(r)?`Added to Wishlist!`:`Removed from Wishlist`,`info`),u(t)}}),document.querySelectorAll(`[data-add-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-add-id`),r=a.dishes.find(e=>e.id===n);r&&r.inStock&&(a.addToCart(n,1),s(`Added ${r.name} to Cart!`,`success`))}}),document.querySelectorAll(`[data-detail-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation(),d(e.getAttribute(`data-detail-id`))}})}function d(e){let t=a.dishes.find(t=>t.id===e);if(!t)return;let n=1;c({title:`Customize Your Order`,bodyHTML:`
+  `;let i=document.getElementById(`menu-search-input`);i&&(i.oninput=e=>{a.searchQuery=e.target.value,f(t)}),document.querySelectorAll(`.edit-dish-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-dish-id`),r=a.dishes.find(e=>e.id===n);r&&l(r)}}),document.querySelectorAll(`.tag-btn`).forEach(e=>{e.onclick=()=>{a.searchQuery=e.getAttribute(`data-tag`),f(t)}}),document.querySelectorAll(`[data-cat]`).forEach(e=>{e.onclick=()=>{a.selectedCategory=e.getAttribute(`data-cat`),f(t)}}),document.querySelectorAll(`[data-diet]`).forEach(e=>{e.onclick=()=>{a.dietaryFilter=e.getAttribute(`data-diet`),f(t)}});let s=document.getElementById(`sort-select`);s&&(s.onchange=e=>{a.sortBy=e.target.value,f(t)}),document.querySelectorAll(`[data-wishlist-id]`).forEach(e=>{e.onclick=n=>{n.stopPropagation();let r=e.getAttribute(`data-wishlist-id`);a.toggleWishlist(r),o(a.isWishlisted(r)?`Added to Wishlist!`:`Removed from Wishlist`,`info`),f(t)}}),document.querySelectorAll(`[data-add-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-add-id`),r=a.dishes.find(e=>e.id===n);r&&r.inStock&&(a.addToCart(n,1),o(`Added ${r.name} to Cart!`,`success`))}}),document.querySelectorAll(`[data-detail-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation(),p(e.getAttribute(`data-detail-id`))}})}function p(e){let t=a.dishes.find(t=>t.id===e);if(!t)return;let n=1;s({title:`Customize Your Order`,bodyHTML:`
     <div style="display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
       <img src="${t.image}" alt="${t.name}" style="width: 140px; height: 120px; border-radius: var(--radius-md); object-fit: cover;">
       <div style="flex: 1;">
@@ -232,7 +374,7 @@
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
     <button class="btn btn-primary" id="modal-add-cart-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
-  `});let r=document.getElementById(`modal-qty-minus`),i=document.getElementById(`modal-qty-plus`),o=document.getElementById(`modal-qty-val`);r&&i&&o&&(r.onclick=()=>{n>1&&(n--,o.textContent=n)},i.onclick=()=>{n++,o.textContent=n});let u=document.getElementById(`modal-cancel-btn`);u&&(u.onclick=l);let d=document.getElementById(`modal-add-cart-btn`);d&&(d.onclick=()=>{let r=document.getElementById(`modal-spice-select`).value,i=document.getElementById(`modal-notes-input`).value.trim(),o=[];document.getElementById(`addon-cheese`).checked&&o.push(`Extra Cheese`),document.getElementById(`addon-sauce`).checked&&o.push(`Truffle Dip`),document.getElementById(`addon-gf`).checked&&o.push(`GF Option`);let c=r;o.length>0&&(c+=` | ${o.join(`, `)}`),i&&(c+=` (${i})`),a.addToCart(e,n,c),s(`Added ${t.name} (${n}x) to Cart!`,`success`),l()})}function f(e){let t=a.dishes.filter(e=>a.wishlist.includes(e.id));e.innerHTML=`
+  `});let r=document.getElementById(`modal-qty-minus`),i=document.getElementById(`modal-qty-plus`),l=document.getElementById(`modal-qty-val`);r&&i&&l&&(r.onclick=()=>{n>1&&(n--,l.textContent=n)},i.onclick=()=>{n++,l.textContent=n});let u=document.getElementById(`modal-cancel-btn`);u&&(u.onclick=c);let d=document.getElementById(`modal-add-cart-btn`);d&&(d.onclick=()=>{let r=document.getElementById(`modal-spice-select`).value,i=document.getElementById(`modal-notes-input`).value.trim(),s=[];document.getElementById(`addon-cheese`).checked&&s.push(`Extra Cheese`),document.getElementById(`addon-sauce`).checked&&s.push(`Truffle Dip`),document.getElementById(`addon-gf`).checked&&s.push(`GF Option`);let l=r;s.length>0&&(l+=` | ${s.join(`, `)}`),i&&(l+=` (${i})`),a.addToCart(e,n,l),o(`Added ${t.name} (${n}x) to Cart!`,`success`),c()})}function m(e){let t=a.dishes.filter(e=>a.wishlist.includes(e.id));e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
         <div>
@@ -288,7 +430,7 @@
         </div>
       `}
     </section>
-  `;let n=document.getElementById(`wishlist-explore-btn`);n&&(n.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-remove-wishlist]`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-remove-wishlist`);a.toggleWishlist(n),s(`Item removed from Wishlist`,`info`),f(e)}}),document.querySelectorAll(`[data-wishlist-add]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-wishlist-add`),n=a.dishes.find(e=>e.id===t);n&&(a.addToCart(t,1),s(`Moved ${n.name} to Cart!`,`success`))}})}function p(){let e=document.getElementById(`cart-drawer-body`);if(!e)return;let t=a.getCartTotal(),n=a.cart;e.innerHTML=`
+  `;let n=document.getElementById(`wishlist-explore-btn`);n&&(n.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-remove-wishlist]`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-remove-wishlist`);a.toggleWishlist(n),o(`Item removed from Wishlist`,`info`),m(e)}}),document.querySelectorAll(`[data-wishlist-add]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-wishlist-add`),n=a.dishes.find(e=>e.id===t);n&&(a.addToCart(t,1),o(`Moved ${n.name} to Cart!`,`success`))}})}function h(){let e=document.getElementById(`cart-drawer-body`);if(!e)return;let t=a.getCartTotal(),n=a.cart;e.innerHTML=`
     <div class="cart-header">
       <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
         <i class="fa-solid fa-basket-shopping" style="color: var(--primary);"></i> Your Cart Order
@@ -375,7 +517,7 @@
         </button>
       </div>
     `}
-  `;let r=document.getElementById(`close-cart-drawer-btn`),i=document.getElementById(`cart-overlay`),o=document.getElementById(`cart-drawer`),c=()=>{o&&o.classList.add(`hidden`)};r&&(r.onclick=c),i&&(i.onclick=c);let l=document.getElementById(`cart-start-ordering-btn`);l&&(l.onclick=()=>{c(),a.setView(`menu`)}),document.querySelectorAll(`[data-qty-change]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-qty-change`)),n=parseInt(e.getAttribute(`data-delta`)),r=a.cart[t];r&&(a.updateCartQty(t,r.qty+n),p())}});let u=document.getElementById(`apply-coupon-btn`);u&&(u.onclick=()=>{let e=document.getElementById(`coupon-input-field`);if(e){let t=a.applyCoupon(e.value);t.success?s(t.message,`success`):s(t.message,`info`),p()}});let d=document.getElementById(`checkout-trigger-btn`);d&&(d.onclick=()=>{c(),m()})}function m(){let e=a.getCartTotal(),t=a.profile;t.addresses.find(e=>e.isDefault)||t.addresses[0],c({title:`Complete Your Order`,bodyHTML:`
+  `;let r=document.getElementById(`close-cart-drawer-btn`),i=document.getElementById(`cart-overlay`),s=document.getElementById(`cart-drawer`),c=()=>{s&&s.classList.add(`hidden`)};r&&(r.onclick=c),i&&(i.onclick=c);let l=document.getElementById(`cart-start-ordering-btn`);l&&(l.onclick=()=>{c(),a.setView(`menu`)}),document.querySelectorAll(`[data-qty-change]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-qty-change`)),n=parseInt(e.getAttribute(`data-delta`)),r=a.cart[t];r&&(a.updateCartQty(t,r.qty+n),h())}});let u=document.getElementById(`apply-coupon-btn`);u&&(u.onclick=()=>{let e=document.getElementById(`coupon-input-field`);if(e){let t=a.applyCoupon(e.value);t.success?o(t.message,`success`):o(t.message,`info`),h()}});let d=document.getElementById(`checkout-trigger-btn`);d&&(d.onclick=()=>{c(),g()})}function g(){let e=a.getCartTotal(),t=a.profile;t.addresses.find(e=>e.isDefault)||t.addresses[0],s({title:`Complete Your Order`,bodyHTML:`
     <div style="margin-bottom: 1.5rem;">
       <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-sub);">
         <i class="fa-solid fa-motorcycle" style="color: var(--primary);"></i> 1. Select Fulfillment Mode
@@ -441,7 +583,7 @@
     <button class="btn btn-primary btn-lg" id="confirm-pay-btn">
       <i class="fa-solid fa-lock"></i> Place Order ($${e.grandTotal.toFixed(2)})
     </button>
-  `});let n=document.getElementById(`checkout-cancel-btn`);n&&(n.onclick=l);let r=document.getElementById(`confirm-pay-btn`);r&&(r.onclick=()=>{let t=document.getElementById(`checkout-address-select`).value,n=document.querySelector(`input[name="fulfillment"]:checked`).value,r=a.placeOrder({deliveryAddress:t,fulfillmentType:n,subtotal:e.subtotal,discount:e.discountAmount,tax:e.tax,deliveryFee:e.deliveryFee,total:e.grandTotal,estimatedEta:`20-25 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`});l(),s(`Order #${r.id} Placed Successfully!`,`success`),a.setView(`orders`)})}function h(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.filter(e=>e.status===`delivered`);e.innerHTML=`
+  `});let n=document.getElementById(`checkout-cancel-btn`);n&&(n.onclick=c);let r=document.getElementById(`confirm-pay-btn`);r&&(r.onclick=()=>{let t=document.getElementById(`checkout-address-select`).value,n=document.querySelector(`input[name="fulfillment"]:checked`).value,r=a.placeOrder({deliveryAddress:t,fulfillmentType:n,subtotal:e.subtotal,discount:e.discountAmount,tax:e.tax,deliveryFee:e.deliveryFee,total:e.grandTotal,estimatedEta:`20-25 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`});c(),o(`Order #${r.id} Placed Successfully!`,`success`),a.setView(`orders`)})}function _(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.filter(e=>e.status===`delivered`);e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Order Tracker & History</h1>
@@ -454,7 +596,7 @@
           <span class="pulse-dot"></span> Active Live Orders (${t.length})
         </h2>
 
-        ${t.map(e=>g(e)).join(``)}
+        ${t.map(e=>v(e)).join(``)}
       `:`
         <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2rem; text-align: center; margin-bottom: 2.5rem;">
           <i class="fa-solid fa-bell-concierge" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 0.75rem;"></i>
@@ -502,7 +644,7 @@
         `}
       </div>
     </section>
-  `;let r=document.getElementById(`active-order-explore-btn`);r&&(r.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-reorder-id]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-reorder-id`),n=a.orders.find(e=>e.id===t);n&&(n.items.forEach(e=>{a.addToCart(e.dishId,e.qty,e.opts||``)}),s(`Items re-added to Cart!`,`success`),a.setView(`menu`))}})}function g(e){let t=e.status===`preparing`||e.status===`ready`||e.status===`delivered`,n=e.status===`ready`||e.status===`delivered`,r=e.status===`delivered`;return`
+  `;let r=document.getElementById(`active-order-explore-btn`);r&&(r.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-reorder-id]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-reorder-id`),n=a.orders.find(e=>e.id===t);n&&(n.items.forEach(e=>{a.addToCart(e.dishId,e.qty,e.opts||``)}),o(`Items re-added to Cart!`,`success`),a.setView(`menu`))}})}function v(e){let t=e.status===`preparing`||e.status===`ready`||e.status===`delivered`,n=e.status===`ready`||e.status===`delivered`,r=e.status===`delivered`;return`
     <div class="order-tracker-card">
       <div class="tracker-header">
         <div>
@@ -574,7 +716,7 @@
         </div>
       </div>
     </div>
-  `}function _(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2);e.innerHTML=`
+  `}function y(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2);e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Account Settings & Address Book</h1>
@@ -681,7 +823,7 @@
         </main>
       </div>
     </section>
-  `,document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let r=document.getElementById(`add-new-address-btn`);r&&(r.onclick=()=>{v(e)})}function v(e){c({title:`Add New Delivery Address`,bodyHTML:`
+  `,document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let r=document.getElementById(`add-new-address-btn`);r&&(r.onclick=()=>{b(e)})}function b(e){s({title:`Add New Delivery Address`,bodyHTML:`
     <div class="form-group">
       <label class="form-label">Address Label</label>
       <input type="text" id="new-addr-label" class="form-input" placeholder="e.g. Home, Office, Summer House">
@@ -709,11 +851,17 @@
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-addr">Cancel</button>
     <button class="btn btn-primary" id="modal-save-addr">Save Address</button>
-  `}),document.getElementById(`modal-cancel-addr`).onclick=l,document.getElementById(`modal-save-addr`).onclick=()=>{let t=document.getElementById(`new-addr-label`).value.trim()||`Other`,n=document.getElementById(`new-addr-street`).value.trim(),r=document.getElementById(`new-addr-city`).value.trim()||`Nellore, Andhra Pradesh`,i=document.getElementById(`new-addr-zip`).value.trim()||`524001`,o=document.getElementById(`new-addr-default`).checked;if(!n){s(`Please enter a street address`,`info`);return}a.addAddress({label:t,street:n,city:r,zip:i,isDefault:o}),l(),s(`New Address Saved!`,`success`),_(e)}}function y(e){let t=a.selectedLocation;e.innerHTML=`
+  `}),document.getElementById(`modal-cancel-addr`).onclick=c,document.getElementById(`modal-save-addr`).onclick=()=>{let t=document.getElementById(`new-addr-label`).value.trim()||`Other`,n=document.getElementById(`new-addr-street`).value.trim(),r=document.getElementById(`new-addr-city`).value.trim()||`Nellore, Andhra Pradesh`,i=document.getElementById(`new-addr-zip`).value.trim()||`524001`,s=document.getElementById(`new-addr-default`).checked;if(!n){o(`Please enter a street address`,`info`);return}a.addAddress({label:t,street:n,city:r,zip:i,isDefault:s}),c(),o(`New Address Saved!`,`success`),y(e)}}function x(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
-      <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-        <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Restaurant Locations & Table Booking</h1>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Find your nearest Savory Bites Bistro branch or reserve a dining table online.</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <div>
+          <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Restaurant Locations & Table Booking</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Find your nearest Savory Bites Bistro branch in Nellore or reserve a dining table online.</p>
+        </div>
+
+        <button class="btn btn-outline btn-sm" id="view-add-branch-btn" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+          <i class="fa-solid fa-plus"></i> Add New Branch (Admin)
+        </button>
       </div>
 
       <div class="locations-grid">
@@ -722,11 +870,16 @@
           <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.25rem;">Select Bistro Branch</h2>
           
           <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
-            ${n.map(e=>`
+            ${a.locations.map(e=>`
               <div class="branch-card ${e.id===t.id?`active`:``}" data-select-loc="${e.id}" style="${e.id===t.id?`border-color: var(--primary); background: rgba(255, 107, 53, 0.04);`:``} cursor: pointer;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                   <h3 style="font-size: 1.15rem; font-weight: 700;">${e.name}</h3>
-                  <span class="badge badge-gold"><i class="fa-solid fa-star"></i> ${e.rating}</span>
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="badge badge-gold"><i class="fa-solid fa-star"></i> ${e.rating||`4.9`}</span>
+                    <button class="btn btn-secondary btn-sm edit-branch-direct-btn" data-edit-loc-id="${e.id}" title="Edit Branch (Admin)">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div style="font-size: 0.9rem; color: var(--text-sub); display: flex; flex-direction: column; gap: 0.4rem;">
@@ -804,19 +957,28 @@
         </div>
       </div>
     </section>
-  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=()=>{let r=t.getAttribute(`data-select-loc`),i=n.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),y(e)}}});let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;s(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function b(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders,r=n.reduce((e,t)=>e+t.total,0),i=t.length;e.innerHTML=`
+  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=n=>{if(n.target.closest(`.edit-branch-direct-btn`))return;let r=t.getAttribute(`data-select-loc`),i=a.locations.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),x(e)}}}),document.querySelectorAll(`.edit-branch-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-loc-id`),r=a.locations.find(e=>e.id===n);r&&u(r)}});let n=document.getElementById(`view-add-branch-btn`);n&&(n.onclick=()=>u());let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;o(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function S(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.reduce((e,t)=>e+t.total,0),r=t.length;e.innerHTML=`
     <!-- Staff Banner -->
     <div class="staff-portal-banner">
       <div style="display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-        <i class="fa-solid fa-kitchen-set" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
+        <i class="fa-solid fa-user-shield" style="font-size: 1.6rem; color: var(--accent-gold);"></i>
         <div>
-          <h2 style="font-size: 1.2rem; font-weight: 800;">Kitchen Display & Live Staff Management System</h2>
-          <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8);">Real-time kitchen order processing & menu inventory stock control</p>
+          <h2 style="font-size: 1.25rem; font-weight: 800;">Restaurant Management & Staff Control Center</h2>
+          <p style="font-size: 0.82rem; color: rgba(255,255,255,0.85);">Real-time kitchen orders, full menu editor, and branch location management</p>
         </div>
       </div>
-      <button class="btn btn-outline btn-sm" id="exit-staff-portal-btn" style="border-color: rgba(255,255,255,0.3); color: #fff;">
-        <i class="fa-solid fa-right-from-bracket"></i> Exit to Customer View
-      </button>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="btn btn-primary btn-sm" id="admin-banner-add-dish">
+          <i class="fa-solid fa-plus"></i> Add New Dish
+        </button>
+        <button class="btn btn-secondary btn-sm" id="admin-banner-add-branch">
+          <i class="fa-solid fa-building-circle-check"></i> Add New Branch
+        </button>
+        <button class="btn btn-outline btn-sm" id="exit-staff-portal-btn" style="border-color: rgba(255,255,255,0.3); color: #fff;">
+          <i class="fa-solid fa-right-from-bracket"></i> Customer View
+        </button>
+      </div>
     </div>
 
     <section class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
@@ -824,39 +986,39 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
           <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Daily Revenue</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">$${r.toFixed(2)}</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-green);">$${n.toFixed(2)}</div>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
           <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Active Kitchen Orders</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${i} Pending</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${r} Pending</div>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Orders Placed</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">${n.length} Orders</div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Menu Dishes</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-gold);">${a.dishes.length} Items</div>
         </div>
 
         <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Menu Dish Items</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-gold);">${a.dishes.length} Dishes</div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;">Active Branches</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">${a.locations.length} Outlets</div>
         </div>
       </div>
 
-      <!-- Live Kitchen Display System (KDS) -->
-      <div style="margin-bottom: 3rem;">
+      <!-- Section 1: Live Kitchen Display System (KDS) -->
+      <div style="margin-bottom: 3.5rem;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
           <h2 style="font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem;">
-            <span class="pulse-dot"></span> Kitchen Display Orders Queue (${t.length})
+            <span class="pulse-dot"></span> Live Kitchen Orders Queue (${t.length})
           </h2>
-          <span style="font-size: 0.85rem; color: var(--text-muted);">Updating order status here syncs live with customer tracker!</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Changing order status updates customer tracker in real time</span>
         </div>
 
         ${t.length===0?`
-          <div style="background: var(--bg-card); padding: 3rem; border-radius: var(--radius-lg); text-align: center; border: 1px solid var(--border-color);">
+          <div style="background: var(--bg-card); padding: 2.5rem; border-radius: var(--radius-lg); text-align: center; border: 1px solid var(--border-color);">
             <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: var(--accent-green); margin-bottom: 0.75rem;"></i>
             <h3>All Kitchen Orders Cleared!</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">No pending kitchen orders at the moment.</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">No active pending orders right now.</p>
           </div>
         `:`
           <div class="staff-kds-grid">
@@ -873,7 +1035,6 @@
                   <i class="fa-solid fa-clock"></i> Placed ${new Date(e.date).toLocaleTimeString([],{hour:`2-digit`,minute:`2-digit`})} • <strong>${e.fulfillmentType}</strong>
                 </div>
 
-                <!-- Order Items -->
                 <div class="kds-order-items">
                   ${e.items.map(e=>`
                     <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.3rem;">
@@ -887,7 +1048,6 @@
                   <strong>Deliver to:</strong> ${e.deliveryAddress}
                 </div>
 
-                <!-- Update Status Controller -->
                 <div class="form-group" style="margin-bottom: 0;">
                   <label class="form-label" style="font-size: 0.8rem;">Change Order Status:</label>
                   <select class="form-select status-change-select" data-order-status-id="${e.id}">
@@ -903,26 +1063,101 @@
         `}
       </div>
 
-      <!-- Menu Stock Availability Management -->
-      <div>
-        <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.25rem;">
-          <i class="fa-solid fa-boxes-stacked" style="color: var(--primary);"></i> Menu Stock & Ingredient Availability
-        </h2>
+      <!-- Section 2: Menu Items & Inventory Control -->
+      <div style="margin-bottom: 3.5rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-utensils" style="color: var(--primary);"></i> Menu Items Editor & Inventory
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Add new dishes, edit descriptions & pricing, toggle stock, or delete items.</p>
+          </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+          <button class="btn btn-primary" id="admin-add-dish-btn">
+            <i class="fa-solid fa-plus"></i> Add New Menu Dish
+          </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
           ${a.dishes.map(e=>`
-            <div style="background: var(--bg-card); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="font-weight: 700; font-size: 0.95rem;">${e.name}</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">$${e.price.toFixed(2)} • ${e.category}</div>
+            <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+              <div style="display: flex; gap: 1rem;">
+                <img src="${e.image}" alt="${e.name}" style="width: 64px; height: 64px; border-radius: var(--radius-md); object-fit: cover;">
+                <div style="flex: 1;">
+                  <div style="font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 0.2rem;">${e.name}</div>
+                  <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">$${e.price.toFixed(2)} • <span style="color: var(--text-muted); font-weight: 400; text-transform: capitalize;">${e.category}</span></div>
+                  <div style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    ${e.description}
+                  </div>
+                </div>
               </div>
 
-              <button class="btn ${e.inStock?`btn-outline`:`btn-primary`} btn-sm stock-toggle-btn" data-stock-dish-id="${e.id}">
-                ${e.inStock?`<i class="fa-solid fa-check"></i> In Stock`:`<i class="fa-solid fa-ban"></i> Out of Stock`}
-              </button>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px dashed var(--border-color); flex-wrap: wrap; gap: 0.5rem;">
+                <button class="btn ${e.inStock?`btn-outline`:`btn-primary`} btn-sm stock-toggle-btn" data-stock-dish-id="${e.id}">
+                  ${e.inStock?`<i class="fa-solid fa-check"></i> In Stock`:`<i class="fa-solid fa-ban"></i> Out of Stock`}
+                </button>
+
+                <div style="display: flex; gap: 0.4rem;">
+                  <button class="btn btn-secondary btn-sm edit-dish-btn" data-edit-dish-id="${e.id}">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                  </button>
+                  <button class="btn btn-outline btn-sm delete-dish-btn" data-delete-dish-id="${e.id}" style="color: #ef4444; border-color: #ef4444;">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join(``)}
+        </div>
+      </div>
+
+      <!-- Section 3: Branch Locations Control -->
+      <div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-location-dot" style="color: var(--accent-gold);"></i> Restaurant Branch Outlets
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Manage restaurant branches, addresses, contact phones, and operating hours.</p>
+          </div>
+
+          <button class="btn btn-primary" id="admin-add-branch-btn">
+            <i class="fa-solid fa-plus"></i> Add New Branch Outlet
+          </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+          ${a.locations.map(e=>`
+            <div style="background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <h3 style="font-size: 1.1rem; font-weight: 700;">${e.name}</h3>
+                  <span class="badge badge-gold"><i class="fa-solid fa-star"></i> ${e.rating||`4.8`}</span>
+                </div>
+
+                <div style="font-size: 0.88rem; color: var(--text-sub); display: flex; flex-direction: column; gap: 0.35rem;">
+                  <div><i class="fa-solid fa-map-pin" style="color: var(--primary);"></i> ${e.address}</div>
+                  <div><i class="fa-solid fa-phone"></i> ${e.phone}</div>
+                  <div><i class="fa-solid fa-clock"></i> ${e.hours}</div>
+                  <div><i class="fa-solid fa-truck"></i> Radius: ${e.deliveryRadius} (${e.avgDeliveryTime})</div>
+                </div>
+
+                <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.75rem;">
+                  ${e.features.map(e=>`<span class="badge badge-primary" style="font-size: 0.75rem;">${e}</span>`).join(``)}
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-color);">
+                <button class="btn btn-secondary btn-sm edit-loc-btn" data-edit-loc-id="${e.id}">
+                  <i class="fa-solid fa-pen-to-square"></i> Edit Branch
+                </button>
+                <button class="btn btn-outline btn-sm delete-loc-btn" data-delete-loc-id="${e.id}" style="color: #ef4444; border-color: #ef4444;">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
             </div>
           `).join(``)}
         </div>
       </div>
     </section>
-  `;let o=document.getElementById(`exit-staff-portal-btn`);o&&(o.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),s(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),b(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);s(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),b(e)}})}function x(){document.documentElement.setAttribute(`data-theme`,a.theme),o(),p(),S(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`?(o(),S()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(o(),p()):e===`WISHLIST_UPDATED`?(o(),a.activeView===`wishlist`&&f(document.getElementById(`app-view`)),a.activeView===`menu`&&u(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(o(),p(),a.activeView===`orders`&&h(document.getElementById(`app-view`)),a.activeView===`staff`&&b(document.getElementById(`app-view`))):e===`STOCK_UPDATED`&&(a.activeView===`menu`&&u(document.getElementById(`app-view`)),a.activeView===`staff`&&b(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.setView(`staff`)})}function S(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`menu`:u(e);break;case`wishlist`:f(e);break;case`orders`:h(e);break;case`account`:_(e);break;case`location`:y(e);break;case`staff`:b(e);break;default:u(e)}}document.addEventListener(`DOMContentLoaded`,x);
+  `;let i=document.getElementById(`exit-staff-portal-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`admin-banner-add-dish`);s&&(s.onclick=()=>l());let c=document.getElementById(`admin-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`admin-banner-add-branch`);d&&(d.onclick=()=>u());let f=document.getElementById(`admin-add-branch-btn`);f&&(f.onclick=()=>u()),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),o(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),S(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);o(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),S(e)}}),document.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),document.querySelectorAll(`.delete-dish-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-dish-id`),r=a.dishes.find(e=>e.id===n);r&&confirm(`Are you sure you want to delete "${r.name}"?`)&&(a.deleteDish(n),o(`Deleted ${r.name}`,`info`),S(e))}}),document.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),document.querySelectorAll(`.delete-loc-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-loc-id`),r=a.locations.find(e=>e.id===n);if(r&&confirm(`Are you sure you want to delete branch "${r.name}"?`)){let t=a.deleteLocation(n);t.success?(o(`Deleted branch ${r.name}`,`info`),S(e)):o(t.message,`info`)}}})}function C(){document.documentElement.setAttribute(`data-theme`,a.theme),d(),h(),w(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`?(d(),w()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(d(),h()):e===`WISHLIST_UPDATED`?(d(),a.activeView===`wishlist`&&m(document.getElementById(`app-view`)),a.activeView===`menu`&&f(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(d(),h(),a.activeView===`orders`&&_(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`))):e===`STOCK_UPDATED`?(a.activeView===`menu`&&f(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`))):e===`LOCATIONS_UPDATED`&&(d(),a.activeView===`location`&&x(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.setView(`staff`)})}function w(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`menu`:f(e);break;case`wishlist`:m(e);break;case`orders`:_(e);break;case`account`:y(e);break;case`location`:x(e);break;case`staff`:S(e);break;default:f(e)}}document.addEventListener(`DOMContentLoaded`,C);

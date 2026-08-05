@@ -41,6 +41,10 @@ function initApp() {
     } else if (event === 'STOCK_UPDATED') {
       if (state.activeView === 'menu') renderMenuView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
+    } else if (event === 'LOCATIONS_UPDATED') {
+      renderNavbar();
+      if (state.activeView === 'location') renderLocationView(document.getElementById('app-view'));
+      if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     }
   });
 

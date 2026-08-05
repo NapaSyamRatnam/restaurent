@@ -6,6 +6,7 @@ import { CATEGORIES } from '../data.js';
 import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
 import { openModal, closeModal } from '../components/modal.js';
+import { openDishModal } from '../components/adminModal.js';
 
 export function renderMenuView(container) {
   const isWishlisted = (id) => state.isWishlisted(id);
@@ -154,6 +155,9 @@ export function renderMenuView(container) {
                 </div>
 
                 <div class="dish-card-actions">
+                  <button class="btn btn-outline btn-sm edit-dish-direct-btn" data-edit-dish-id="${dish.id}" title="Edit Dish (Admin)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
                   <button class="btn btn-outline btn-sm dish-detail-btn" data-detail-id="${dish.id}">
                     <i class="fa-solid fa-sliders"></i> Customize
                   </button>
@@ -177,6 +181,16 @@ export function renderMenuView(container) {
       renderMenuView(container);
     };
   }
+
+  // Edit Dish Direct listeners
+  document.querySelectorAll('.edit-dish-direct-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const dishId = btn.getAttribute('data-edit-dish-id');
+      const dish = state.dishes.find(d => d.id === dishId);
+      if (dish) openDishModal(dish);
+    };
+  });
 
   // Quick Tags
   document.querySelectorAll('.tag-btn').forEach(btn => {
