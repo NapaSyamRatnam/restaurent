@@ -3,6 +3,21 @@
    ========================================================================== */
 
 import { INITIAL_DISHES, RESTAURANT_LOCATIONS, DEFAULT_USER_PROFILE, INITIAL_ORDERS } from './data.js';
+import { 
+  isSupabaseConfigured, 
+  supabaseSignIn, 
+  supabaseSignUp, 
+  supabaseSignOut, 
+  supabaseGetDishes, 
+  supabaseSaveDish, 
+  supabaseDeleteDish, 
+  supabaseGetLocations, 
+  supabaseSaveLocation, 
+  supabaseDeleteLocation, 
+  supabaseGetOrders, 
+  supabaseCreateOrder, 
+  supabaseUpdateOrderStatus 
+} from './supabase.js';
 
 class AppState {
   constructor() {
@@ -55,6 +70,38 @@ class AppState {
     this.selectedCategory = 'all';
     this.dietaryFilter = 'all'; // all, veg, gf, chefSpecial
     this.sortBy = 'popular'; // popular, price-low, price-high, rating
+
+    // Asynchronously sync with Supabase if configured
+    this.syncWithSupabase();
+  }
+
+  async syncWithSupabase() {
+    if (!isSupabaseConfigured()) return;
+    try {
+      const dbDishes = await supabaseGetDishes();
+      if (dbDishes && dbDishes.length > 0) {
+        this.dishes = dbDishes;
+        this.saveDishes();
+        this.notify('STOCK_UPDATED', this.dishes);
+      }
+
+      const dbLocations = await supabaseGetLocations();
+      if (dbLocations && dbLocations.length > 0) {
+        this.locations = dbLocations;
+        this.selectedLocation = this.locations[0];
+        this.saveLocations();
+        this.notify('LOCATIONS_UPDATED', this.locations);
+      }
+
+      const dbOrders = await supabaseGetOrders();
+      if (dbOrders && dbOrders.length > 0) {
+        this.orders = dbOrders;
+        localStorage.setItem('sb_orders', JSON.stringify(this.orders));
+        this.notify('ORDER_STATUS_UPDATED', this.orders);
+      }
+    } catch (err) {
+      console.warn('Supabase sync error:', err);
+    }
   }
 
   // Subscribe to state changes
@@ -70,10 +117,24 @@ class AppState {
   }
 
   // Auth & Roles Management
-  login(email, password, role = 'user') {
+  async login(email, password, role = 'user') {
     const cleanEmail = email.trim().toLowerCase();
     const isAdminRole = (role === 'admin' || cleanEmail.includes('admin'));
-    
+
+    if (isSupabaseConfigured()) {
+      const res = await supabaseSignIn(cleanEmail, password);
+      if (res.error) {
+        // Fallback to local mode with warning if Supabase user fails
+        console.warn('Supabase auth error:', res.error);
+      } else if (res.user) {
+        this.currentUser = res.user;
+        localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+        this.notify('AUTH_CHANGED', this.currentUser);
+        return { success: true, user: this.currentUser };
+      }
+    }
+
+    // Local / Demo Login Mode
     this.currentUser = {
       id: `usr-${Date.now()}`,
       name: isAdminRole ? 'Admin Manager' : (cleanEmail.split('@')[0] || 'User'),
@@ -86,21 +147,48 @@ class AppState {
     return { success: true, user: this.currentUser };
   }
 
-  logout() {
+  async logout() {
+    if (isSupabaseConfigured()) {
+      await supabaseSignOut();
+    }
     this.currentUser = null;
     localStorage.removeItem('sb_user');
     this.notify('AUTH_CHANGED', null);
   }
 
-  register(name, email, password) {
+  async register(name, email, password) {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanName = name.trim();
+
+    if (isSupabaseConfigured()) {
+      const res = await supabaseSignUp(cleanEmail, password, cleanName, 'customer');
+      if (res.error) {
+        console.warn('Supabase registration error:', res.error);
+      } else if (res.data) {
+        this.currentUser = {
+          id: res.data.id,
+          name: cleanName,
+          email: cleanEmail,
+          role: 'user'
+        };
+        this.profile.name = cleanName;
+        this.profile.email = cleanEmail;
+        this.saveProfile();
+        localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+        this.notify('AUTH_CHANGED', this.currentUser);
+        return { success: true, user: this.currentUser };
+      }
+    }
+
+    // Local Registration Fallback
     this.currentUser = {
       id: `usr-${Date.now()}`,
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
+      name: cleanName,
+      email: cleanEmail,
       role: 'user'
     };
-    this.profile.name = name.trim();
-    this.profile.email = email.trim().toLowerCase();
+    this.profile.name = cleanName;
+    this.profile.email = cleanEmail;
     this.saveProfile();
     localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
     this.notify('AUTH_CHANGED', this.currentUser);
@@ -227,7 +315,7 @@ class AppState {
   }
 
   // Order Placement & Live Status Updates
-  placeOrder(orderData) {
+  async placeOrder(orderData) {
     const newOrder = {
       id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
       date: new Date().toISOString(),
@@ -248,35 +336,45 @@ class AppState {
     this.orders.unshift(newOrder);
     localStorage.setItem('sb_orders', JSON.stringify(this.orders));
 
+    if (isSupabaseConfigured()) {
+      await supabaseCreateOrder(newOrder);
+    }
+
     // Clear cart after order
     this.clearCart();
     this.notify('ORDER_PLACED', newOrder);
     return newOrder;
   }
 
-  updateOrderStatus(orderId, newStatus) {
+  async updateOrderStatus(orderId, newStatus) {
     const order = this.orders.find(o => o.id === orderId);
     if (order) {
       order.status = newStatus;
       localStorage.setItem('sb_orders', JSON.stringify(this.orders));
+      if (isSupabaseConfigured()) {
+        await supabaseUpdateOrderStatus(orderId, newStatus);
+      }
       this.notify('ORDER_STATUS_UPDATED', order);
     }
   }
 
   // Stock & Dish Admin Management
-  toggleDishStock(dishId) {
+  async toggleDishStock(dishId) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const dish = this.dishes.find(d => d.id === dishId);
     if (dish) {
       dish.inStock = !dish.inStock;
       this.saveDishes();
+      if (isSupabaseConfigured()) {
+        await supabaseSaveDish(dish);
+      }
       this.notify('STOCK_UPDATED', dish);
       return { success: true, dish };
     }
     return { success: false, message: 'Dish not found' };
   }
 
-  addDish(dishObj) {
+  async addDish(dishObj) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const newDish = {
       id: `dish-${Date.now()}`,
@@ -288,26 +386,35 @@ class AppState {
     };
     this.dishes.unshift(newDish);
     this.saveDishes();
+    if (isSupabaseConfigured()) {
+      await supabaseSaveDish(newDish);
+    }
     this.notify('STOCK_UPDATED', newDish);
     return { success: true, dish: newDish };
   }
 
-  updateDish(dishId, updatedFields) {
+  async updateDish(dishId, updatedFields) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const idx = this.dishes.findIndex(d => d.id === dishId);
     if (idx > -1) {
       this.dishes[idx] = { ...this.dishes[idx], ...updatedFields };
       this.saveDishes();
+      if (isSupabaseConfigured()) {
+        await supabaseSaveDish(this.dishes[idx]);
+      }
       this.notify('STOCK_UPDATED', this.dishes[idx]);
       return { success: true, dish: this.dishes[idx] };
     }
     return { success: false, message: 'Dish not found' };
   }
 
-  deleteDish(dishId) {
+  async deleteDish(dishId) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     this.dishes = this.dishes.filter(d => d.id !== dishId);
     this.saveDishes();
+    if (isSupabaseConfigured()) {
+      await supabaseDeleteDish(dishId);
+    }
     this.notify('STOCK_UPDATED', dishId);
     return { success: true };
   }
@@ -317,7 +424,7 @@ class AppState {
   }
 
   // Location Admin Management
-  addLocation(locObj) {
+  async addLocation(locObj) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const newLoc = {
       id: `loc-${Date.now()}`,
@@ -329,11 +436,14 @@ class AppState {
     };
     this.locations.push(newLoc);
     this.saveLocations();
+    if (isSupabaseConfigured()) {
+      await supabaseSaveLocation(newLoc);
+    }
     this.notify('LOCATIONS_UPDATED', newLoc);
     return { success: true, location: newLoc };
   }
 
-  updateLocation(locId, updatedFields) {
+  async updateLocation(locId, updatedFields) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const idx = this.locations.findIndex(l => l.id === locId);
     if (idx > -1) {
@@ -342,13 +452,16 @@ class AppState {
         this.selectedLocation = this.locations[idx];
       }
       this.saveLocations();
+      if (isSupabaseConfigured()) {
+        await supabaseSaveLocation(this.locations[idx]);
+      }
       this.notify('LOCATIONS_UPDATED', this.locations[idx]);
       return { success: true, location: this.locations[idx] };
     }
     return { success: false, message: 'Branch location not found' };
   }
 
-  deleteLocation(locId) {
+  async deleteLocation(locId) {
     if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     if (this.locations.length <= 1) {
       return { success: false, message: 'Cannot delete the only branch location!' };
@@ -358,6 +471,9 @@ class AppState {
       this.selectedLocation = this.locations[0];
     }
     this.saveLocations();
+    if (isSupabaseConfigured()) {
+      await supabaseDeleteLocation(locId);
+    }
     this.notify('LOCATIONS_UPDATED', locId);
     return { success: true };
   }

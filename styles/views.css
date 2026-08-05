@@ -1539,3 +1539,31 @@
   margin: 0 auto 1.5rem auto;
 }
 
+/* Supabase Modal & Config Banner */
+.config-status-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+.config-status-banner i {
+  font-size: 1.5rem;
+  margin-top: 0.15rem;
+}
+
+.config-status-banner.status-connected {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.config-status-banner.status-disconnected {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #f59e0b;
+}
+
+

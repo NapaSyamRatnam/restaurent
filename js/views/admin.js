@@ -5,7 +5,9 @@
 import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
 import { openDishModal, openLocationModal } from '../components/adminModal.js';
+import { openModal, closeModal } from '../components/modal.js';
 import { CATEGORIES } from '../data.js';
+import { isSupabaseConfigured, getSupabaseConfig, setSupabaseConfig, supabaseSeedAllData } from '../supabase.js';
 
 export function renderAdminView(container) {
   if (!container) return;
@@ -41,6 +43,7 @@ export function renderAdminView(container) {
 
   // Active sub-tab inside Admin Page: 'items', 'locations', 'orders'
   let activeTab = 'items';
+  const supabaseActive = isSupabaseConfigured();
 
   // Calculate Metrics
   const totalDishes = state.dishes.length;
@@ -55,12 +58,21 @@ export function renderAdminView(container) {
         <!-- Admin Dashboard Header -->
         <div class="admin-header-bar">
           <div>
-            <span class="badge badge-admin"><i class="fa-solid fa-shield-halved"></i> ADMINISTRATOR PORTAL</span>
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <span class="badge badge-admin"><i class="fa-solid fa-shield-halved"></i> ADMINISTRATOR PORTAL</span>
+              <span class="badge ${supabaseActive ? 'badge-green' : 'badge-gold'}" id="supabase-status-badge" style="cursor: pointer;">
+                <i class="fa-solid ${supabaseActive ? 'fa-database' : 'fa-server'}"></i>
+                ${supabaseActive ? 'Live Supabase DB' : 'Demo Local Mode'}
+              </span>
+            </div>
             <h1 class="admin-title">Bistro Management Console</h1>
             <p class="admin-subtitle">Full administrative authority to manage menu items, restaurant branches, and kitchen orders.</p>
           </div>
 
           <div class="admin-quick-actions">
+            <button class="btn btn-outline" id="admin-supabase-config-btn" title="Configure Supabase Credentials">
+              <i class="fa-solid fa-bolt" style="color: #3ecf8e;"></i> Supabase Settings
+            </button>
             <button class="btn btn-primary" id="admin-add-item-btn">
               <i class="fa-solid fa-plus"></i> Add New Menu Item
             </button>
@@ -125,6 +137,12 @@ export function renderAdminView(container) {
   `;
 
   // Attach Top Header Action Buttons
+  const supabaseConfigBtn = document.getElementById('admin-supabase-config-btn');
+  if (supabaseConfigBtn) supabaseConfigBtn.onclick = () => openSupabaseConfigModal();
+
+  const supabaseBadge = document.getElementById('supabase-status-badge');
+  if (supabaseBadge) supabaseBadge.onclick = () => openSupabaseConfigModal();
+
   const addItemBtn = document.getElementById('admin-add-item-btn');
   if (addItemBtn) addItemBtn.onclick = () => openDishModal();
 
@@ -416,11 +434,138 @@ function renderAdminOrdersTab(container) {
 
   // Status Change Handler
   container.querySelectorAll('.admin-status-select').forEach(select => {
-    select.onchange = () => {
+    select.onchange = async () => {
       const orderId = select.getAttribute('data-order-id');
       const newStatus = select.value;
-      state.updateOrderStatus(orderId, newStatus);
+      await state.updateOrderStatus(orderId, newStatus);
       showToast(`Updated ${orderId} status to ${newStatus.toUpperCase()}`, 'success');
     };
   });
 }
+
+/* Supabase Configuration & Setup Modal */
+export function openSupabaseConfigModal() {
+  const currentConfig = getSupabaseConfig();
+  const configured = isSupabaseConfigured();
+
+  const title = `<i class="fa-solid fa-bolt" style="color: #3ecf8e;"></i> Supabase Backend & Database Setup`;
+
+  const bodyHTML = `
+    <div class="supabase-modal-content">
+      <div class="config-status-banner ${configured ? 'status-connected' : 'status-disconnected'}">
+        <i class="fa-solid ${configured ? 'fa-circle-check' : 'fa-triangle-exclamation'}"></i>
+        <div>
+          <strong>Status: ${configured ? 'Connected to Supabase DB' : 'Local Demo Mode Active'}</strong>
+          <p style="margin: 0.2rem 0 0 0; font-size: 0.82rem;">
+            ${configured 
+              ? 'Your bistro app is storing authentication, dishes, locations, and orders in your live Supabase cloud database.' 
+              : 'Enter your Supabase URL & Anon Key below to link your live database and authentication service.'}
+          </p>
+        </div>
+      </div>
+
+      <form id="supabase-config-form" style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <label class="form-label">Supabase Project URL *</label>
+          <input type="text" id="supabase-url" class="form-input" placeholder="https://xyzcompany.supabase.co" value="${currentConfig.url}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Supabase Anon Key *</label>
+          <input type="password" id="supabase-key" class="form-input" placeholder="eyJhYmdj... (anon key)" value="${currentConfig.key}">
+        </div>
+
+        <div class="form-group" style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md);">
+          <strong style="font-size: 0.88rem; color: var(--primary);"><i class="fa-solid fa-code"></i> Database Setup SQL Script</strong>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.3rem 0 0.75rem 0;">
+            A complete <code>supabase_schema.sql</code> file has been created at your project root containing table schemas for <code>profiles</code>, <code>dishes</code>, <code>locations</code>, and <code>orders</code> with Row-Level Security policies.
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline btn-xs" id="copy-sql-guide-btn">
+              <i class="fa-solid fa-copy"></i> View SQL Schema Instructions
+            </button>
+            ${configured ? `
+              <button type="button" class="btn btn-accent btn-xs" id="seed-supabase-data-btn">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Seed / Reflect All App Data to Supabase
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      </form>
+    </div>
+  `;
+
+  const footerHTML = `
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+      ${configured ? `
+        <button class="btn btn-outline" id="clear-supabase-credentials-btn" style="color: var(--danger); border-color: var(--danger);">
+          <i class="fa-solid fa-trash"></i> Disconnect
+        </button>
+      ` : '<div></div>'}
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-secondary" id="modal-cancel-supabase">Cancel</button>
+        <button class="btn btn-primary" id="save-supabase-credentials-btn">
+          <i class="fa-solid fa-plug"></i> Save & Connect
+        </button>
+      </div>
+    </div>
+  `;
+
+  openModal({ title, bodyHTML, footerHTML });
+
+  document.getElementById('modal-cancel-supabase').onclick = closeModal;
+
+  const copySqlBtn = document.getElementById('copy-sql-guide-btn');
+  if (copySqlBtn) {
+    copySqlBtn.onclick = () => {
+      alert(`Supabase Setup Instructions:\n\n1. Open your Supabase Dashboard (https://app.supabase.com).\n2. Navigate to SQL Editor.\n3. Copy the SQL script from "supabase_schema.sql" in your workspace and paste it into the editor.\n4. Click Run to create tables (profiles, dishes, locations, orders) and security policies!`);
+    };
+  }
+
+  const seedBtn = document.getElementById('seed-supabase-data-btn');
+  if (seedBtn) {
+    seedBtn.onclick = async () => {
+      seedBtn.disabled = true;
+      seedBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Uploading Data to Supabase...`;
+      const res = await supabaseSeedAllData(state.dishes, state.locations, state.orders);
+      if (res && res.success) {
+        showToast(`Successfully seeded Supabase! (${res.seededDishes} Dishes, ${res.seededLocations} Branches, ${res.seededOrders} Orders uploaded)`, 'success', 5000);
+        closeModal();
+        await state.syncWithSupabase();
+        state.notify('VIEW_CHANGED', 'admin');
+      } else {
+        showToast(`Seeding error: ${res?.error || 'Failed to populate Supabase'}`, 'info');
+        seedBtn.disabled = false;
+        seedBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Seed / Reflect All App Data to Supabase`;
+      }
+    };
+  }
+
+  const clearBtn = document.getElementById('clear-supabase-credentials-btn');
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      setSupabaseConfig('', '');
+      closeModal();
+      showToast('Disconnected from Supabase. Switched to Local Mode.', 'info');
+      state.notify('VIEW_CHANGED', 'admin');
+    };
+  }
+
+  document.getElementById('save-supabase-credentials-btn').onclick = async () => {
+    const url = document.getElementById('supabase-url').value.trim();
+    const key = document.getElementById('supabase-key').value.trim();
+
+    if (!url || !key) {
+      showToast('Please enter both Supabase URL and Anon Key', 'info');
+      return;
+    }
+
+    setSupabaseConfig(url, key);
+    closeModal();
+    showToast('Saved Supabase configuration! Syncing live data...', 'success');
+    await state.syncWithSupabase();
+    state.notify('VIEW_CHANGED', 'admin');
+  };
+}
+

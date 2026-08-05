@@ -186,7 +186,7 @@ export function renderLoginView(container) {
   // Form Submit Handler
   const form = document.getElementById('auth-form');
   if (form) {
-    form.onsubmit = (e) => {
+    form.onsubmit = async (e) => {
       e.preventDefault();
       const email = emailInput ? emailInput.value.trim() : '';
       const password = passInput ? passInput.value.trim() : '';
@@ -202,16 +202,18 @@ export function renderLoginView(container) {
           showToast('Please enter your full name', 'info');
           return;
         }
-        state.register(name, email, password);
-        showToast(`Welcome ${name}! Account created.`, 'success');
+        await state.register(name, email, password);
+        showToast(`Welcome ${name}! Account registered.`, 'success');
         state.setView('menu');
       } else {
-        const res = state.login(email, password, activeTab);
-        showToast(`Logged in as ${res.user.name} (${res.user.role.toUpperCase()})`, 'success');
-        if (res.user.role === 'admin') {
-          state.setView('admin');
-        } else {
-          state.setView('menu');
+        const res = await state.login(email, password, activeTab);
+        if (res && res.user) {
+          showToast(`Logged in as ${res.user.name} (${res.user.role.toUpperCase()})`, 'success');
+          if (res.user.role === 'admin') {
+            state.setView('admin');
+          } else {
+            state.setView('menu');
+          }
         }
       }
     };
