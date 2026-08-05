@@ -179,8 +179,8 @@ export const RESTAURANT_LOCATIONS = [
 ];
 
 export const DEFAULT_USER_PROFILE = {
-  name: 'Alex Vance',
-  email: 'alex.vance@example.com',
+  name: 'Syam',
+  email: 'syam@example.com',
   phone: '+91 98480 12345',
   rewardPoints: 480,
   loyaltyTier: 'Gold Gourmet',
@@ -215,7 +215,7 @@ export const DEFAULT_USER_PROFILE = {
       id: 'pay-2',
       type: 'upi',
       title: 'UPI ID (PhonePe / GPay)',
-      upiId: 'alexvance@ybl',
+      upiId: 'syam@ybl',
       isPrimary: false
     }
   ]
