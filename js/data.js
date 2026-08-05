@@ -179,8 +179,8 @@ export const RESTAURANT_LOCATIONS = [
 ];
 
 export const DEFAULT_USER_PROFILE = {
-  name: 'Syam',
-  email: 'syam@example.com',
+  name: 'syam',
+  email: 'syam@gmail.com',
   phone: '+91 98480 12345',
   rewardPoints: 480,
   loyaltyTier: 'Gold Gourmet',

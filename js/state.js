@@ -28,9 +28,9 @@ class AppState {
 
     const savedProfile = localStorage.getItem('sb_profile');
     this.profile = savedProfile ? JSON.parse(savedProfile) : DEFAULT_USER_PROFILE;
-    if (!this.profile.name || this.profile.name === 'Alex Vance') {
-      this.profile.name = 'Syam';
-      this.profile.email = 'syam@example.com';
+    if (!this.profile.name || this.profile.name === 'Alex Vance' || this.profile.name === 'Syam') {
+      this.profile.name = 'syam';
+      this.profile.email = 'syam@gmail.com';
       this.saveProfile();
     }
 
