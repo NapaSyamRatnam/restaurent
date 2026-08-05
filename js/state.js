@@ -292,8 +292,15 @@ class AppState {
     localStorage.setItem('sb_locations', JSON.stringify(this.locations));
   }
 
-  // Address Control (Account)
+  // Address, Payment & Profile Control (Account)
+  updateProfile(fields) {
+    this.profile = { ...this.profile, ...fields };
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
   addAddress(addressObj) {
+    if (!this.profile.addresses) this.profile.addresses = [];
     const newAddr = {
       id: `addr-${Date.now()}`,
       ...addressObj
@@ -302,8 +309,89 @@ class AppState {
       this.profile.addresses.forEach(a => a.isDefault = false);
     }
     this.profile.addresses.push(newAddr);
-    localStorage.setItem('sb_profile', JSON.stringify(this.profile));
+    this.saveProfile();
     this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  updateAddress(addressId, updatedFields) {
+    if (!this.profile.addresses) return;
+    const idx = this.profile.addresses.findIndex(a => a.id === addressId);
+    if (idx > -1) {
+      if (updatedFields.isDefault) {
+        this.profile.addresses.forEach(a => a.isDefault = false);
+      }
+      this.profile.addresses[idx] = { ...this.profile.addresses[idx], ...updatedFields };
+      this.saveProfile();
+      this.notify('PROFILE_UPDATED', this.profile);
+    }
+  }
+
+  deleteAddress(addressId) {
+    if (!this.profile.addresses) return;
+    this.profile.addresses = this.profile.addresses.filter(a => a.id !== addressId);
+    if (this.profile.addresses.length > 0 && !this.profile.addresses.some(a => a.isDefault)) {
+      this.profile.addresses[0].isDefault = true;
+    }
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  setDefaultAddress(addressId) {
+    if (!this.profile.addresses) return;
+    this.profile.addresses.forEach(a => {
+      a.isDefault = (a.id === addressId);
+    });
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  addPaymentMethod(paymentObj) {
+    if (!this.profile.paymentMethods) this.profile.paymentMethods = [];
+    const newPayment = {
+      id: `pay-${Date.now()}`,
+      isPrimary: this.profile.paymentMethods.length === 0,
+      ...paymentObj
+    };
+    if (paymentObj.isPrimary) {
+      this.profile.paymentMethods.forEach(p => p.isPrimary = false);
+    }
+    this.profile.paymentMethods.push(newPayment);
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  deletePaymentMethod(paymentId) {
+    if (!this.profile.paymentMethods) return;
+    this.profile.paymentMethods = this.profile.paymentMethods.filter(p => p.id !== paymentId);
+    if (this.profile.paymentMethods.length > 0 && !this.profile.paymentMethods.some(p => p.isPrimary)) {
+      this.profile.paymentMethods[0].isPrimary = true;
+    }
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  setDefaultPayment(paymentId) {
+    if (!this.profile.paymentMethods) return;
+    this.profile.paymentMethods.forEach(p => {
+      p.isPrimary = (p.id === paymentId);
+    });
+    this.saveProfile();
+    this.notify('PROFILE_UPDATED', this.profile);
+  }
+
+  redeemRewardPoints(pointsToRedeem) {
+    if (this.profile.rewardPoints >= pointsToRedeem) {
+      this.profile.rewardPoints -= pointsToRedeem;
+      const discountCash = (pointsToRedeem / 10).toFixed(2);
+      this.saveProfile();
+      this.notify('PROFILE_UPDATED', this.profile);
+      return { success: true, discountCash };
+    }
+    return { success: false, message: 'Insufficient Reward Points!' };
+  }
+
+  saveProfile() {
+    localStorage.setItem('sb_profile', JSON.stringify(this.profile));
   }
 }
 

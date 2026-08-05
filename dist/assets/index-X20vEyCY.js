@@ -1,4 +1,4 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`Alex Vance`,email:`alex.vance@example.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`menu`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_wishlist`);this.wishlist=e?JSON.parse(e):[`dish-1`,`dish-4`];let a=localStorage.getItem(`sb_cart`);this.cart=a?JSON.parse(a):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let o=localStorage.getItem(`sb_dishes`);this.dishes=o?JSON.parse(o):t;let s=localStorage.getItem(`sb_profile`);this.profile=s?JSON.parse(s):r;let c=localStorage.getItem(`sb_orders`);this.orders=c?JSON.parse(c):i;let l=localStorage.getItem(`sb_locations`);this.locations=l?JSON.parse(l):n,this.selectedLocation=this.locations[0]||n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){let t=this.dishes.find(t=>t.id===e);t&&(t.inStock=!t.inStock,this.saveDishes(),this.notify(`STOCK_UPDATED`,t))}addDish(e){let t={id:`dish-${Date.now()}`,rating:4.8,reviews:1,inStock:!0,tags:[],...e};return this.dishes.unshift(t),this.saveDishes(),this.notify(`STOCK_UPDATED`,t),t}updateDish(e,t){let n=this.dishes.findIndex(t=>t.id===e);n>-1&&(this.dishes[n]={...this.dishes[n],...t},this.saveDishes(),this.notify(`STOCK_UPDATED`,this.dishes[n]))}deleteDish(e){this.dishes=this.dishes.filter(t=>t.id!==e),this.saveDishes(),this.notify(`STOCK_UPDATED`,e)}saveDishes(){localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes))}addLocation(e){let t={id:`loc-${Date.now()}`,rating:4.8,mapLat:14.4426,mapLng:79.9865,features:[],...e};return this.locations.push(t),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,t),t}updateLocation(e,t){let n=this.locations.findIndex(t=>t.id===e);n>-1&&(this.locations[n]={...this.locations[n],...t},this.selectedLocation.id===e&&(this.selectedLocation=this.locations[n]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,this.locations[n]))}deleteLocation(e){return this.locations.length<=1?{success:!1,message:`Cannot delete the only branch location!`}:(this.locations=this.locations.filter(t=>t.id!==e),this.selectedLocation.id===e&&(this.selectedLocation=this.locations[0]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,e),{success:!0})}saveLocations(){localStorage.setItem(`sb_locations`,JSON.stringify(this.locations))}addAddress(e){let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),localStorage.setItem(`sb_profile`,JSON.stringify(this.profile)),this.notify(`PROFILE_UPDATED`,this.profile)}};function o(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`Alex Vance`,email:`alex.vance@example.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}],paymentMethods:[{id:`pay-1`,type:`card`,title:`Visa Credit Card`,cardNumber:`•••• •••• •••• 4892`,expiry:`09/29`,isPrimary:!0},{id:`pay-2`,type:`upi`,title:`UPI ID (PhonePe / GPay)`,upiId:`alexvance@ybl`,isPrimary:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`menu`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_wishlist`);this.wishlist=e?JSON.parse(e):[`dish-1`,`dish-4`];let a=localStorage.getItem(`sb_cart`);this.cart=a?JSON.parse(a):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let o=localStorage.getItem(`sb_dishes`);this.dishes=o?JSON.parse(o):t;let s=localStorage.getItem(`sb_profile`);this.profile=s?JSON.parse(s):r;let c=localStorage.getItem(`sb_orders`);this.orders=c?JSON.parse(c):i;let l=localStorage.getItem(`sb_locations`);this.locations=l?JSON.parse(l):n,this.selectedLocation=this.locations[0]||n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){let t=this.dishes.find(t=>t.id===e);t&&(t.inStock=!t.inStock,this.saveDishes(),this.notify(`STOCK_UPDATED`,t))}addDish(e){let t={id:`dish-${Date.now()}`,rating:4.8,reviews:1,inStock:!0,tags:[],...e};return this.dishes.unshift(t),this.saveDishes(),this.notify(`STOCK_UPDATED`,t),t}updateDish(e,t){let n=this.dishes.findIndex(t=>t.id===e);n>-1&&(this.dishes[n]={...this.dishes[n],...t},this.saveDishes(),this.notify(`STOCK_UPDATED`,this.dishes[n]))}deleteDish(e){this.dishes=this.dishes.filter(t=>t.id!==e),this.saveDishes(),this.notify(`STOCK_UPDATED`,e)}saveDishes(){localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes))}addLocation(e){let t={id:`loc-${Date.now()}`,rating:4.8,mapLat:14.4426,mapLng:79.9865,features:[],...e};return this.locations.push(t),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,t),t}updateLocation(e,t){let n=this.locations.findIndex(t=>t.id===e);n>-1&&(this.locations[n]={...this.locations[n],...t},this.selectedLocation.id===e&&(this.selectedLocation=this.locations[n]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,this.locations[n]))}deleteLocation(e){return this.locations.length<=1?{success:!1,message:`Cannot delete the only branch location!`}:(this.locations=this.locations.filter(t=>t.id!==e),this.selectedLocation.id===e&&(this.selectedLocation=this.locations[0]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,e),{success:!0})}saveLocations(){localStorage.setItem(`sb_locations`,JSON.stringify(this.locations))}updateProfile(e){this.profile={...this.profile,...e},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}addAddress(e){this.profile.addresses||(this.profile.addresses=[]);let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}updateAddress(e,t){if(!this.profile.addresses)return;let n=this.profile.addresses.findIndex(t=>t.id===e);n>-1&&(t.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses[n]={...this.profile.addresses[n],...t},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}deleteAddress(e){this.profile.addresses&&(this.profile.addresses=this.profile.addresses.filter(t=>t.id!==e),this.profile.addresses.length>0&&!this.profile.addresses.some(e=>e.isDefault)&&(this.profile.addresses[0].isDefault=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultAddress(e){this.profile.addresses&&(this.profile.addresses.forEach(t=>{t.isDefault=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}addPaymentMethod(e){this.profile.paymentMethods||(this.profile.paymentMethods=[]);let t={id:`pay-${Date.now()}`,isPrimary:this.profile.paymentMethods.length===0,...e};e.isPrimary&&this.profile.paymentMethods.forEach(e=>e.isPrimary=!1),this.profile.paymentMethods.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}deletePaymentMethod(e){this.profile.paymentMethods&&(this.profile.paymentMethods=this.profile.paymentMethods.filter(t=>t.id!==e),this.profile.paymentMethods.length>0&&!this.profile.paymentMethods.some(e=>e.isPrimary)&&(this.profile.paymentMethods[0].isPrimary=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultPayment(e){this.profile.paymentMethods&&(this.profile.paymentMethods.forEach(t=>{t.isPrimary=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}redeemRewardPoints(e){if(this.profile.rewardPoints>=e){this.profile.rewardPoints-=e;let t=(e/10).toFixed(2);return this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile),{success:!0,discountCash:t}}return{success:!1,message:`Insufficient Reward Points!`}}saveProfile(){localStorage.setItem(`sb_profile`,JSON.stringify(this.profile))}};function o(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
     <i class="${t===`success`?`fa-solid fa-circle-check`:t===`info`?`fa-solid fa-circle-info`:`fa-solid fa-triangle-exclamation`}"></i>
     <span class="toast-message">${e}</span>
   `,r.appendChild(i),setTimeout(()=>{i.style.opacity=`0`,i.style.transform=`translateY(20px)`,setTimeout(()=>{i.parentNode&&i.parentNode.removeChild(i)},300)},n)}function s({title:e,bodyHTML:t,footerHTML:n=``}){let r=document.getElementById(`modal-container`);if(!r)return;r.innerHTML=`
@@ -716,11 +716,17 @@
         </div>
       </div>
     </div>
-  `}function y(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2);e.innerHTML=`
+  `}function y(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2),r=t.addresses||[],i=t.paymentMethods||[];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
-      <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-        <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Account Settings & Address Book</h1>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Manage your profile details, delivery addresses, payment methods, and loyalty reward cash.</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <div>
+          <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Account Settings & Address Book</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Manage your profile details, delivery addresses, payment methods, and loyalty reward cash.</p>
+        </div>
+
+        <button class="btn btn-outline btn-sm" id="edit-profile-details-btn" style="border-color: var(--primary); color: var(--primary);">
+          <i class="fa-solid fa-pen-to-square"></i> Edit Profile Info
+        </button>
       </div>
 
       <div class="account-layout">
@@ -731,28 +737,35 @@
               <i class="fa-solid fa-user"></i>
             </div>
             <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.2rem;">${t.name}</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">${t.email}</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">${t.email}</p>
+            <p style="font-size: 0.82rem; color: var(--text-sub); margin-bottom: 1rem;"><i class="fa-solid fa-phone"></i> ${t.phone}</p>
 
             <span class="badge badge-gold" style="font-size: 0.8rem; margin-bottom: 1.5rem;">
-              <i class="fa-solid fa-crown"></i> ${t.loyaltyTier}
+              <i class="fa-solid fa-crown"></i> ${t.loyaltyTier||`Gold Gourmet Member`}
             </span>
 
+            <!-- Loyalty Reward Cash Box -->
             <div style="background: var(--bg-dark); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: left; margin-bottom: 1.5rem;">
               <div style="font-size: 0.82rem; color: var(--text-sub); margin-bottom: 0.3rem;">
                 <i class="fa-solid fa-coins" style="color: var(--accent-gold);"></i> Gourmet Reward Points
               </div>
               <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold);">${t.rewardPoints} Points</div>
-              <div style="font-size: 0.78rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem;">
+              <div style="font-size: 0.78rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem; margin-bottom: 0.75rem;">
                 = $${n} Redeemable Discount Cash
               </div>
+
+              <button class="btn btn-primary btn-sm btn-full" id="redeem-points-btn" ${t.rewardPoints<100?`disabled`:``}>
+                <i class="fa-solid fa-gift"></i> ${t.rewardPoints>=100?`Redeem Cash Credit`:`Min 100 Points to Redeem`}
+              </button>
             </div>
 
+            <!-- Navigation Tabs -->
             <div class="account-nav">
               <button class="account-nav-btn active" data-tab="addresses">
-                <i class="fa-solid fa-map-location-dot"></i> Saved Addresses
+                <i class="fa-solid fa-map-location-dot"></i> Saved Addresses (${r.length})
               </button>
               <button class="account-nav-btn" data-tab="payments">
-                <i class="fa-solid fa-credit-card"></i> Saved Payment Methods
+                <i class="fa-solid fa-credit-card"></i> Saved Payment Methods (${i.length})
               </button>
             </div>
           </div>
@@ -763,21 +776,29 @@
           <!-- Addresses Panel -->
           <div id="account-tab-addresses">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-              <h3 style="font-size: 1.25rem; font-weight: 700;">Delivery Address Book</h3>
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700;">Delivery Address Book</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Manage your default home, office, and delivery addresses.</p>
+              </div>
+
               <button class="btn btn-primary btn-sm" id="add-new-address-btn">
                 <i class="fa-solid fa-plus"></i> Add New Address
               </button>
             </div>
 
             <div class="address-grid">
-              ${t.addresses.map(e=>`
+              ${r.map(e=>`
                 <div class="address-card ${e.isDefault?`default`:``}">
                   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                     <span style="font-weight: 700; font-size: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 0.4rem;">
-                      <i class="fa-solid ${e.label===`Home`?`fa-house-chimney`:`fa-building`}" style="color: var(--primary);"></i>
+                      <i class="fa-solid ${e.label.toLowerCase().includes(`home`)?`fa-house-chimney`:e.label.toLowerCase().includes(`work`)?`fa-building`:`fa-location-dot`}" style="color: var(--primary);"></i>
                       ${e.label}
                     </span>
-                    ${e.isDefault?`<span class="badge badge-primary">Default</span>`:``}
+                    ${e.isDefault?`<span class="badge badge-primary">Default</span>`:`
+                      <button class="btn btn-outline btn-sm set-default-addr-btn" data-default-addr-id="${e.id}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+                        Make Default
+                      </button>
+                    `}
                   </div>
 
                   <p style="font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; line-height: 1.4;">
@@ -785,8 +806,17 @@
                     ${e.city}, ${e.zip}
                   </p>
 
-                  <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
-                    <i class="fa-solid fa-phone"></i> ${t.phone}
+                  <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
+                    <span><i class="fa-solid fa-phone"></i> ${t.phone}</span>
+
+                    <div style="display: flex; gap: 0.4rem;">
+                      <button class="btn btn-secondary btn-sm edit-addr-btn" data-edit-addr-id="${e.id}" title="Edit Address">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      <button class="btn btn-outline btn-sm delete-addr-btn" data-delete-addr-id="${e.id}" style="color: #ef4444; border-color: #ef4444;" title="Delete Address">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               `).join(``)}
@@ -794,64 +824,171 @@
           </div>
 
           <!-- Payment Methods Panel -->
-          <div id="account-tab-payments" style="display: none; margin-top: 1.5rem;">
-            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;">Saved Payment Methods</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;">
-              <div class="address-card default">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                  <i class="fa-brands fa-cc-visa" style="font-size: 2rem; color: #3b82f6;"></i>
-                  <span class="badge badge-primary">Primary Card</span>
-                </div>
-                <div style="font-family: monospace; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
-                  •••• •••• •••• 4892
-                </div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Expires 09/29 • ${t.name}</div>
+          <div id="account-tab-payments" style="display: none;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700;">Saved Payment Methods</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Manage saved credit cards, debit cards, and UPI IDs for 1-click checkout.</p>
               </div>
 
-              <div class="address-card">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                  <i class="fa-brands fa-apple-pay" style="font-size: 2rem; color: var(--text-main);"></i>
-                  <span class="badge badge-green">Connected</span>
+              <button class="btn btn-primary btn-sm" id="add-new-payment-btn">
+                <i class="fa-solid fa-plus"></i> Add Payment Method
+              </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;">
+              ${i.map(e=>`
+                <div class="address-card ${e.isPrimary?`default`:``}">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                    <i class="fa-solid ${e.type===`card`?`fa-credit-card`:`fa-mobile-screen-button`}" style="font-size: 1.8rem; color: var(--primary);"></i>
+                    ${e.isPrimary?`<span class="badge badge-primary">Primary</span>`:`
+                      <button class="btn btn-outline btn-sm set-primary-pay-btn" data-primary-pay-id="${e.id}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+                        Make Primary
+                      </button>
+                    `}
+                  </div>
+
+                  <div style="font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text-main);">
+                    ${e.title}
+                  </div>
+
+                  <div style="font-family: monospace; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px; color: var(--text-sub);">
+                    ${e.cardNumber||e.upiId}
+                  </div>
+
+                  <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
+                    <span>${e.expiry?`Expires ${e.expiry}`:`Verified Instant UPI`}</span>
+
+                    <button class="btn btn-outline btn-sm delete-pay-btn" data-delete-pay-id="${e.id}" style="color: #ef4444; border-color: #ef4444;" title="Delete Payment Method">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
                 </div>
-                <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem;">
-                  Apple Pay Wallet
-                </div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">One-touch checkout enabled</div>
-              </div>
+              `).join(``)}
             </div>
           </div>
         </main>
       </div>
     </section>
-  `,document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let r=document.getElementById(`add-new-address-btn`);r&&(r.onclick=()=>{b(e)})}function b(e){s({title:`Add New Delivery Address`,bodyHTML:`
+  `;let s=document.getElementById(`edit-profile-details-btn`);s&&(s.onclick=()=>b(e));let c=document.getElementById(`redeem-points-btn`);c&&(c.onclick=()=>C(e)),document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let l=document.getElementById(`add-new-address-btn`);l&&(l.onclick=()=>x(e)),document.querySelectorAll(`.edit-addr-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-edit-addr-id`),r=a.profile.addresses.find(e=>e.id===n);r&&x(e,r)}}),document.querySelectorAll(`.delete-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-addr-id`);confirm(`Delete this address?`)&&(a.deleteAddress(t),o(`Address removed`,`info`))}}),document.querySelectorAll(`.set-default-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-default-addr-id`);a.setDefaultAddress(t),o(`Default delivery address updated`,`success`)}});let u=document.getElementById(`add-new-payment-btn`);u&&(u.onclick=()=>S(e)),document.querySelectorAll(`.delete-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-pay-id`);confirm(`Delete this payment method?`)&&(a.deletePaymentMethod(t),o(`Payment method removed`,`info`))}}),document.querySelectorAll(`.set-primary-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-primary-pay-id`);a.setDefaultPayment(t),o(`Primary payment method updated`,`success`)}})}function b(e){let t=a.profile;s({title:`Edit Profile Information`,bodyHTML:`
     <div class="form-group">
-      <label class="form-label">Address Label</label>
-      <input type="text" id="new-addr-label" class="form-input" placeholder="e.g. Home, Office, Summer House">
+      <label class="form-label">Full Name *</label>
+      <input type="text" id="edit-profile-name" class="form-input" required value="${t.name}">
     </div>
 
     <div class="form-group">
-      <label class="form-label">Street Address & Apartment</label>
-      <input type="text" id="new-addr-street" class="form-input" placeholder="e.g. 120 Ocean Drive, Apt 3C">
+      <label class="form-label">Email Address *</label>
+      <input type="email" id="edit-profile-email" class="form-input" required value="${t.email}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Phone Number *</label>
+      <input type="text" id="edit-profile-phone" class="form-input" required value="${t.phone}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Loyalty Tier</label>
+      <input type="text" class="form-input" disabled value="${t.loyaltyTier||`Gold Gourmet`}">
+    </div>
+  `,footerHTML:`
+    <button class="btn btn-secondary" id="modal-cancel-profile">Cancel</button>
+    <button class="btn btn-primary" id="modal-save-profile">Save Profile</button>
+  `}),document.getElementById(`modal-cancel-profile`).onclick=c,document.getElementById(`modal-save-profile`).onclick=()=>{let e=document.getElementById(`edit-profile-name`).value.trim(),t=document.getElementById(`edit-profile-email`).value.trim(),n=document.getElementById(`edit-profile-phone`).value.trim();if(!e||!t||!n){o(`Please fill in name, email and phone`,`info`);return}a.updateProfile({name:e,email:t,phone:n}),c(),o(`Profile information updated successfully!`,`success`)}}function x(e,t=null){let n=!!t,r=`
+    <div class="form-group">
+      <label class="form-label">Address Label (Home, Work, etc.) *</label>
+      <input type="text" id="addr-label" class="form-input" required value="${n?t.label:``}" placeholder="e.g. Home, Office, Parent's House">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Street Address & Apartment *</label>
+      <input type="text" id="addr-street" class="form-input" required value="${n?t.street:``}" placeholder="e.g. Door No. 24-2-154, Dargamitta">
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
       <div class="form-group">
-        <label class="form-label">City & State</label>
-        <input type="text" id="new-addr-city" class="form-input" placeholder="e.g. Nellore, Andhra Pradesh">
+        <label class="form-label">City & State *</label>
+        <input type="text" id="addr-city" class="form-input" required value="${n?t.city:`Nellore, Andhra Pradesh`}">
       </div>
       <div class="form-group">
-        <label class="form-label">PIN Code</label>
-        <input type="text" id="new-addr-zip" class="form-input" placeholder="e.g. 524001">
+        <label class="form-label">PIN Code *</label>
+        <input type="text" id="addr-zip" class="form-input" required value="${n?t.zip:`524003`}">
       </div>
     </div>
 
     <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub); cursor: pointer;">
-      <input type="checkbox" id="new-addr-default" checked> Set as primary default delivery address
+      <input type="checkbox" id="addr-default" ${n?t.isDefault?`checked`:``:`checked`}> Set as primary default delivery address
+    </label>
+  `,i=`
+    <button class="btn btn-secondary" id="modal-cancel-addr">Cancel</button>
+    <button class="btn btn-primary" id="modal-save-addr">${n?`Save Changes`:`Add Address`}</button>
+  `;s({title:n?`Edit Address (${t.label})`:`Add New Delivery Address`,bodyHTML:r,footerHTML:i}),document.getElementById(`modal-cancel-addr`).onclick=c,document.getElementById(`modal-save-addr`).onclick=()=>{let e=document.getElementById(`addr-label`).value.trim()||`Other`,r=document.getElementById(`addr-street`).value.trim(),i=document.getElementById(`addr-city`).value.trim()||`Nellore, Andhra Pradesh`,s=document.getElementById(`addr-zip`).value.trim()||`524003`,l=document.getElementById(`addr-default`).checked;if(!r){o(`Please enter a street address`,`info`);return}n?(a.updateAddress(t.id,{label:e,street:r,city:i,zip:s,isDefault:l}),o(`Address updated!`,`success`)):(a.addAddress({label:e,street:r,city:i,zip:s,isDefault:l}),o(`New Address added!`,`success`)),c()}}function S(e){s({title:`Add Saved Payment Method`,bodyHTML:`
+    <div class="form-group">
+      <label class="form-label">Payment Method Type</label>
+      <select id="pay-type" class="form-select">
+        <option value="card">Credit / Debit Card (Visa, Mastercard, RuPay)</option>
+        <option value="upi">UPI ID (PhonePe, GPay, Paytm)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Title / Label</label>
+      <input type="text" id="pay-title" class="form-input" placeholder="e.g. HDFC Credit Card or My PhonePe UPI">
+    </div>
+
+    <div id="card-fields">
+      <div class="form-group">
+        <label class="form-label">Card Number (Last 4 digits or Full)</label>
+        <input type="text" id="pay-card-num" class="form-input" placeholder="•••• •••• •••• 5678">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Expiry Date</label>
+        <input type="text" id="pay-expiry" class="form-input" placeholder="MM/YY e.g. 10/28">
+      </div>
+    </div>
+
+    <div id="upi-fields" style="display: none;">
+      <div class="form-group">
+        <label class="form-label">UPI ID</label>
+        <input type="text" id="pay-upi-id" class="form-input" placeholder="e.g. username@ybl or mobile@paytm">
+      </div>
+    </div>
+
+    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-sub); cursor: pointer;">
+      <input type="checkbox" id="pay-primary" checked> Set as primary default payment method
     </label>
   `,footerHTML:`
-    <button class="btn btn-secondary" id="modal-cancel-addr">Cancel</button>
-    <button class="btn btn-primary" id="modal-save-addr">Save Address</button>
-  `}),document.getElementById(`modal-cancel-addr`).onclick=c,document.getElementById(`modal-save-addr`).onclick=()=>{let t=document.getElementById(`new-addr-label`).value.trim()||`Other`,n=document.getElementById(`new-addr-street`).value.trim(),r=document.getElementById(`new-addr-city`).value.trim()||`Nellore, Andhra Pradesh`,i=document.getElementById(`new-addr-zip`).value.trim()||`524001`,s=document.getElementById(`new-addr-default`).checked;if(!n){o(`Please enter a street address`,`info`);return}a.addAddress({label:t,street:n,city:r,zip:i,isDefault:s}),c(),o(`New Address Saved!`,`success`),y(e)}}function x(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
+    <button class="btn btn-secondary" id="modal-cancel-pay">Cancel</button>
+    <button class="btn btn-primary" id="modal-save-pay">Save Payment Method</button>
+  `});let t=document.getElementById(`pay-type`);t.onchange=e=>{e.target.value===`card`?(document.getElementById(`card-fields`).style.display=`block`,document.getElementById(`upi-fields`).style.display=`none`):(document.getElementById(`card-fields`).style.display=`none`,document.getElementById(`upi-fields`).style.display=`block`)},document.getElementById(`modal-cancel-pay`).onclick=c,document.getElementById(`modal-save-pay`).onclick=()=>{let e=t.value,n=document.getElementById(`pay-title`).value.trim()||(e===`card`?`Credit Card`:`UPI ID`),r=document.getElementById(`pay-primary`).checked;if(e===`card`){let e=document.getElementById(`pay-card-num`).value.trim()||`5678`,t=e.length===4?`•••• •••• •••• ${e}`:e,i=document.getElementById(`pay-expiry`).value.trim()||`12/28`;a.addPaymentMethod({type:`card`,title:n,cardNumber:t,expiry:i,isPrimary:r})}else{let e=document.getElementById(`pay-upi-id`).value.trim()||`user@upi`;a.addPaymentMethod({type:`upi`,title:n,upiId:e,isPrimary:r})}c(),o(`New Payment Method Saved!`,`success`)}}function C(e){let t=a.profile;s({title:`Redeem Loyalty Points for Discount Cash`,bodyHTML:`
+    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+      You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${t.rewardPoints} Reward Points</strong>. Every 100 Points = $10.00 Discount Cash!
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      ${t.rewardPoints>=100?`
+        <button class="btn btn-outline redeem-option-btn" data-redeem-pts="100" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
+          <span>Redeem 100 Points</span>
+          <strong style="color: var(--accent-green);">$10.00 Voucher</strong>
+        </button>
+      `:``}
+
+      ${t.rewardPoints>=200?`
+        <button class="btn btn-outline redeem-option-btn" data-redeem-pts="200" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
+          <span>Redeem 200 Points</span>
+          <strong style="color: var(--accent-green);">$20.00 Voucher</strong>
+        </button>
+      `:``}
+
+      ${t.rewardPoints>=400?`
+        <button class="btn btn-outline redeem-option-btn" data-redeem-pts="400" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem;">
+          <span>Redeem 400 Points</span>
+          <strong style="color: var(--accent-green);">$40.00 Voucher</strong>
+        </button>
+      `:``}
+    </div>
+  `,footerHTML:`
+    <button class="btn btn-secondary" id="modal-cancel-redeem">Close</button>
+  `}),document.getElementById(`modal-cancel-redeem`).onclick=c,document.querySelectorAll(`[data-redeem-pts]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-redeem-pts`)),n=a.redeemRewardPoints(t);n.success?(a.applyCoupon(`WELCOME20`),o(`Redeemed ${t} Points! $${n.discountCash} discount applied to your active order!`,`success`,6e3),c()):o(n.message,`info`)}})}function w(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <div>
@@ -957,7 +1094,7 @@
         </div>
       </div>
     </section>
-  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=n=>{if(n.target.closest(`.edit-branch-direct-btn`))return;let r=t.getAttribute(`data-select-loc`),i=a.locations.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),x(e)}}}),document.querySelectorAll(`.edit-branch-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-loc-id`),r=a.locations.find(e=>e.id===n);r&&u(r)}});let n=document.getElementById(`view-add-branch-btn`);n&&(n.onclick=()=>u());let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;o(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function S(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.reduce((e,t)=>e+t.total,0),r=t.length;e.innerHTML=`
+  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=n=>{if(n.target.closest(`.edit-branch-direct-btn`))return;let r=t.getAttribute(`data-select-loc`),i=a.locations.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),w(e)}}}),document.querySelectorAll(`.edit-branch-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-loc-id`),r=a.locations.find(e=>e.id===n);r&&u(r)}});let n=document.getElementById(`view-add-branch-btn`);n&&(n.onclick=()=>u());let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;o(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function T(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.reduce((e,t)=>e+t.total,0),r=t.length;e.innerHTML=`
     <!-- Staff Banner -->
     <div class="staff-portal-banner">
       <div style="display: flex; align-items: center; gap: 0.75rem; color: #fff;">
@@ -1160,4 +1297,4 @@
         </div>
       </div>
     </section>
-  `;let i=document.getElementById(`exit-staff-portal-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`admin-banner-add-dish`);s&&(s.onclick=()=>l());let c=document.getElementById(`admin-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`admin-banner-add-branch`);d&&(d.onclick=()=>u());let f=document.getElementById(`admin-add-branch-btn`);f&&(f.onclick=()=>u()),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),o(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),S(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);o(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),S(e)}}),document.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),document.querySelectorAll(`.delete-dish-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-dish-id`),r=a.dishes.find(e=>e.id===n);r&&confirm(`Are you sure you want to delete "${r.name}"?`)&&(a.deleteDish(n),o(`Deleted ${r.name}`,`info`),S(e))}}),document.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),document.querySelectorAll(`.delete-loc-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-loc-id`),r=a.locations.find(e=>e.id===n);if(r&&confirm(`Are you sure you want to delete branch "${r.name}"?`)){let t=a.deleteLocation(n);t.success?(o(`Deleted branch ${r.name}`,`info`),S(e)):o(t.message,`info`)}}})}function C(){document.documentElement.setAttribute(`data-theme`,a.theme),d(),h(),w(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`?(d(),w()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(d(),h()):e===`WISHLIST_UPDATED`?(d(),a.activeView===`wishlist`&&m(document.getElementById(`app-view`)),a.activeView===`menu`&&f(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(d(),h(),a.activeView===`orders`&&_(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`))):e===`STOCK_UPDATED`?(a.activeView===`menu`&&f(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`))):e===`LOCATIONS_UPDATED`&&(d(),a.activeView===`location`&&x(document.getElementById(`app-view`)),a.activeView===`staff`&&S(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.setView(`staff`)})}function w(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`menu`:f(e);break;case`wishlist`:m(e);break;case`orders`:_(e);break;case`account`:y(e);break;case`location`:x(e);break;case`staff`:S(e);break;default:f(e)}}document.addEventListener(`DOMContentLoaded`,C);
+  `;let i=document.getElementById(`exit-staff-portal-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`admin-banner-add-dish`);s&&(s.onclick=()=>l());let c=document.getElementById(`admin-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`admin-banner-add-branch`);d&&(d.onclick=()=>u());let f=document.getElementById(`admin-add-branch-btn`);f&&(f.onclick=()=>u()),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),o(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),T(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);o(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),T(e)}}),document.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),document.querySelectorAll(`.delete-dish-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-dish-id`),r=a.dishes.find(e=>e.id===n);r&&confirm(`Are you sure you want to delete "${r.name}"?`)&&(a.deleteDish(n),o(`Deleted ${r.name}`,`info`),T(e))}}),document.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),document.querySelectorAll(`.delete-loc-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-loc-id`),r=a.locations.find(e=>e.id===n);if(r&&confirm(`Are you sure you want to delete branch "${r.name}"?`)){let t=a.deleteLocation(n);t.success?(o(`Deleted branch ${r.name}`,`info`),T(e)):o(t.message,`info`)}}})}function E(){document.documentElement.setAttribute(`data-theme`,a.theme),d(),h(),D(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`?(d(),D()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(d(),h()):e===`WISHLIST_UPDATED`?(d(),a.activeView===`wishlist`&&m(document.getElementById(`app-view`)),a.activeView===`menu`&&f(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(d(),h(),a.activeView===`orders`&&_(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`STOCK_UPDATED`?(a.activeView===`menu`&&f(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`LOCATIONS_UPDATED`?(d(),a.activeView===`location`&&w(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`PROFILE_UPDATED`&&(d(),a.activeView===`account`&&y(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.setView(`staff`)})}function D(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`menu`:f(e);break;case`wishlist`:m(e);break;case`orders`:_(e);break;case`account`:y(e);break;case`location`:w(e);break;case`staff`:T(e);break;default:f(e)}}document.addEventListener(`DOMContentLoaded`,E);

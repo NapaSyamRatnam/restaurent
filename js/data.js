@@ -201,6 +201,23 @@ export const DEFAULT_USER_PROFILE = {
       zip: '524004',
       isDefault: false
     }
+  ],
+  paymentMethods: [
+    {
+      id: 'pay-1',
+      type: 'card',
+      title: 'Visa Credit Card',
+      cardNumber: '•••• •••• •••• 4892',
+      expiry: '09/29',
+      isPrimary: true
+    },
+    {
+      id: 'pay-2',
+      type: 'upi',
+      title: 'UPI ID (PhonePe / GPay)',
+      upiId: 'alexvance@ybl',
+      isPrimary: false
+    }
   ]
 };
 
