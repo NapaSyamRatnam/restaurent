@@ -1,4 +1,4 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`syam`,email:`syam@gmail.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}],paymentMethods:[{id:`pay-1`,type:`card`,title:`Visa Credit Card`,cardNumber:`•••• •••• •••• 4892`,expiry:`09/29`,isPrimary:!0},{id:`pay-2`,type:`upi`,title:`UPI ID (PhonePe / GPay)`,upiId:`syam@ybl`,isPrimary:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`menu`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_wishlist`);this.wishlist=e?JSON.parse(e):[`dish-1`,`dish-4`];let a=localStorage.getItem(`sb_cart`);this.cart=a?JSON.parse(a):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let o=localStorage.getItem(`sb_dishes`);this.dishes=o?JSON.parse(o):t;let s=localStorage.getItem(`sb_profile`);this.profile=s?JSON.parse(s):r,(!this.profile.name||this.profile.name===`Alex Vance`||this.profile.name===`Syam`)&&(this.profile.name=`syam`,this.profile.email=`syam@gmail.com`,this.saveProfile());let c=localStorage.getItem(`sb_orders`);this.orders=c?JSON.parse(c):i;let l=localStorage.getItem(`sb_locations`);this.locations=l?JSON.parse(l):n,this.selectedLocation=this.locations[0]||n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){let t=this.dishes.find(t=>t.id===e);t&&(t.inStock=!t.inStock,this.saveDishes(),this.notify(`STOCK_UPDATED`,t))}addDish(e){let t={id:`dish-${Date.now()}`,rating:4.8,reviews:1,inStock:!0,tags:[],...e};return this.dishes.unshift(t),this.saveDishes(),this.notify(`STOCK_UPDATED`,t),t}updateDish(e,t){let n=this.dishes.findIndex(t=>t.id===e);n>-1&&(this.dishes[n]={...this.dishes[n],...t},this.saveDishes(),this.notify(`STOCK_UPDATED`,this.dishes[n]))}deleteDish(e){this.dishes=this.dishes.filter(t=>t.id!==e),this.saveDishes(),this.notify(`STOCK_UPDATED`,e)}saveDishes(){localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes))}addLocation(e){let t={id:`loc-${Date.now()}`,rating:4.8,mapLat:14.4426,mapLng:79.9865,features:[],...e};return this.locations.push(t),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,t),t}updateLocation(e,t){let n=this.locations.findIndex(t=>t.id===e);n>-1&&(this.locations[n]={...this.locations[n],...t},this.selectedLocation.id===e&&(this.selectedLocation=this.locations[n]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,this.locations[n]))}deleteLocation(e){return this.locations.length<=1?{success:!1,message:`Cannot delete the only branch location!`}:(this.locations=this.locations.filter(t=>t.id!==e),this.selectedLocation.id===e&&(this.selectedLocation=this.locations[0]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,e),{success:!0})}saveLocations(){localStorage.setItem(`sb_locations`,JSON.stringify(this.locations))}updateProfile(e){this.profile={...this.profile,...e},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}addAddress(e){this.profile.addresses||(this.profile.addresses=[]);let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}updateAddress(e,t){if(!this.profile.addresses)return;let n=this.profile.addresses.findIndex(t=>t.id===e);n>-1&&(t.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses[n]={...this.profile.addresses[n],...t},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}deleteAddress(e){this.profile.addresses&&(this.profile.addresses=this.profile.addresses.filter(t=>t.id!==e),this.profile.addresses.length>0&&!this.profile.addresses.some(e=>e.isDefault)&&(this.profile.addresses[0].isDefault=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultAddress(e){this.profile.addresses&&(this.profile.addresses.forEach(t=>{t.isDefault=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}addPaymentMethod(e){this.profile.paymentMethods||(this.profile.paymentMethods=[]);let t={id:`pay-${Date.now()}`,isPrimary:this.profile.paymentMethods.length===0,...e};e.isPrimary&&this.profile.paymentMethods.forEach(e=>e.isPrimary=!1),this.profile.paymentMethods.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}deletePaymentMethod(e){this.profile.paymentMethods&&(this.profile.paymentMethods=this.profile.paymentMethods.filter(t=>t.id!==e),this.profile.paymentMethods.length>0&&!this.profile.paymentMethods.some(e=>e.isPrimary)&&(this.profile.paymentMethods[0].isPrimary=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultPayment(e){this.profile.paymentMethods&&(this.profile.paymentMethods.forEach(t=>{t.isPrimary=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}redeemRewardPoints(e){if(this.profile.rewardPoints>=e){this.profile.rewardPoints-=e;let t=(e/10).toFixed(2);return this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile),{success:!0,discountCash:t}}return{success:!1,message:`Insufficient Reward Points!`}}saveProfile(){localStorage.setItem(`sb_profile`,JSON.stringify(this.profile))}};function o(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=[{id:`all`,name:`All Dishes`,icon:`fa-solid fa-utensils`},{id:`specials`,name:`Chef's Specials`,icon:`fa-solid fa-crown`},{id:`starters`,name:`Starters & Apps`,icon:`fa-solid fa-bowl-food`},{id:`mains`,name:`Gourmet Mains`,icon:`fa-solid fa-drumstick-bite`},{id:`pizzas`,name:`Artisanal Pizzas`,icon:`fa-solid fa-pizza-slice`},{id:`burgers`,name:`Craft Burgers`,icon:`fa-solid fa-burger`},{id:`desserts`,name:`Decadent Desserts`,icon:`fa-solid fa-ice-cream`},{id:`drinks`,name:`Craft Beverages`,icon:`fa-solid fa-wine-glass`}],t=[{id:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,category:`pizzas`,price:18.99,rating:4.9,reviews:142,description:`Freshly baked wood-fired pizza with San Marzano tomatoes, buffalo mozzarella, fresh basil leaves, and cold-pressed extra virgin olive oil drizzle.`,image:`./assets/woodfired-pizza.png`,spicy:0,calories:`850 kcal`,prepTime:`15-20 min`,tags:[`chefSpecial`,`veg`],inStock:!0},{id:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,category:`burgers`,price:21.5,rating:4.95,reviews:218,description:`Prime Wagyu beef patty with black truffle aioli, aged Swiss Gruyère, caramelized balsamic onions, and arugula on a toasted brioche bun.`,image:`./assets/truffle-burger.png`,spicy:1,calories:`920 kcal`,prepTime:`12-15 min`,tags:[`chefSpecial`],inStock:!0},{id:`dish-3`,name:`Crispy Calamari Fritti`,category:`starters`,price:14.25,rating:4.7,reviews:89,description:`Wild-caught calamari lightly dusted in seasoned flour, flash-fried until golden, served with house garlic lemon aioli and spicy marinara.`,image:`https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80`,spicy:1,calories:`540 kcal`,prepTime:`10 min`,tags:[],inStock:!0},{id:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,category:`mains`,price:26.8,rating:4.85,reviews:164,description:`Pan-seared Atlantic salmon fillet served over saffron risotto, tender asparagus spears, and a citrus lemon butter dill emulsion.`,image:`https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`680 kcal`,prepTime:`20 min`,tags:[`gf`,`chefSpecial`],inStock:!0},{id:`dish-5`,name:`Fiery Spicy Thai Basil Noodle Bowl`,category:`mains`,price:17.5,rating:4.6,reviews:112,description:`Wok-tossed rice noodles with red bell peppers, Thai bird chili, holy basil, garlic shoots, and grilled organic tofu or chicken.`,image:`https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80`,spicy:3,calories:`610 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-6`,name:`Creamy Wild Mushroom Rigatoni`,category:`mains`,price:19,rating:4.75,reviews:95,description:`House-made rigatoni pasta tossed in a rich porcini mushroom cream sauce, white truffle oil, shaved Parmigiano-Reggiano, and thyme.`,image:`https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`740 kcal`,prepTime:`15 min`,tags:[`veg`],inStock:!0},{id:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,category:`desserts`,price:10.5,rating:4.9,reviews:178,description:`Warm dark Belgian chocolate cake with a rich liquid fudge center, served with Madagascan bourbon vanilla bean gelato.`,image:`https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`520 kcal`,prepTime:`12 min`,tags:[`veg`],inStock:!0},{id:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,category:`drinks`,price:13,rating:4.8,reviews:65,description:`Bourbon infused with hickory smoke, Angostura bitters, maraschino cherry, and hand-carved ice sphere.`,image:`https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80`,spicy:0,calories:`180 kcal`,prepTime:`5 min`,tags:[],inStock:!0}],n=[{id:`loc-1`,name:`GT Road Central (Flagship)`,address:`Grand Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001`,phone:`+91 861 234 8901`,hours:`Daily: 11:00 AM - 11:00 PM`,deliveryRadius:`8 km`,avgDeliveryTime:`20-30 min`,rating:4.9,mapLat:14.4426,mapLng:79.9865,features:[`Valet Parking`,`Air Conditioned Dining`,`Full Bar & Mocktail Lounge`,`Private Family Section`]},{id:`loc-2`,name:`Magunta Layout Bistro`,address:`16/1124 Mini Bypass Road, Magunta Layout, Nellore, Andhra Pradesh 524003`,phone:`+91 861 239 8765`,hours:`Mon-Sat: 11:30 AM - 10:30 PM`,deliveryRadius:`6 km`,avgDeliveryTime:`25-35 min`,rating:4.8,mapLat:14.435,mapLng:79.978,features:[`Rooftop Seating`,`Weekend Special Buffet`,`Craft Beverage Counter`]},{id:`loc-3`,name:`Pogathota Plaza`,address:`Opposite Children's Park, Pogathota, Nellore, Andhra Pradesh 524001`,phone:`+91 861 230 4567`,hours:`Daily: 10:00 AM - 11:30 PM`,deliveryRadius:`7 km`,avgDeliveryTime:`15-25 min`,rating:4.95,mapLat:14.448,mapLng:79.989,features:[`Garden Dining`,`Family Dining Tables`,`Spicy Nellore Specials & Fusion Menu`]}],r={name:`syam`,email:`syam@gmail.com`,phone:`+91 98480 12345`,rewardPoints:480,loyaltyTier:`Gold Gourmet`,addresses:[{id:`addr-1`,label:`Home`,street:`Door No. 24-2-154, Dargamitta`,city:`Nellore, Andhra Pradesh`,zip:`524003`,isDefault:!0},{id:`addr-2`,label:`Work / Tech Hub`,street:`Plot 45, Auto Nagar Industrial Area`,city:`Nellore, Andhra Pradesh`,zip:`524004`,isDefault:!1}],paymentMethods:[{id:`pay-1`,type:`card`,title:`Visa Credit Card`,cardNumber:`•••• •••• •••• 4892`,expiry:`09/29`,isPrimary:!0},{id:`pay-2`,type:`upi`,title:`UPI ID (PhonePe / GPay)`,upiId:`syam@ybl`,isPrimary:!1}]},i=[{id:`ORD-8492`,date:`2026-08-04T15:30:00.000Z`,status:`preparing`,items:[{dishId:`dish-1`,name:`Artisanal Woodfired Neapolitan Pizza`,qty:1,price:18.99,opts:`Extra Basil`},{dishId:`dish-2`,name:`Truffle Wagyu Gourmet Burger`,qty:1,price:21.5,opts:`Medium Rare`},{dishId:`dish-8`,name:`Smoked Smoked Old Fashioned Cocktail`,qty:2,price:13,opts:``}],subtotal:66.49,tax:5.32,deliveryFee:3.5,discount:13.3,total:62.01,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`18 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`},{id:`ORD-7210`,date:`2026-08-01T19:15:00.000Z`,status:`delivered`,items:[{dishId:`dish-4`,name:`Grilled Atlantic Salmon Ribeye`,qty:2,price:26.8,opts:`Lemon on side`},{dishId:`dish-7`,name:`Molten Belgian Chocolate Lava Cake`,qty:1,price:10.5,opts:``}],subtotal:64.1,tax:5.12,deliveryFee:0,discount:0,total:69.22,deliveryAddress:`Door No. 24-2-154, Dargamitta, Nellore, Andhra Pradesh 524003`,fulfillmentType:`Delivery`,estimatedEta:`Delivered`,driverName:`Kalyan Kumar`,driverPhone:`+91 98480 77112`}],a=new class{constructor(){this.listeners=[],this.init()}init(){this.activeView=`landing`,this.theme=localStorage.getItem(`sb_theme`)||`dark`;let e=localStorage.getItem(`sb_user`);this.currentUser=e?JSON.parse(e):{id:`usr-admin`,name:`Admin Manager`,email:`admin@savorybites.com`,role:`admin`};let a=localStorage.getItem(`sb_wishlist`);this.wishlist=a?JSON.parse(a):[`dish-1`,`dish-4`];let o=localStorage.getItem(`sb_cart`);this.cart=o?JSON.parse(o):[{dishId:`dish-1`,qty:1,options:`Extra Fresh Basil`,price:18.99}];let s=localStorage.getItem(`sb_dishes`);this.dishes=s?JSON.parse(s):t;let c=localStorage.getItem(`sb_profile`);this.profile=c?JSON.parse(c):r,(!this.profile.name||this.profile.name===`Alex Vance`||this.profile.name===`Syam`)&&(this.profile.name=`syam`,this.profile.email=`syam@gmail.com`,this.saveProfile());let l=localStorage.getItem(`sb_orders`);this.orders=l?JSON.parse(l):i;let u=localStorage.getItem(`sb_locations`);this.locations=u?JSON.parse(u):n,this.selectedLocation=this.locations[0]||n[0],this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.searchQuery=``,this.selectedCategory=`all`,this.dietaryFilter=`all`,this.sortBy=`popular`}subscribe(e){return this.listeners.push(e),()=>{this.listeners=this.listeners.filter(t=>t!==e)}}notify(e,t){this.listeners.forEach(n=>n(e,t))}login(e,t,n=`user`){let r=e.trim().toLowerCase(),i=n===`admin`||r.includes(`admin`);return this.currentUser={id:`usr-${Date.now()}`,name:i?`Admin Manager`:r.split(`@`)[0]||`User`,email:r,role:i?`admin`:`user`},localStorage.setItem(`sb_user`,JSON.stringify(this.currentUser)),this.notify(`AUTH_CHANGED`,this.currentUser),{success:!0,user:this.currentUser}}logout(){this.currentUser=null,localStorage.removeItem(`sb_user`),this.notify(`AUTH_CHANGED`,null)}register(e,t,n){return this.currentUser={id:`usr-${Date.now()}`,name:e.trim(),email:t.trim().toLowerCase(),role:`user`},this.profile.name=e.trim(),this.profile.email=t.trim().toLowerCase(),this.saveProfile(),localStorage.setItem(`sb_user`,JSON.stringify(this.currentUser)),this.notify(`AUTH_CHANGED`,this.currentUser),{success:!0,user:this.currentUser}}isAdmin(){return!!(this.currentUser&&this.currentUser.role===`admin`)}isLoggedIn(){return!!this.currentUser}setTheme(e){this.theme=e,localStorage.setItem(`sb_theme`,e),document.documentElement.setAttribute(`data-theme`,e),this.notify(`THEME_CHANGED`,e)}setView(e){this.activeView=e,window.scrollTo({top:0,behavior:`smooth`}),this.notify(`VIEW_CHANGED`,e)}toggleWishlist(e){this.wishlist.includes(e)?this.wishlist=this.wishlist.filter(t=>t!==e):this.wishlist.push(e),localStorage.setItem(`sb_wishlist`,JSON.stringify(this.wishlist)),this.notify(`WISHLIST_UPDATED`,this.wishlist)}isWishlisted(e){return this.wishlist.includes(e)}addToCart(e,t=1,n=``){let r=this.dishes.find(t=>t.id===e);if(!r)return;let i=this.cart.findIndex(t=>t.dishId===e&&t.options===n);i>-1?this.cart[i].qty+=t:this.cart.push({dishId:e,qty:t,options:n,price:r.price}),this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}updateCartQty(e,t){t<=0?this.cart.splice(e,1):this.cart[e].qty=t,this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}clearCart(){this.cart=[],this.saveCart(),this.notify(`CART_UPDATED`,this.cart)}saveCart(){localStorage.setItem(`sb_cart`,JSON.stringify(this.cart))}getCartTotal(){let e=this.cart.reduce((e,t)=>e+t.price*t.qty,0),t=this.appliedCoupon?e*(this.appliedCoupon.discountPercent/100):0,n=(e-t)*.08,r=e>0?3.5:0;return{subtotal:e,discountAmount:t,tax:n,deliveryFee:r,grandTotal:Math.max(0,e-t+n+r)}}applyCoupon(e){let t=e.trim().toUpperCase();return t===`WELCOME20`?(this.appliedCoupon={code:`WELCOME20`,discountPercent:20},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`20% Discount Coupon Applied!`}):t===`SAVORY10`?(this.appliedCoupon={code:`SAVORY10`,discountPercent:10},this.notify(`COUPON_APPLIED`,this.appliedCoupon),{success:!0,message:`10% Discount Coupon Applied!`}):{success:!1,message:`Invalid promo code. Try WELCOME20`}}placeOrder(e){let t={id:`ORD-${Math.floor(1e3+Math.random()*9e3)}`,date:new Date().toISOString(),status:`placed`,items:this.cart.map(e=>{let t=this.dishes.find(t=>t.id===e.dishId);return{dishId:e.dishId,name:t?t.name:`Gourmet Dish`,qty:e.qty,price:e.price,opts:e.options}}),...e};return this.orders.unshift(t),localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.clearCart(),this.notify(`ORDER_PLACED`,t),t}updateOrderStatus(e,t){let n=this.orders.find(t=>t.id===e);n&&(n.status=t,localStorage.setItem(`sb_orders`,JSON.stringify(this.orders)),this.notify(`ORDER_STATUS_UPDATED`,n))}toggleDishStock(e){if(!this.isAdmin())return{success:!1,message:`Admin permissions required!`};let t=this.dishes.find(t=>t.id===e);return t?(t.inStock=!t.inStock,this.saveDishes(),this.notify(`STOCK_UPDATED`,t),{success:!0,dish:t}):{success:!1,message:`Dish not found`}}addDish(e){if(!this.isAdmin())return{success:!1,message:`Admin permissions required!`};let t={id:`dish-${Date.now()}`,rating:4.8,reviews:1,inStock:!0,tags:[],...e};return this.dishes.unshift(t),this.saveDishes(),this.notify(`STOCK_UPDATED`,t),{success:!0,dish:t}}updateDish(e,t){if(!this.isAdmin())return{success:!1,message:`Admin permissions required!`};let n=this.dishes.findIndex(t=>t.id===e);return n>-1?(this.dishes[n]={...this.dishes[n],...t},this.saveDishes(),this.notify(`STOCK_UPDATED`,this.dishes[n]),{success:!0,dish:this.dishes[n]}):{success:!1,message:`Dish not found`}}deleteDish(e){return this.isAdmin()?(this.dishes=this.dishes.filter(t=>t.id!==e),this.saveDishes(),this.notify(`STOCK_UPDATED`,e),{success:!0}):{success:!1,message:`Admin permissions required!`}}saveDishes(){localStorage.setItem(`sb_dishes`,JSON.stringify(this.dishes))}addLocation(e){if(!this.isAdmin())return{success:!1,message:`Admin permissions required!`};let t={id:`loc-${Date.now()}`,rating:4.8,mapLat:14.4426,mapLng:79.9865,features:[],...e};return this.locations.push(t),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,t),{success:!0,location:t}}updateLocation(e,t){if(!this.isAdmin())return{success:!1,message:`Admin permissions required!`};let n=this.locations.findIndex(t=>t.id===e);return n>-1?(this.locations[n]={...this.locations[n],...t},this.selectedLocation.id===e&&(this.selectedLocation=this.locations[n]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,this.locations[n]),{success:!0,location:this.locations[n]}):{success:!1,message:`Branch location not found`}}deleteLocation(e){return this.isAdmin()?this.locations.length<=1?{success:!1,message:`Cannot delete the only branch location!`}:(this.locations=this.locations.filter(t=>t.id!==e),this.selectedLocation.id===e&&(this.selectedLocation=this.locations[0]),this.saveLocations(),this.notify(`LOCATIONS_UPDATED`,e),{success:!0}):{success:!1,message:`Admin permissions required!`}}saveLocations(){localStorage.setItem(`sb_locations`,JSON.stringify(this.locations))}updateProfile(e){this.profile={...this.profile,...e},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}addAddress(e){this.profile.addresses||(this.profile.addresses=[]);let t={id:`addr-${Date.now()}`,...e};e.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}updateAddress(e,t){if(!this.profile.addresses)return;let n=this.profile.addresses.findIndex(t=>t.id===e);n>-1&&(t.isDefault&&this.profile.addresses.forEach(e=>e.isDefault=!1),this.profile.addresses[n]={...this.profile.addresses[n],...t},this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}deleteAddress(e){this.profile.addresses&&(this.profile.addresses=this.profile.addresses.filter(t=>t.id!==e),this.profile.addresses.length>0&&!this.profile.addresses.some(e=>e.isDefault)&&(this.profile.addresses[0].isDefault=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultAddress(e){this.profile.addresses&&(this.profile.addresses.forEach(t=>{t.isDefault=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}addPaymentMethod(e){this.profile.paymentMethods||(this.profile.paymentMethods=[]);let t={id:`pay-${Date.now()}`,isPrimary:this.profile.paymentMethods.length===0,...e};e.isPrimary&&this.profile.paymentMethods.forEach(e=>e.isPrimary=!1),this.profile.paymentMethods.push(t),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile)}deletePaymentMethod(e){this.profile.paymentMethods&&(this.profile.paymentMethods=this.profile.paymentMethods.filter(t=>t.id!==e),this.profile.paymentMethods.length>0&&!this.profile.paymentMethods.some(e=>e.isPrimary)&&(this.profile.paymentMethods[0].isPrimary=!0),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}setDefaultPayment(e){this.profile.paymentMethods&&(this.profile.paymentMethods.forEach(t=>{t.isPrimary=t.id===e}),this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile))}redeemRewardPoints(e){if(this.profile.rewardPoints>=e){this.profile.rewardPoints-=e;let t=(e/10).toFixed(2);return this.saveProfile(),this.notify(`PROFILE_UPDATED`,this.profile),{success:!0,discountCash:t}}return{success:!1,message:`Insufficient Reward Points!`}}saveProfile(){localStorage.setItem(`sb_profile`,JSON.stringify(this.profile))}};function o(e,t=`success`,n=3e3){let r=document.getElementById(`toast-container`);if(!r)return;let i=document.createElement(`div`);i.className=`toast toast-${t}`,i.innerHTML=`
     <i class="${t===`success`?`fa-solid fa-circle-check`:t===`info`?`fa-solid fa-circle-info`:`fa-solid fa-triangle-exclamation`}"></i>
     <span class="toast-message">${e}</span>
   `,r.appendChild(i),setTimeout(()=>{i.style.opacity=`0`,i.style.transform=`translateY(20px)`,setTimeout(()=>{i.parentNode&&i.parentNode.removeChild(i)},300)},n)}function s({title:e,bodyHTML:t,footerHTML:n=``}){let r=document.getElementById(`modal-container`);if(!r)return;r.innerHTML=`
@@ -14,7 +14,7 @@
       </div>
       ${n?`<div class="modal-footer">${n}</div>`:``}
     </div>
-  `,r.classList.remove(`hidden`);let i=document.getElementById(`global-modal-close-btn`);i&&i.addEventListener(`click`,c),r.onclick=e=>{e.target===r&&c()}}function c(){let e=document.getElementById(`modal-container`);e&&(e.classList.add(`hidden`),e.innerHTML=``)}function l(t=null){let n=!!t;if(s({title:n?`Edit Menu Item: ${t.name}`:`Add New Menu Item`,bodyHTML:`
+  `,r.classList.remove(`hidden`);let i=document.getElementById(`global-modal-close-btn`);i&&i.addEventListener(`click`,c),r.onclick=e=>{e.target===r&&c()}}function c(){let e=document.getElementById(`modal-container`);e&&(e.classList.add(`hidden`),e.innerHTML=``)}function l(t=null){if(!a.isAdmin()){o(`Admin permission required to manage items. Please log in as Admin.`,`info`),a.setView(`login`);return}let n=!!t;if(s({title:n?`Edit Menu Item: ${t.name}`:`Add New Menu Item`,bodyHTML:`
     <form id="admin-dish-form">
       <div class="form-group">
         <label class="form-label">Dish Name *</label>
@@ -90,7 +90,7 @@
         <button class="btn btn-primary" id="modal-save-dish">${n?`Save Changes`:`Create Dish`}</button>
       </div>
     </div>
-  `}),document.getElementById(`modal-cancel-dish`).onclick=c,n){let e=document.getElementById(`modal-delete-dish-btn`);e&&(e.onclick=()=>{confirm(`Are you sure you want to delete "${t.name}"?`)&&(a.deleteDish(t.id),c(),o(`Deleted ${t.name}`,`info`))})}document.getElementById(`modal-save-dish`).onclick=()=>{let e=document.getElementById(`dish-name`).value.trim(),r=document.getElementById(`dish-category`).value,i=parseFloat(document.getElementById(`dish-price`).value)||0,s=document.getElementById(`dish-desc`).value.trim(),l=document.getElementById(`dish-prep`).value.trim(),u=document.getElementById(`dish-calories`).value.trim(),d=document.getElementById(`dish-image`).value.trim(),f=[];document.getElementById(`dish-tag-special`).checked&&f.push(`chefSpecial`),document.getElementById(`dish-tag-veg`).checked&&f.push(`veg`),document.getElementById(`dish-tag-gf`).checked&&f.push(`gf`);let p=document.getElementById(`dish-instock`).checked;if(!e||!s||i<=0){o(`Please fill in dish name, price and description`,`info`);return}let m={name:e,category:r,price:i,description:s,prepTime:l,calories:u,image:d||`./assets/woodfired-pizza.png`,tags:f,inStock:p};n?(a.updateDish(t.id,m),o(`Updated dish: ${e}`,`success`)):(a.addDish(m),o(`Added new dish: ${e}`,`success`)),c()}}function u(e=null){let t=!!e;if(s({title:t?`Edit Branch: ${e.name}`:`Add New Restaurant Branch`,bodyHTML:`
+  `}),document.getElementById(`modal-cancel-dish`).onclick=c,n){let e=document.getElementById(`modal-delete-dish-btn`);e&&(e.onclick=()=>{confirm(`Are you sure you want to delete "${t.name}"?`)&&(a.deleteDish(t.id),c(),o(`Deleted ${t.name}`,`info`))})}document.getElementById(`modal-save-dish`).onclick=()=>{let e=document.getElementById(`dish-name`).value.trim(),r=document.getElementById(`dish-category`).value,i=parseFloat(document.getElementById(`dish-price`).value)||0,s=document.getElementById(`dish-desc`).value.trim(),l=document.getElementById(`dish-prep`).value.trim(),u=document.getElementById(`dish-calories`).value.trim(),d=document.getElementById(`dish-image`).value.trim(),f=[];document.getElementById(`dish-tag-special`).checked&&f.push(`chefSpecial`),document.getElementById(`dish-tag-veg`).checked&&f.push(`veg`),document.getElementById(`dish-tag-gf`).checked&&f.push(`gf`);let p=document.getElementById(`dish-instock`).checked;if(!e||!s||i<=0){o(`Please fill in dish name, price and description`,`info`);return}let m={name:e,category:r,price:i,description:s,prepTime:l,calories:u,image:d||`./assets/woodfired-pizza.png`,tags:f,inStock:p};n?(a.updateDish(t.id,m),o(`Updated dish: ${e}`,`success`)):(a.addDish(m),o(`Added new dish: ${e}`,`success`)),c()}}function u(e=null){if(!a.isAdmin()){o(`Admin permission required to manage locations. Please log in as Admin.`,`info`),a.setView(`login`);return}let t=!!e;if(s({title:t?`Edit Branch: ${e.name}`:`Add New Restaurant Branch`,bodyHTML:`
     <form id="admin-loc-form">
       <div class="form-group">
         <label class="form-label">Branch Name *</label>
@@ -144,7 +144,7 @@
         <button class="btn btn-primary" id="modal-save-loc">${t?`Save Branch`:`Add Branch`}</button>
       </div>
     </div>
-  `}),document.getElementById(`modal-cancel-loc`).onclick=c,t){let t=document.getElementById(`modal-delete-loc-btn`);t&&(t.onclick=()=>{if(confirm(`Are you sure you want to delete branch "${e.name}"?`)){let t=a.deleteLocation(e.id);t.success?(c(),o(`Deleted branch ${e.name}`,`info`)):o(t.message,`info`)}})}document.getElementById(`modal-save-loc`).onclick=()=>{let n=document.getElementById(`loc-name`).value.trim(),r=document.getElementById(`loc-address`).value.trim(),i=document.getElementById(`loc-phone`).value.trim(),s=document.getElementById(`loc-hours`).value.trim(),l=document.getElementById(`loc-radius`).value.trim(),u=document.getElementById(`loc-time`).value.trim(),d=document.getElementById(`loc-features`).value.trim(),f=d?d.split(`,`).map(e=>e.trim()).filter(Boolean):[];if(!n||!r||!i){o(`Please fill in branch name, address and phone`,`info`);return}let p={name:n,address:r,phone:i,hours:s,deliveryRadius:l,avgDeliveryTime:u,features:f};t?(a.updateLocation(e.id,p),o(`Updated branch: ${n}`,`success`)):(a.addLocation(p),o(`Added branch: ${n}`,`success`)),c()}}function d(){let e=document.getElementById(`main-header`);if(!e)return;let t=a.cart.reduce((e,t)=>e+t.qty,0),n=a.wishlist.length,r=a.activeView;e.innerHTML=`
+  `}),document.getElementById(`modal-cancel-loc`).onclick=c,t){let t=document.getElementById(`modal-delete-loc-btn`);t&&(t.onclick=()=>{if(confirm(`Are you sure you want to delete branch "${e.name}"?`)){let t=a.deleteLocation(e.id);t.success?(c(),o(`Deleted branch ${e.name}`,`info`)):o(t.message,`info`)}})}document.getElementById(`modal-save-loc`).onclick=()=>{let n=document.getElementById(`loc-name`).value.trim(),r=document.getElementById(`loc-address`).value.trim(),i=document.getElementById(`loc-phone`).value.trim(),s=document.getElementById(`loc-hours`).value.trim(),l=document.getElementById(`loc-radius`).value.trim(),u=document.getElementById(`loc-time`).value.trim(),d=document.getElementById(`loc-features`).value.trim(),f=d?d.split(`,`).map(e=>e.trim()).filter(Boolean):[];if(!n||!r||!i){o(`Please fill in branch name, address and phone`,`info`);return}let p={name:n,address:r,phone:i,hours:s,deliveryRadius:l,avgDeliveryTime:u,features:f};t?(a.updateLocation(e.id,p),o(`Updated branch: ${n}`,`success`)):(a.addLocation(p),o(`Added branch: ${n}`,`success`)),c()}}function d(){let e=document.getElementById(`main-header`);if(!e)return;let t=a.cart.reduce((e,t)=>e+t.qty,0),n=a.wishlist.length,r=a.activeView,i=a.currentUser,s=a.isAdmin();e.innerHTML=`
     <div class="nav-container">
       <a href="#" class="brand-logo" id="nav-brand-btn">
         <div class="brand-icon-wrapper">
@@ -154,6 +154,9 @@
       </a>
 
       <nav class="nav-links">
+        <button class="nav-link ${r===`landing`?`active`:``}" data-nav="landing">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
         <button class="nav-link ${r===`menu`?`active`:``}" data-nav="menu">
           <i class="fa-solid fa-book-open"></i> Menu
         </button>
@@ -164,23 +167,25 @@
         <button class="nav-link ${r===`orders`?`active`:``}" data-nav="orders">
           <i class="fa-solid fa-clock-rotate-left"></i> Track Orders
         </button>
-        <button class="nav-link ${r===`account`?`active`:``}" data-nav="account">
-          <i class="fa-solid fa-user"></i> Account
-        </button>
         <button class="nav-link ${r===`location`?`active`:``}" data-nav="location">
           <i class="fa-solid fa-location-dot"></i> Locations
+        </button>
+        <button class="nav-link nav-admin-link ${r===`admin`?`active`:``}" data-nav="admin" title="Admin Dashboard Page">
+          <i class="fa-solid fa-user-shield"></i> Admin Page
         </button>
       </nav>
 
       <div class="nav-actions">
-        <!-- Quick Admin Action Buttons -->
-        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
-          <i class="fa-solid fa-plus"></i> Add Item
-        </button>
+        ${s?`
+          <!-- Quick Admin Action Buttons (Visible for Admin) -->
+          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
+            <i class="fa-solid fa-plus"></i> Add Item
+          </button>
 
-        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
-          <i class="fa-solid fa-building-circle-check"></i> Add Branch
-        </button>
+          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+            <i class="fa-solid fa-building-circle-check"></i> Add Branch
+          </button>
+        `:``}
 
         <button class="btn-icon" id="theme-toggle-btn" title="Toggle Theme">
           <i class="fa-solid ${a.theme===`dark`?`fa-sun`:`fa-moon`}"></i>
@@ -192,13 +197,556 @@
           ${t>0?`<span class="badge-counter">${t}</span>`:``}
         </button>
 
-        <button class="btn ${r===`staff`?`btn-primary`:`btn-outline`} btn-sm" id="staff-portal-nav-btn">
-          <i class="fa-solid fa-kitchen-set"></i>
-          <span>${r===`staff`?`Exit Staff Portal`:`Admin Portal`}</span>
-        </button>
+        <!-- User Authentication & Profile Pill -->
+        ${i?`
+          <button class="nav-user-pill ${r===`login`?`active`:``}" id="nav-user-btn">
+            <span class="user-role-badge ${i.role}">${i.role.toUpperCase()}</span>
+            <span class="nav-user-name">${i.name}</span>
+          </button>
+        `:`
+          <button class="btn btn-secondary btn-sm ${r===`login`?`active`:``}" id="nav-login-btn">
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          </button>
+        `}
       </div>
     </div>
-  `,document.querySelectorAll(`[data-nav]`).forEach(e=>{e.onclick=t=>{t.preventDefault();let n=e.getAttribute(`data-nav`);a.setView(n)}});let i=document.getElementById(`nav-brand-btn`);i&&(i.onclick=e=>{e.preventDefault(),a.setView(`menu`)});let o=document.getElementById(`theme-toggle-btn`);o&&(o.onclick=()=>{a.setTheme(a.theme===`dark`?`light`:`dark`)});let s=document.getElementById(`open-cart-btn`);s&&(s.onclick=()=>{let e=document.getElementById(`cart-drawer`);e&&e.classList.remove(`hidden`)});let c=document.getElementById(`nav-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`nav-add-branch-btn`);d&&(d.onclick=()=>u());let f=document.getElementById(`staff-portal-nav-btn`);f&&(f.onclick=()=>{a.activeView===`staff`?a.setView(`menu`):a.setView(`staff`)})}function f(t){let n=e=>a.isWishlisted(e),r=a.dishes.filter(e=>{if(a.selectedCategory!==`all`){if(a.selectedCategory===`specials`){if(!e.tags.includes(`chefSpecial`))return!1}else if(e.category!==a.selectedCategory)return!1}if(a.searchQuery.trim()!==``){let t=a.searchQuery.toLowerCase(),n=e.name.toLowerCase().includes(t),r=e.description.toLowerCase().includes(t);if(!n&&!r)return!1}return!(a.dietaryFilter===`veg`&&!e.tags.includes(`veg`)||a.dietaryFilter===`gf`&&!e.tags.includes(`gf`)||a.dietaryFilter===`chefSpecial`&&!e.tags.includes(`chefSpecial`))});a.sortBy===`price-low`?r.sort((e,t)=>e.price-t.price):a.sortBy===`price-high`?r.sort((e,t)=>t.price-e.price):a.sortBy===`rating`&&r.sort((e,t)=>t.rating-e.rating),t.innerHTML=`
+  `,document.querySelectorAll(`[data-nav]`).forEach(e=>{e.onclick=t=>{t.preventDefault();let n=e.getAttribute(`data-nav`);n===`admin`&&!a.isAdmin()?(o(`Admin permission required. Please log in as Admin.`,`info`),a.setView(`login`)):a.setView(n)}});let c=document.getElementById(`nav-brand-btn`);c&&(c.onclick=e=>{e.preventDefault(),a.setView(`landing`)});let d=document.getElementById(`theme-toggle-btn`);d&&(d.onclick=()=>{a.setTheme(a.theme===`dark`?`light`:`dark`)});let f=document.getElementById(`open-cart-btn`);f&&(f.onclick=()=>{let e=document.getElementById(`cart-drawer`);e&&e.classList.remove(`hidden`)});let p=document.getElementById(`nav-add-dish-btn`);p&&(p.onclick=()=>{a.isAdmin()?l():(o(`Admin permissions required to add items.`,`info`),a.setView(`login`))});let m=document.getElementById(`nav-add-branch-btn`);m&&(m.onclick=()=>{a.isAdmin()?u():(o(`Admin permissions required to add branch locations.`,`info`),a.setView(`login`))});let h=document.getElementById(`nav-user-btn`);h&&(h.onclick=()=>a.setView(`login`));let g=document.getElementById(`nav-login-btn`);g&&(g.onclick=()=>a.setView(`login`))}function f(e){if(!e)return;let t=a.dishes.filter(e=>e.tags&&e.tags.includes(`chefSpecial`)).slice(0,3),n=t.length>0?t:a.dishes.slice(0,3),r=a.locations.slice(0,3),i=e=>a.isWishlisted(e);e.innerHTML=`
+    <!-- Landing Hero Section -->
+    <section class="landing-hero">
+      <div class="landing-hero-overlay"></div>
+      <div class="landing-hero-content">
+        <span class="landing-badge">
+          <i class="fa-solid fa-sparkles"></i> Welcoming Gourmet Lovers
+        </span>
+        <h1 class="landing-title">
+          Artisanal Culinary Magic <br> Delivered <span class="landing-highlight">Hot & Fresh</span>
+        </h1>
+        <p class="landing-subtitle">
+          Experience handcrafted dishes prepared by world-class chefs, local organic ingredients, 
+          and lightning-fast delivery to your doorstep.
+        </p>
+
+        <div class="landing-cta-group">
+          <button class="btn btn-primary btn-lg" id="landing-menu-btn">
+            <i class="fa-solid fa-utensils"></i> Explore Full Menu
+          </button>
+          <button class="btn btn-secondary btn-lg" id="landing-locations-btn">
+            <i class="fa-solid fa-location-dot"></i> Book a Table
+          </button>
+          <button class="btn btn-outline btn-lg landing-admin-quick-btn" id="landing-admin-btn">
+            <i class="fa-solid fa-user-shield"></i> Admin Portal
+          </button>
+        </div>
+
+        <div class="landing-stats-row">
+          <div class="stat-item">
+            <span class="stat-number">4.9 ★</span>
+            <span class="stat-label">10,000+ Reviews</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">20 Min</span>
+            <span class="stat-label">Avg. Express Delivery</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Farm Fresh Organic</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Propositions / Highlights -->
+    <section class="landing-features-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag"><i class="fa-solid fa-award"></i> WHY CHOOSE SAVORY BITES</span>
+          <h2 class="section-title">Crafted With Passion & Excellence</h2>
+          <p class="section-subtitle">We believe food is an art form. Here is why thousands choose us daily.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h3>Farm-to-Table Fresh</h3>
+            <p>Sourced daily from local organic farms. Zero preservatives, maximum flavor, and authentic taste.</p>
+          </div>
+
+          <div class="feature-card highlight-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+            <h3>Master Chef Artisans</h3>
+            <p>Every dish is crafted under the guidance of award-winning culinary masters using traditional wood-fire techniques.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3>Insulated Express Delivery</h3>
+            <p>Hot food stays piping hot. Our thermal-locked eco-friendly containers guarantee oven-fresh arrival.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Signature Dishes -->
+    <section class="landing-dishes-section">
+      <div class="container">
+        <div class="landing-section-top">
+          <div>
+            <span class="section-tag"><i class="fa-solid fa-star"></i> CHEF'S SPECIAL SELECTIONS</span>
+            <h2 class="section-title">Signature Delicacies</h2>
+          </div>
+          <button class="btn btn-outline" id="landing-view-all-dishes-btn">
+            View All Dishes <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="menu-grid" id="landing-dishes-grid">
+          ${n.map(e=>`
+            <div class="dish-card" data-dish-id="${e.id}">
+              <div class="dish-media">
+                <img src="${e.image}" alt="${e.name}" class="dish-img" loading="lazy">
+                
+                <button class="dish-wishlist-btn ${i(e.id)?`active`:``}" 
+                        data-wishlist-id="${e.id}" 
+                        title="${i(e.id)?`Remove from Wishlist`:`Add to Wishlist`}">
+                  <i class="${i(e.id)?`fa-solid fa-heart`:`fa-regular fa-heart`}"></i>
+                </button>
+
+                ${e.tags.includes(`chefSpecial`)?`
+                  <span class="badge badge-gold dish-tag-badge"><i class="fa-solid fa-crown"></i> Chef Special</span>
+                `:e.tags.includes(`veg`)?`
+                  <span class="badge badge-green dish-tag-badge"><i class="fa-solid fa-leaf"></i> Vegetarian</span>
+                `:``}
+              </div>
+
+              <div class="dish-content">
+                <div class="dish-header-row">
+                  <h3 class="dish-title">${e.name}</h3>
+                  <span class="dish-price">₹${e.price.toFixed(2)}</span>
+                </div>
+
+                <p class="dish-desc">${e.description}</p>
+
+                <div class="dish-meta">
+                  <span><i class="fa-solid fa-star" style="color: var(--accent-gold);"></i> ${e.rating} (${e.reviews})</span>
+                  <span><i class="fa-solid fa-clock"></i> ${e.prepTime}</span>
+                  <span><i class="fa-solid fa-fire" style="color: var(--primary);"></i> ${e.calories}</span>
+                </div>
+
+                <div class="dish-card-actions">
+                  <button class="btn btn-primary btn-sm btn-full add-cart-btn" data-add-id="${e.id}">
+                    <i class="fa-solid fa-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join(``)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Branch Locations Highlights -->
+    <section class="landing-branches-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag"><i class="fa-solid fa-building-circle-check"></i> OUR RESTAURANT LOCATIONS</span>
+          <h2 class="section-title">Visit Our Nearest Bistro Branch</h2>
+          <p class="section-subtitle">Dine-in with luxurious ambiance or order delivery from your closest location.</p>
+        </div>
+
+        <div class="landing-branches-grid">
+          ${r.map(e=>`
+            <div class="landing-branch-card">
+              <div class="branch-card-header">
+                <i class="fa-solid fa-store branch-icon"></i>
+                <div>
+                  <h3 class="branch-title">${e.name}</h3>
+                  <span class="branch-status"><span class="pulse-dot"></span> Open Now</span>
+                </div>
+              </div>
+              <p class="branch-address"><i class="fa-solid fa-location-dot"></i> ${e.address}</p>
+              <div class="branch-info-row">
+                <span><i class="fa-solid fa-phone"></i> ${e.phone}</span>
+                <span><i class="fa-solid fa-motorcycle"></i> ${e.avgDeliveryTime||`20-30 min`}</span>
+              </div>
+              <div class="branch-footer">
+                <button class="btn btn-primary btn-sm btn-full branch-select-btn" data-loc-id="${e.id}">
+                  Select as My Branch
+                </button>
+              </div>
+            </div>
+          `).join(``)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Promo CTA Banner -->
+    <section class="landing-promo-banner">
+      <div class="container">
+        <div class="promo-box">
+          <div class="promo-content">
+            <span class="badge badge-flash"><i class="fa-solid fa-tag"></i> EXCLUSIVE DISCOUNT</span>
+            <h2>Get 20% OFF Your First Gourmet Order!</h2>
+            <p>Apply promo code <strong>WELCOME20</strong> at checkout and enjoy artisanal dining delivered fast.</p>
+            <div class="promo-buttons">
+              <button class="btn btn-light btn-lg" id="promo-order-now-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Order Now
+              </button>
+              <button class="btn btn-outline-light btn-lg" id="promo-admin-link">
+                <i class="fa-solid fa-user-gear"></i> Admin & Staff Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;let s=document.getElementById(`landing-menu-btn`);s&&(s.onclick=()=>a.setView(`menu`));let c=document.getElementById(`landing-view-all-dishes-btn`);c&&(c.onclick=()=>a.setView(`menu`));let l=document.getElementById(`landing-locations-btn`);l&&(l.onclick=()=>a.setView(`location`));let u=document.getElementById(`landing-admin-btn`);u&&(u.onclick=()=>{a.isAdmin()?a.setView(`admin`):(o(`Please log in with Admin credentials to access Admin Portal.`,`info`),a.setView(`login`))});let d=document.getElementById(`promo-admin-link`);d&&(d.onclick=()=>{a.isAdmin()?a.setView(`admin`):a.setView(`login`)});let p=document.getElementById(`promo-order-now-btn`);p&&(p.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`.add-cart-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-add-id`);a.addToCart(t,1),o(`Added to Cart!`,`success`)}}),document.querySelectorAll(`.dish-wishlist-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-wishlist-id`);a.toggleWishlist(n),f(e)}}),document.querySelectorAll(`.branch-select-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-loc-id`),n=a.locations.find(e=>e.id===t);n&&(a.selectedLocation=n,o(`Delivering from ${n.name}`,`success`),a.setView(`menu`))}})}function p(e){if(!e)return;let t=a.currentUser,n=`user`;e.innerHTML=`
+    <div class="auth-view-container">
+      <div class="auth-card">
+        <!-- Auth Card Header -->
+        <div class="auth-header">
+          <div class="auth-brand-logo">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h2>Savory Bites Portal</h2>
+          <p id="auth-subtitle">Log in to manage orders, wishlist, and account preferences</p>
+        </div>
+
+        ${t?`
+          <!-- Logged In Status Banner -->
+          <div class="auth-logged-in-box">
+            <div class="user-avatar-large">
+              <i class="fa-solid ${t.role===`admin`?`fa-user-shield`:`fa-user`}"></i>
+            </div>
+            <div class="logged-user-details">
+              <h3>Currently Logged In As:</h3>
+              <p class="user-name">${t.name} <span class="role-pill role-${t.role}">${t.role.toUpperCase()}</span></p>
+              <p class="user-email">${t.email}</p>
+            </div>
+            <div class="logged-in-actions">
+              ${t.role===`admin`?`
+                <button class="btn btn-primary btn-full" id="auth-goto-admin-btn">
+                  <i class="fa-solid fa-gauge-high"></i> Go to Admin Dashboard
+                </button>
+              `:`
+                <button class="btn btn-primary btn-full" id="auth-goto-menu-btn">
+                  <i class="fa-solid fa-utensils"></i> Browse Gourmet Menu
+                </button>
+              `}
+              <button class="btn btn-outline btn-full" id="auth-logout-btn" style="border-color: var(--danger); color: var(--danger);">
+                <i class="fa-solid fa-right-from-bracket"></i> Switch Account / Logout
+              </button>
+            </div>
+          </div>
+        `:`
+          <!-- Auth Tabs Header -->
+          <div class="auth-tabs">
+            <button class="auth-tab active" id="tab-user-btn" data-tab="user">
+              <i class="fa-solid fa-user"></i> Customer Login
+            </button>
+            <button class="auth-tab" id="tab-admin-btn" data-tab="admin">
+              <i class="fa-solid fa-user-shield"></i> Admin Portal
+            </button>
+            <button class="auth-tab" id="tab-register-btn" data-tab="register">
+              <i class="fa-solid fa-user-plus"></i> New Account
+            </button>
+          </div>
+
+          <!-- Quick One-Click Demo Logins -->
+          <div class="auth-quick-demo">
+            <span class="quick-demo-title"><i class="fa-solid fa-bolt"></i> One-Click Demo Access:</span>
+            <div class="quick-demo-buttons">
+              <button class="btn btn-outline btn-sm demo-btn" id="demo-user-btn" title="Log in as Customer Syam">
+                <i class="fa-solid fa-user"></i> Customer: syam@gmail.com
+              </button>
+              <button class="btn btn-outline btn-sm demo-btn admin-demo-btn" id="demo-admin-btn" title="Log in as Admin Manager">
+                <i class="fa-solid fa-crown"></i> Admin: admin@savorybites.com
+              </button>
+            </div>
+          </div>
+
+          <!-- Auth Form Body -->
+          <form id="auth-form" class="auth-form-body">
+            <div class="form-group" id="group-name" style="display: none;">
+              <label class="form-label"><i class="fa-solid fa-signature"></i> Full Name *</label>
+              <input type="text" id="auth-name" class="form-input" placeholder="e.g. Syam Sundar">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><i class="fa-solid fa-envelope"></i> Email Address *</label>
+              <input type="email" id="auth-email" class="form-input" required placeholder="name@example.com" value="syam@gmail.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><i class="fa-solid fa-lock"></i> Password *</label>
+              <input type="password" id="auth-password" class="form-input" required placeholder="••••••••" value="user123">
+            </div>
+
+            <div class="auth-submit-area">
+              <button type="submit" class="btn btn-primary btn-full btn-lg" id="auth-submit-btn">
+                <i class="fa-solid fa-right-to-bracket"></i> <span id="auth-btn-text">Sign In as Customer</span>
+              </button>
+            </div>
+          </form>
+        `}
+      </div>
+    </div>
+  `;let r=document.getElementById(`auth-goto-admin-btn`);r&&(r.onclick=()=>a.setView(`admin`));let i=document.getElementById(`auth-goto-menu-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`auth-logout-btn`);s&&(s.onclick=()=>{a.logout(),o(`Logged out successfully`,`info`),p(e)});let c=document.getElementById(`demo-user-btn`);c&&(c.onclick=()=>{a.login(`syam@gmail.com`,`user123`,`user`),o(`Logged in as Customer (Syam)`,`success`),a.setView(`menu`)});let l=document.getElementById(`demo-admin-btn`);l&&(l.onclick=()=>{a.login(`admin@savorybites.com`,`admin123`,`admin`),o(`Logged in as Admin Manager`,`success`),a.setView(`admin`)});let u=document.getElementById(`tab-user-btn`),d=document.getElementById(`tab-admin-btn`),f=document.getElementById(`tab-register-btn`),m=document.getElementById(`group-name`),h=document.getElementById(`auth-email`),g=document.getElementById(`auth-password`),_=document.getElementById(`auth-name`),v=document.getElementById(`auth-btn-text`),y=document.getElementById(`auth-subtitle`);function b(e){n=e,[u,d,f].forEach(e=>e&&e.classList.remove(`active`)),e===`user`?(u&&u.classList.add(`active`),m&&(m.style.display=`none`),h&&(h.value=`syam@gmail.com`),g&&(g.value=`user123`),v&&(v.textContent=`Sign In as Customer`),y&&(y.textContent=`Log in to manage orders, wishlist, and account preferences`)):e===`admin`?(d&&d.classList.add(`active`),m&&(m.style.display=`none`),h&&(h.value=`admin@savorybites.com`),g&&(g.value=`admin123`),v&&(v.textContent=`Sign In to Admin Portal`),y&&(y.textContent=`Restricted access for restaurant managers & item control`)):e===`register`&&(f&&f.classList.add(`active`),m&&(m.style.display=`block`),h&&(h.value=``),g&&(g.value=``),v&&(v.textContent=`Create Customer Account`),y&&(y.textContent=`Join Savory Bites Bistro for rewards, express checkout & tracking`))}u&&(u.onclick=()=>b(`user`)),d&&(d.onclick=()=>b(`admin`)),f&&(f.onclick=()=>b(`register`));let x=document.getElementById(`auth-form`);x&&(x.onsubmit=e=>{e.preventDefault();let t=h?h.value.trim():``,r=g?g.value.trim():``;if(!t||!r){o(`Please enter email and password`,`info`);return}if(n===`register`){let e=_?_.value.trim():``;if(!e){o(`Please enter your full name`,`info`);return}a.register(e,t,r),o(`Welcome ${e}! Account created.`,`success`),a.setView(`menu`)}else{let e=a.login(t,r,n);o(`Logged in as ${e.user.name} (${e.user.role.toUpperCase()})`,`success`),e.user.role===`admin`?a.setView(`admin`):a.setView(`menu`)}})}function m(e){if(!e)return;if(!a.isAdmin()){e.innerHTML=`
+      <div class="container" style="padding: 4rem 1.5rem; text-align: center;">
+        <div class="auth-restricted-card">
+          <div class="restricted-icon"><i class="fa-solid fa-lock"></i></div>
+          <h2>Admin Access Restricted</h2>
+          <p>You need Administrator permissions to view and manage restaurant items, locations, and orders.</p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+            <button class="btn btn-primary" id="admin-login-redirect-btn">
+              <i class="fa-solid fa-user-shield"></i> Log In as Admin
+            </button>
+            <button class="btn btn-outline" id="admin-back-menu-btn">
+              <i class="fa-solid fa-arrow-left"></i> Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    `;let t=document.getElementById(`admin-login-redirect-btn`);t&&(t.onclick=()=>a.setView(`login`));let n=document.getElementById(`admin-back-menu-btn`);n&&(n.onclick=()=>a.setView(`menu`));return}let t=a.dishes.length,n=a.dishes.filter(e=>e.inStock).length,r=a.locations.length,i=a.orders.length;e.innerHTML=`
+    <div class="admin-dashboard-wrapper">
+      <div class="container">
+        <!-- Admin Dashboard Header -->
+        <div class="admin-header-bar">
+          <div>
+            <span class="badge badge-admin"><i class="fa-solid fa-shield-halved"></i> ADMINISTRATOR PORTAL</span>
+            <h1 class="admin-title">Bistro Management Console</h1>
+            <p class="admin-subtitle">Full administrative authority to manage menu items, restaurant branches, and kitchen orders.</p>
+          </div>
+
+          <div class="admin-quick-actions">
+            <button class="btn btn-primary" id="admin-add-item-btn">
+              <i class="fa-solid fa-plus"></i> Add New Menu Item
+            </button>
+            <button class="btn btn-accent" id="admin-add-branch-btn">
+              <i class="fa-solid fa-building-circle-check"></i> Add New Branch Location
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Cards Grid -->
+        <div class="admin-metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon icon-primary"><i class="fa-solid fa-utensils"></i></div>
+            <div class="metric-info">
+              <span class="metric-value">${t}</span>
+              <span class="metric-label">Menu Items (${n} In Stock)</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon icon-gold"><i class="fa-solid fa-store"></i></div>
+            <div class="metric-info">
+              <span class="metric-value">${r}</span>
+              <span class="metric-label">Active Restaurant Branches</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon icon-blue"><i class="fa-solid fa-basket-shopping"></i></div>
+            <div class="metric-info">
+              <span class="metric-value">${i}</span>
+              <span class="metric-label">Total Customer Orders</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon icon-green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            <div class="metric-info">
+              <span class="metric-value">₹${a.orders.reduce((e,t)=>e+(t.grandTotal||0),0).toFixed(2)}</span>
+              <span class="metric-label">Total Sales Revenue</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Sub-Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" id="tab-admin-items" data-tab="items">
+            <i class="fa-solid fa-list-check"></i> Menu Items (${t})
+          </button>
+          <button class="admin-tab" id="tab-admin-locations" data-tab="locations">
+            <i class="fa-solid fa-map-location-dot"></i> Branches & Locations (${r})
+          </button>
+          <button class="admin-tab" id="tab-admin-orders" data-tab="orders">
+            <i class="fa-solid fa-clock-rotate-left"></i> Live Orders (${i})
+          </button>
+        </div>
+
+        <!-- Admin Content Section -->
+        <div id="admin-tab-content" class="admin-tab-body"></div>
+      </div>
+    </div>
+  `;let o=document.getElementById(`admin-add-item-btn`);o&&(o.onclick=()=>l());let s=document.getElementById(`admin-add-branch-btn`);s&&(s.onclick=()=>u());let c=document.getElementById(`tab-admin-items`),d=document.getElementById(`tab-admin-locations`),f=document.getElementById(`tab-admin-orders`);function p(e){[c,d,f].forEach(e=>e&&e.classList.remove(`active`));let t=document.getElementById(`admin-tab-content`);t&&(e===`items`?(c&&c.classList.add(`active`),h(t)):e===`locations`?(d&&d.classList.add(`active`),g(t)):e===`orders`&&(f&&f.classList.add(`active`),_(t)))}c&&(c.onclick=()=>p(`items`)),d&&(d.onclick=()=>p(`locations`)),f&&(f.onclick=()=>p(`orders`)),p(`items`)}function h(t){t.innerHTML=`
+    <div class="admin-table-container">
+      <div class="table-actions-header">
+        <h3><i class="fa-solid fa-utensils"></i> All Registered Menu Items</h3>
+        <button class="btn btn-primary btn-sm" id="tab-add-dish-btn">
+          <i class="fa-solid fa-plus"></i> Add Item
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-data-table">
+          <thead>
+            <tr>
+              <th>Dish</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Prep Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${a.dishes.map(t=>{let n=e.find(e=>e.id===t.category)?.name||t.category;return`
+                <tr>
+                  <td>
+                    <div class="dish-item-cell">
+                      <img src="${t.image}" alt="${t.name}" class="dish-thumb" onerror="this.src='./assets/woodfired-pizza.png'">
+                      <div>
+                        <strong>${t.name}</strong>
+                        <p class="dish-desc-sub">${t.description.substring(0,60)}...</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="category-pill">${n}</span></td>
+                  <td><strong class="price-text">₹${t.price.toFixed(2)}</strong></td>
+                  <td>${t.prepTime||`15 min`}</td>
+                  <td>
+                    <button class="stock-toggle-btn ${t.inStock?`in-stock`:`out-of-stock`}" data-dish-id="${t.id}">
+                      <i class="fa-solid ${t.inStock?`fa-check-circle`:`fa-times-circle`}"></i>
+                      ${t.inStock?`In Stock`:`Out of Stock`}
+                    </button>
+                  </td>
+                  <td>
+                    <div class="action-buttons-group">
+                      <button class="btn btn-outline btn-xs edit-dish-btn" data-dish-id="${t.id}" title="Edit Dish">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                      </button>
+                      <button class="btn btn-outline btn-xs delete-dish-btn" data-dish-id="${t.id}" style="color: var(--danger); border-color: var(--danger);" title="Delete Dish">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `}).join(``)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;let n=document.getElementById(`tab-add-dish-btn`);n&&(n.onclick=()=>l()),t.querySelectorAll(`.stock-toggle-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-dish-id`),n=a.toggleDishStock(t);n&&!n.success?o(n.message,`info`):o(`Updated stock availability`,`success`)}}),t.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),t.querySelectorAll(`.delete-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-dish-id`),n=a.dishes.find(e=>e.id===t);if(n&&confirm(`Are you sure you want to delete "${n.name}"?`)){let e=a.deleteDish(t);e&&e.success?o(`Deleted ${n.name}`,`info`):e&&e.message&&o(e.message,`info`)}}})}function g(e){e.innerHTML=`
+    <div class="admin-table-container">
+      <div class="table-actions-header">
+        <h3><i class="fa-solid fa-store"></i> Restaurant Branch Locations</h3>
+        <button class="btn btn-accent btn-sm" id="tab-add-loc-btn">
+          <i class="fa-solid fa-plus"></i> Add Branch
+        </button>
+      </div>
+
+      <div class="admin-locations-grid">
+        ${a.locations.map(e=>`
+          <div class="admin-loc-card">
+            <div class="loc-card-top">
+              <div>
+                <span class="badge badge-gold"><i class="fa-solid fa-building"></i> Branch</span>
+                <h3 class="loc-card-title">${e.name}</h3>
+              </div>
+              <div class="loc-actions">
+                <button class="btn btn-outline btn-xs edit-loc-btn" data-loc-id="${e.id}">
+                  <i class="fa-solid fa-pen"></i> Edit
+                </button>
+                <button class="btn btn-outline btn-xs delete-loc-btn" data-loc-id="${e.id}" style="color: var(--danger); border-color: var(--danger);">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <p class="loc-address-text"><i class="fa-solid fa-location-dot"></i> ${e.address}</p>
+            
+            <div class="loc-details-grid">
+              <div><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> ${e.phone}</div>
+              <div><i class="fa-solid fa-clock"></i> <strong>Hours:</strong> ${e.hours||`10:30 AM - 11 PM`}</div>
+              <div><i class="fa-solid fa-map-pin"></i> <strong>Radius:</strong> ${e.deliveryRadius||`7 km`}</div>
+              <div><i class="fa-solid fa-motorcycle"></i> <strong>Delivery:</strong> ${e.avgDeliveryTime||`20-30 min`}</div>
+            </div>
+
+            ${e.features&&e.features.length>0?`
+              <div class="loc-tags">
+                ${e.features.map(e=>`<span class="tag-mini">${e}</span>`).join(``)}
+              </div>
+            `:``}
+          </div>
+        `).join(``)}
+      </div>
+    </div>
+  `;let t=document.getElementById(`tab-add-loc-btn`);t&&(t.onclick=()=>u()),e.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),e.querySelectorAll(`.delete-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-loc-id`),n=a.locations.find(e=>e.id===t);if(n&&confirm(`Are you sure you want to delete branch "${n.name}"?`)){let e=a.deleteLocation(t);e&&e.success?o(`Deleted branch ${n.name}`,`info`):e&&e.message&&o(e.message,`info`)}}})}function _(e){let t=a.orders;e.innerHTML=`
+    <div class="admin-table-container">
+      <div class="table-actions-header">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Incoming Customer Orders</h3>
+      </div>
+
+      ${t.length===0?`
+        <div class="empty-state">
+          <i class="fa-solid fa-clipboard-list empty-icon"></i>
+          <h3>No Orders Placed Yet</h3>
+        </div>
+      `:`
+        <div class="table-responsive">
+          <table class="admin-data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${t.map(e=>`
+                <tr>
+                  <td><strong>${e.id}</strong></td>
+                  <td>${new Date(e.date).toLocaleDateString()}</td>
+                  <td>
+                    <div>
+                      <strong>${e.customerName||`Syam`}</strong>
+                      <div style="font-size: 0.8rem; color: var(--text-muted);">${e.phone||`+91 9876543210`}</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-size: 0.85rem;">
+                      ${e.items.map(e=>`${e.qty}x ${e.name}`).join(`, `)}
+                    </div>
+                  </td>
+                  <td><strong style="color: var(--primary);">₹${(e.grandTotal||250).toFixed(2)}</strong></td>
+                  <td>
+                    <select class="admin-status-select" data-order-id="${e.id}">
+                      <option value="placed" ${e.status===`placed`?`selected`:``}>Placed</option>
+                      <option value="preparing" ${e.status===`preparing`?`selected`:``}>Preparing</option>
+                      <option value="delivering" ${e.status===`delivering`?`selected`:``}>Out for Delivery</option>
+                      <option value="completed" ${e.status===`completed`?`selected`:``}>Completed</option>
+                    </select>
+                  </td>
+                </tr>
+              `).join(``)}
+            </tbody>
+          </table>
+        </div>
+      `}
+    </div>
+  `,e.querySelectorAll(`.admin-status-select`).forEach(e=>{e.onchange=()=>{let t=e.getAttribute(`data-order-id`),n=e.value;a.updateOrderStatus(t,n),o(`Updated ${t} status to ${n.toUpperCase()}`,`success`)}})}function v(t){let n=e=>a.isWishlisted(e),r=a.dishes.filter(e=>{if(a.selectedCategory!==`all`){if(a.selectedCategory===`specials`){if(!e.tags.includes(`chefSpecial`))return!1}else if(e.category!==a.selectedCategory)return!1}if(a.searchQuery.trim()!==``){let t=a.searchQuery.toLowerCase(),n=e.name.toLowerCase().includes(t),r=e.description.toLowerCase().includes(t);if(!n&&!r)return!1}return!(a.dietaryFilter===`veg`&&!e.tags.includes(`veg`)||a.dietaryFilter===`gf`&&!e.tags.includes(`gf`)||a.dietaryFilter===`chefSpecial`&&!e.tags.includes(`chefSpecial`))});a.sortBy===`price-low`?r.sort((e,t)=>e.price-t.price):a.sortBy===`price-high`?r.sort((e,t)=>t.price-e.price):a.sortBy===`rating`&&r.sort((e,t)=>t.rating-e.rating),t.innerHTML=`
     <!-- Hero Banner -->
     <section class="hero-section">
       <div class="hero-content">
@@ -324,7 +872,7 @@
         </div>
       `}
     </section>
-  `;let i=document.getElementById(`menu-search-input`);i&&(i.oninput=e=>{a.searchQuery=e.target.value,f(t)}),document.querySelectorAll(`.edit-dish-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-dish-id`),r=a.dishes.find(e=>e.id===n);r&&l(r)}}),document.querySelectorAll(`.tag-btn`).forEach(e=>{e.onclick=()=>{a.searchQuery=e.getAttribute(`data-tag`),f(t)}}),document.querySelectorAll(`[data-cat]`).forEach(e=>{e.onclick=()=>{a.selectedCategory=e.getAttribute(`data-cat`),f(t)}}),document.querySelectorAll(`[data-diet]`).forEach(e=>{e.onclick=()=>{a.dietaryFilter=e.getAttribute(`data-diet`),f(t)}});let s=document.getElementById(`sort-select`);s&&(s.onchange=e=>{a.sortBy=e.target.value,f(t)}),document.querySelectorAll(`[data-wishlist-id]`).forEach(e=>{e.onclick=n=>{n.stopPropagation();let r=e.getAttribute(`data-wishlist-id`);a.toggleWishlist(r),o(a.isWishlisted(r)?`Added to Wishlist!`:`Removed from Wishlist`,`info`),f(t)}}),document.querySelectorAll(`[data-add-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-add-id`),r=a.dishes.find(e=>e.id===n);r&&r.inStock&&(a.addToCart(n,1),o(`Added ${r.name} to Cart!`,`success`))}}),document.querySelectorAll(`[data-detail-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation(),p(e.getAttribute(`data-detail-id`))}})}function p(e){let t=a.dishes.find(t=>t.id===e);if(!t)return;let n=1;s({title:`Customize Your Order`,bodyHTML:`
+  `;let i=document.getElementById(`menu-search-input`);i&&(i.oninput=e=>{a.searchQuery=e.target.value,v(t)}),document.querySelectorAll(`.edit-dish-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-dish-id`),r=a.dishes.find(e=>e.id===n);r&&l(r)}}),document.querySelectorAll(`.tag-btn`).forEach(e=>{e.onclick=()=>{a.searchQuery=e.getAttribute(`data-tag`),v(t)}}),document.querySelectorAll(`[data-cat]`).forEach(e=>{e.onclick=()=>{a.selectedCategory=e.getAttribute(`data-cat`),v(t)}}),document.querySelectorAll(`[data-diet]`).forEach(e=>{e.onclick=()=>{a.dietaryFilter=e.getAttribute(`data-diet`),v(t)}});let s=document.getElementById(`sort-select`);s&&(s.onchange=e=>{a.sortBy=e.target.value,v(t)}),document.querySelectorAll(`[data-wishlist-id]`).forEach(e=>{e.onclick=n=>{n.stopPropagation();let r=e.getAttribute(`data-wishlist-id`);a.toggleWishlist(r),o(a.isWishlisted(r)?`Added to Wishlist!`:`Removed from Wishlist`,`info`),v(t)}}),document.querySelectorAll(`[data-add-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-add-id`),r=a.dishes.find(e=>e.id===n);r&&r.inStock&&(a.addToCart(n,1),o(`Added ${r.name} to Cart!`,`success`))}}),document.querySelectorAll(`[data-detail-id]`).forEach(e=>{e.onclick=t=>{t.stopPropagation(),y(e.getAttribute(`data-detail-id`))}})}function y(e){let t=a.dishes.find(t=>t.id===e);if(!t)return;let n=1;s({title:`Customize Your Order`,bodyHTML:`
     <div style="display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
       <img src="${t.image}" alt="${t.name}" style="width: 140px; height: 120px; border-radius: var(--radius-md); object-fit: cover;">
       <div style="flex: 1;">
@@ -374,7 +922,7 @@
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
     <button class="btn btn-primary" id="modal-add-cart-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
-  `});let r=document.getElementById(`modal-qty-minus`),i=document.getElementById(`modal-qty-plus`),l=document.getElementById(`modal-qty-val`);r&&i&&l&&(r.onclick=()=>{n>1&&(n--,l.textContent=n)},i.onclick=()=>{n++,l.textContent=n});let u=document.getElementById(`modal-cancel-btn`);u&&(u.onclick=c);let d=document.getElementById(`modal-add-cart-btn`);d&&(d.onclick=()=>{let r=document.getElementById(`modal-spice-select`).value,i=document.getElementById(`modal-notes-input`).value.trim(),s=[];document.getElementById(`addon-cheese`).checked&&s.push(`Extra Cheese`),document.getElementById(`addon-sauce`).checked&&s.push(`Truffle Dip`),document.getElementById(`addon-gf`).checked&&s.push(`GF Option`);let l=r;s.length>0&&(l+=` | ${s.join(`, `)}`),i&&(l+=` (${i})`),a.addToCart(e,n,l),o(`Added ${t.name} (${n}x) to Cart!`,`success`),c()})}function m(e){let t=a.dishes.filter(e=>a.wishlist.includes(e.id));e.innerHTML=`
+  `});let r=document.getElementById(`modal-qty-minus`),i=document.getElementById(`modal-qty-plus`),l=document.getElementById(`modal-qty-val`);r&&i&&l&&(r.onclick=()=>{n>1&&(n--,l.textContent=n)},i.onclick=()=>{n++,l.textContent=n});let u=document.getElementById(`modal-cancel-btn`);u&&(u.onclick=c);let d=document.getElementById(`modal-add-cart-btn`);d&&(d.onclick=()=>{let r=document.getElementById(`modal-spice-select`).value,i=document.getElementById(`modal-notes-input`).value.trim(),s=[];document.getElementById(`addon-cheese`).checked&&s.push(`Extra Cheese`),document.getElementById(`addon-sauce`).checked&&s.push(`Truffle Dip`),document.getElementById(`addon-gf`).checked&&s.push(`GF Option`);let l=r;s.length>0&&(l+=` | ${s.join(`, `)}`),i&&(l+=` (${i})`),a.addToCart(e,n,l),o(`Added ${t.name} (${n}x) to Cart!`,`success`),c()})}function b(e){let t=a.dishes.filter(e=>a.wishlist.includes(e.id));e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
         <div>
@@ -430,7 +978,7 @@
         </div>
       `}
     </section>
-  `;let n=document.getElementById(`wishlist-explore-btn`);n&&(n.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-remove-wishlist]`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-remove-wishlist`);a.toggleWishlist(n),o(`Item removed from Wishlist`,`info`),m(e)}}),document.querySelectorAll(`[data-wishlist-add]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-wishlist-add`),n=a.dishes.find(e=>e.id===t);n&&(a.addToCart(t,1),o(`Moved ${n.name} to Cart!`,`success`))}})}function h(){let e=document.getElementById(`cart-drawer-body`);if(!e)return;let t=a.getCartTotal(),n=a.cart;e.innerHTML=`
+  `;let n=document.getElementById(`wishlist-explore-btn`);n&&(n.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-remove-wishlist]`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-remove-wishlist`);a.toggleWishlist(n),o(`Item removed from Wishlist`,`info`),b(e)}}),document.querySelectorAll(`[data-wishlist-add]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-wishlist-add`),n=a.dishes.find(e=>e.id===t);n&&(a.addToCart(t,1),o(`Moved ${n.name} to Cart!`,`success`))}})}function x(){let e=document.getElementById(`cart-drawer-body`);if(!e)return;let t=a.getCartTotal(),n=a.cart;e.innerHTML=`
     <div class="cart-header">
       <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
         <i class="fa-solid fa-basket-shopping" style="color: var(--primary);"></i> Your Cart Order
@@ -517,7 +1065,7 @@
         </button>
       </div>
     `}
-  `;let r=document.getElementById(`close-cart-drawer-btn`),i=document.getElementById(`cart-overlay`),s=document.getElementById(`cart-drawer`),c=()=>{s&&s.classList.add(`hidden`)};r&&(r.onclick=c),i&&(i.onclick=c);let l=document.getElementById(`cart-start-ordering-btn`);l&&(l.onclick=()=>{c(),a.setView(`menu`)}),document.querySelectorAll(`[data-qty-change]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-qty-change`)),n=parseInt(e.getAttribute(`data-delta`)),r=a.cart[t];r&&(a.updateCartQty(t,r.qty+n),h())}});let u=document.getElementById(`apply-coupon-btn`);u&&(u.onclick=()=>{let e=document.getElementById(`coupon-input-field`);if(e){let t=a.applyCoupon(e.value);t.success?o(t.message,`success`):o(t.message,`info`),h()}});let d=document.getElementById(`checkout-trigger-btn`);d&&(d.onclick=()=>{c(),g()})}function g(){let e=a.getCartTotal(),t=a.profile;t.addresses.find(e=>e.isDefault)||t.addresses[0],s({title:`Complete Your Order`,bodyHTML:`
+  `;let r=document.getElementById(`close-cart-drawer-btn`),i=document.getElementById(`cart-overlay`),s=document.getElementById(`cart-drawer`),c=()=>{s&&s.classList.add(`hidden`)};r&&(r.onclick=c),i&&(i.onclick=c);let l=document.getElementById(`cart-start-ordering-btn`);l&&(l.onclick=()=>{c(),a.setView(`menu`)}),document.querySelectorAll(`[data-qty-change]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-qty-change`)),n=parseInt(e.getAttribute(`data-delta`)),r=a.cart[t];r&&(a.updateCartQty(t,r.qty+n),x())}});let u=document.getElementById(`apply-coupon-btn`);u&&(u.onclick=()=>{let e=document.getElementById(`coupon-input-field`);if(e){let t=a.applyCoupon(e.value);t.success?o(t.message,`success`):o(t.message,`info`),x()}});let d=document.getElementById(`checkout-trigger-btn`);d&&(d.onclick=()=>{c(),S()})}function S(){let e=a.getCartTotal(),t=a.profile;t.addresses.find(e=>e.isDefault)||t.addresses[0],s({title:`Complete Your Order`,bodyHTML:`
     <div style="margin-bottom: 1.5rem;">
       <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-sub);">
         <i class="fa-solid fa-motorcycle" style="color: var(--primary);"></i> 1. Select Fulfillment Mode
@@ -583,7 +1131,7 @@
     <button class="btn btn-primary btn-lg" id="confirm-pay-btn">
       <i class="fa-solid fa-lock"></i> Place Order (₹${e.grandTotal.toFixed(2)})
     </button>
-  `});let n=document.getElementById(`checkout-cancel-btn`);n&&(n.onclick=c);let r=document.getElementById(`confirm-pay-btn`);r&&(r.onclick=()=>{let t=document.getElementById(`checkout-address-select`).value,n=document.querySelector(`input[name="fulfillment"]:checked`).value,r=a.placeOrder({deliveryAddress:t,fulfillmentType:n,subtotal:e.subtotal,discount:e.discountAmount,tax:e.tax,deliveryFee:e.deliveryFee,total:e.grandTotal,estimatedEta:`20-25 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`});c(),o(`Order #${r.id} Placed Successfully!`,`success`),a.setView(`orders`)})}function _(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.filter(e=>e.status===`delivered`);e.innerHTML=`
+  `});let n=document.getElementById(`checkout-cancel-btn`);n&&(n.onclick=c);let r=document.getElementById(`confirm-pay-btn`);r&&(r.onclick=()=>{let t=document.getElementById(`checkout-address-select`).value,n=document.querySelector(`input[name="fulfillment"]:checked`).value,r=a.placeOrder({deliveryAddress:t,fulfillmentType:n,subtotal:e.subtotal,discount:e.discountAmount,tax:e.tax,deliveryFee:e.deliveryFee,total:e.grandTotal,estimatedEta:`20-25 minutes`,driverName:`Srinivas Rao`,driverPhone:`+91 98480 88990`});c(),o(`Order #${r.id} Placed Successfully!`,`success`),a.setView(`orders`)})}function C(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.filter(e=>e.status===`delivered`);e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Order Tracker & History</h1>
@@ -596,7 +1144,7 @@
           <span class="pulse-dot"></span> Active Live Orders (${t.length})
         </h2>
 
-        ${t.map(e=>v(e)).join(``)}
+        ${t.map(e=>w(e)).join(``)}
       `:`
         <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2rem; text-align: center; margin-bottom: 2.5rem;">
           <i class="fa-solid fa-bell-concierge" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 0.75rem;"></i>
@@ -644,7 +1192,7 @@
         `}
       </div>
     </section>
-  `;let r=document.getElementById(`active-order-explore-btn`);r&&(r.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-reorder-id]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-reorder-id`),n=a.orders.find(e=>e.id===t);n&&(n.items.forEach(e=>{a.addToCart(e.dishId,e.qty,e.opts||``)}),o(`Items re-added to Cart!`,`success`),a.setView(`menu`))}})}function v(e){let t=e.status===`preparing`||e.status===`ready`||e.status===`delivered`,n=e.status===`ready`||e.status===`delivered`,r=e.status===`delivered`;return`
+  `;let r=document.getElementById(`active-order-explore-btn`);r&&(r.onclick=()=>a.setView(`menu`)),document.querySelectorAll(`[data-reorder-id]`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-reorder-id`),n=a.orders.find(e=>e.id===t);n&&(n.items.forEach(e=>{a.addToCart(e.dishId,e.qty,e.opts||``)}),o(`Items re-added to Cart!`,`success`),a.setView(`menu`))}})}function w(e){let t=e.status===`preparing`||e.status===`ready`||e.status===`delivered`,n=e.status===`ready`||e.status===`delivered`,r=e.status===`delivered`;return`
     <div class="order-tracker-card">
       <div class="tracker-header">
         <div>
@@ -716,7 +1264,7 @@
         </div>
       </div>
     </div>
-  `}function y(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2),r=t.addresses||[],i=t.paymentMethods||[];e.innerHTML=`
+  `}function T(e){let t=a.profile,n=(t.rewardPoints/10).toFixed(2),r=t.addresses||[],i=t.paymentMethods||[];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <div>
@@ -870,7 +1418,7 @@
         </main>
       </div>
     </section>
-  `;let s=document.getElementById(`edit-profile-details-btn`);s&&(s.onclick=()=>b(e));let c=document.getElementById(`redeem-points-btn`);c&&(c.onclick=()=>C(e)),document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let l=document.getElementById(`add-new-address-btn`);l&&(l.onclick=()=>x(e)),document.querySelectorAll(`.edit-addr-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-edit-addr-id`),r=a.profile.addresses.find(e=>e.id===n);r&&x(e,r)}}),document.querySelectorAll(`.delete-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-addr-id`);confirm(`Delete this address?`)&&(a.deleteAddress(t),o(`Address removed`,`info`))}}),document.querySelectorAll(`.set-default-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-default-addr-id`);a.setDefaultAddress(t),o(`Default delivery address updated`,`success`)}});let u=document.getElementById(`add-new-payment-btn`);u&&(u.onclick=()=>S(e)),document.querySelectorAll(`.delete-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-pay-id`);confirm(`Delete this payment method?`)&&(a.deletePaymentMethod(t),o(`Payment method removed`,`info`))}}),document.querySelectorAll(`.set-primary-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-primary-pay-id`);a.setDefaultPayment(t),o(`Primary payment method updated`,`success`)}})}function b(e){let t=a.profile;s({title:`Edit Profile Information`,bodyHTML:`
+  `;let s=document.getElementById(`edit-profile-details-btn`);s&&(s.onclick=()=>E(e));let c=document.getElementById(`redeem-points-btn`);c&&(c.onclick=()=>k(e)),document.querySelectorAll(`[data-tab]`).forEach(e=>{e.onclick=()=>{document.querySelectorAll(`[data-tab]`).forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),e.getAttribute(`data-tab`)===`addresses`?(document.getElementById(`account-tab-addresses`).style.display=`block`,document.getElementById(`account-tab-payments`).style.display=`none`):(document.getElementById(`account-tab-addresses`).style.display=`none`,document.getElementById(`account-tab-payments`).style.display=`block`)}});let l=document.getElementById(`add-new-address-btn`);l&&(l.onclick=()=>D(e)),document.querySelectorAll(`.edit-addr-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-edit-addr-id`),r=a.profile.addresses.find(e=>e.id===n);r&&D(e,r)}}),document.querySelectorAll(`.delete-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-addr-id`);confirm(`Delete this address?`)&&(a.deleteAddress(t),o(`Address removed`,`info`))}}),document.querySelectorAll(`.set-default-addr-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-default-addr-id`);a.setDefaultAddress(t),o(`Default delivery address updated`,`success`)}});let u=document.getElementById(`add-new-payment-btn`);u&&(u.onclick=()=>O(e)),document.querySelectorAll(`.delete-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-delete-pay-id`);confirm(`Delete this payment method?`)&&(a.deletePaymentMethod(t),o(`Payment method removed`,`info`))}}),document.querySelectorAll(`.set-primary-pay-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-primary-pay-id`);a.setDefaultPayment(t),o(`Primary payment method updated`,`success`)}})}function E(e){let t=a.profile;s({title:`Edit Profile Information`,bodyHTML:`
     <div class="form-group">
       <label class="form-label">Full Name *</label>
       <input type="text" id="edit-profile-name" class="form-input" required value="${t.name}">
@@ -893,7 +1441,7 @@
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-profile">Cancel</button>
     <button class="btn btn-primary" id="modal-save-profile">Save Profile</button>
-  `}),document.getElementById(`modal-cancel-profile`).onclick=c,document.getElementById(`modal-save-profile`).onclick=()=>{let e=document.getElementById(`edit-profile-name`).value.trim(),t=document.getElementById(`edit-profile-email`).value.trim(),n=document.getElementById(`edit-profile-phone`).value.trim();if(!e||!t||!n){o(`Please fill in name, email and phone`,`info`);return}a.updateProfile({name:e,email:t,phone:n}),c(),o(`Profile information updated successfully!`,`success`)}}function x(e,t=null){let n=!!t,r=`
+  `}),document.getElementById(`modal-cancel-profile`).onclick=c,document.getElementById(`modal-save-profile`).onclick=()=>{let e=document.getElementById(`edit-profile-name`).value.trim(),t=document.getElementById(`edit-profile-email`).value.trim(),n=document.getElementById(`edit-profile-phone`).value.trim();if(!e||!t||!n){o(`Please fill in name, email and phone`,`info`);return}a.updateProfile({name:e,email:t,phone:n}),c(),o(`Profile information updated successfully!`,`success`)}}function D(e,t=null){let n=!!t,r=`
     <div class="form-group">
       <label class="form-label">Address Label (Home, Work, etc.) *</label>
       <input type="text" id="addr-label" class="form-input" required value="${n?t.label:``}" placeholder="e.g. Home, Office, Parent's House">
@@ -921,7 +1469,7 @@
   `,i=`
     <button class="btn btn-secondary" id="modal-cancel-addr">Cancel</button>
     <button class="btn btn-primary" id="modal-save-addr">${n?`Save Changes`:`Add Address`}</button>
-  `;s({title:n?`Edit Address (${t.label})`:`Add New Delivery Address`,bodyHTML:r,footerHTML:i}),document.getElementById(`modal-cancel-addr`).onclick=c,document.getElementById(`modal-save-addr`).onclick=()=>{let e=document.getElementById(`addr-label`).value.trim()||`Other`,r=document.getElementById(`addr-street`).value.trim(),i=document.getElementById(`addr-city`).value.trim()||`Nellore, Andhra Pradesh`,s=document.getElementById(`addr-zip`).value.trim()||`524003`,l=document.getElementById(`addr-default`).checked;if(!r){o(`Please enter a street address`,`info`);return}n?(a.updateAddress(t.id,{label:e,street:r,city:i,zip:s,isDefault:l}),o(`Address updated!`,`success`)):(a.addAddress({label:e,street:r,city:i,zip:s,isDefault:l}),o(`New Address added!`,`success`)),c()}}function S(e){s({title:`Add Saved Payment Method`,bodyHTML:`
+  `;s({title:n?`Edit Address (${t.label})`:`Add New Delivery Address`,bodyHTML:r,footerHTML:i}),document.getElementById(`modal-cancel-addr`).onclick=c,document.getElementById(`modal-save-addr`).onclick=()=>{let e=document.getElementById(`addr-label`).value.trim()||`Other`,r=document.getElementById(`addr-street`).value.trim(),i=document.getElementById(`addr-city`).value.trim()||`Nellore, Andhra Pradesh`,s=document.getElementById(`addr-zip`).value.trim()||`524003`,l=document.getElementById(`addr-default`).checked;if(!r){o(`Please enter a street address`,`info`);return}n?(a.updateAddress(t.id,{label:e,street:r,city:i,zip:s,isDefault:l}),o(`Address updated!`,`success`)):(a.addAddress({label:e,street:r,city:i,zip:s,isDefault:l}),o(`New Address added!`,`success`)),c()}}function O(e){s({title:`Add Saved Payment Method`,bodyHTML:`
     <div class="form-group">
       <label class="form-label">Payment Method Type</label>
       <select id="pay-type" class="form-select">
@@ -959,7 +1507,7 @@
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-pay">Cancel</button>
     <button class="btn btn-primary" id="modal-save-pay">Save Payment Method</button>
-  `});let t=document.getElementById(`pay-type`);t.onchange=e=>{e.target.value===`card`?(document.getElementById(`card-fields`).style.display=`block`,document.getElementById(`upi-fields`).style.display=`none`):(document.getElementById(`card-fields`).style.display=`none`,document.getElementById(`upi-fields`).style.display=`block`)},document.getElementById(`modal-cancel-pay`).onclick=c,document.getElementById(`modal-save-pay`).onclick=()=>{let e=t.value,n=document.getElementById(`pay-title`).value.trim()||(e===`card`?`Credit Card`:`UPI ID`),r=document.getElementById(`pay-primary`).checked;if(e===`card`){let e=document.getElementById(`pay-card-num`).value.trim()||`5678`,t=e.length===4?`•••• •••• •••• ${e}`:e,i=document.getElementById(`pay-expiry`).value.trim()||`12/28`;a.addPaymentMethod({type:`card`,title:n,cardNumber:t,expiry:i,isPrimary:r})}else{let e=document.getElementById(`pay-upi-id`).value.trim()||`user@upi`;a.addPaymentMethod({type:`upi`,title:n,upiId:e,isPrimary:r})}c(),o(`New Payment Method Saved!`,`success`)}}function C(e){let t=a.profile;s({title:`Redeem Loyalty Points for Discount Cash`,bodyHTML:`
+  `});let t=document.getElementById(`pay-type`);t.onchange=e=>{e.target.value===`card`?(document.getElementById(`card-fields`).style.display=`block`,document.getElementById(`upi-fields`).style.display=`none`):(document.getElementById(`card-fields`).style.display=`none`,document.getElementById(`upi-fields`).style.display=`block`)},document.getElementById(`modal-cancel-pay`).onclick=c,document.getElementById(`modal-save-pay`).onclick=()=>{let e=t.value,n=document.getElementById(`pay-title`).value.trim()||(e===`card`?`Credit Card`:`UPI ID`),r=document.getElementById(`pay-primary`).checked;if(e===`card`){let e=document.getElementById(`pay-card-num`).value.trim()||`5678`,t=e.length===4?`•••• •••• •••• ${e}`:e,i=document.getElementById(`pay-expiry`).value.trim()||`12/28`;a.addPaymentMethod({type:`card`,title:n,cardNumber:t,expiry:i,isPrimary:r})}else{let e=document.getElementById(`pay-upi-id`).value.trim()||`user@upi`;a.addPaymentMethod({type:`upi`,title:n,upiId:e,isPrimary:r})}c(),o(`New Payment Method Saved!`,`success`)}}function k(e){let t=a.profile;s({title:`Redeem Loyalty Points for Discount Cash`,bodyHTML:`
     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
       You currently have <strong style="color: var(--accent-gold); font-size: 1.1rem;">${t.rewardPoints} Reward Points</strong>. Every 100 Points = ₹10.00 Discount Cash!
     </p>
@@ -988,7 +1536,7 @@
     </div>
   `,footerHTML:`
     <button class="btn btn-secondary" id="modal-cancel-redeem">Close</button>
-  `}),document.getElementById(`modal-cancel-redeem`).onclick=c,document.querySelectorAll(`[data-redeem-pts]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-redeem-pts`)),n=a.redeemRewardPoints(t);n.success?(a.applyCoupon(`WELCOME20`),o(`Redeemed ${t} Points! ₹${n.discountCash} discount applied to your active order!`,`success`,6e3),c()):o(n.message,`info`)}})}function w(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
+  `}),document.getElementById(`modal-cancel-redeem`).onclick=c,document.querySelectorAll(`[data-redeem-pts]`).forEach(e=>{e.onclick=()=>{let t=parseInt(e.getAttribute(`data-redeem-pts`)),n=a.redeemRewardPoints(t);n.success?(a.applyCoupon(`WELCOME20`),o(`Redeemed ${t} Points! ₹${n.discountCash} discount applied to your active order!`,`success`,6e3),c()):o(n.message,`info`)}})}function A(e){let t=a.selectedLocation||a.locations[0];e.innerHTML=`
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <div>
@@ -1094,7 +1642,7 @@
         </div>
       </div>
     </section>
-  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=n=>{if(n.target.closest(`.edit-branch-direct-btn`))return;let r=t.getAttribute(`data-select-loc`),i=a.locations.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),w(e)}}}),document.querySelectorAll(`.edit-branch-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-loc-id`),r=a.locations.find(e=>e.id===n);r&&u(r)}});let n=document.getElementById(`view-add-branch-btn`);n&&(n.onclick=()=>u());let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;o(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function T(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.reduce((e,t)=>e+t.total,0),r=t.length;e.innerHTML=`
+  `,document.querySelectorAll(`[data-select-loc]`).forEach(t=>{t.onclick=n=>{if(n.target.closest(`.edit-branch-direct-btn`))return;let r=t.getAttribute(`data-select-loc`),i=a.locations.find(e=>e.id===r);if(i){a.selectedLocation=i;let t=document.getElementById(`header-location-name`);t&&(t.textContent=i.name),A(e)}}}),document.querySelectorAll(`.edit-branch-direct-btn`).forEach(e=>{e.onclick=t=>{t.stopPropagation();let n=e.getAttribute(`data-edit-loc-id`),r=a.locations.find(e=>e.id===n);r&&u(r)}});let n=document.getElementById(`view-add-branch-btn`);n&&(n.onclick=()=>u());let r=document.getElementById(`reservation-form`);r&&(r.onsubmit=e=>{e.preventDefault();let n=document.getElementById(`res-date`).value,i=document.getElementById(`res-time`).value,a=document.getElementById(`res-guests`).value;o(`Table Reserved for ${a} at ${t.name} on ${n} @ ${i}!`,`success`,5e3),r.reset()})}function j(e){let t=a.orders.filter(e=>e.status!==`delivered`),n=a.orders.reduce((e,t)=>e+t.total,0),r=t.length;e.innerHTML=`
     <!-- Staff Banner -->
     <div class="staff-portal-banner">
       <div style="display: flex; align-items: center; gap: 0.75rem; color: #fff;">
@@ -1297,4 +1845,4 @@
         </div>
       </div>
     </section>
-  `;let i=document.getElementById(`exit-staff-portal-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`admin-banner-add-dish`);s&&(s.onclick=()=>l());let c=document.getElementById(`admin-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`admin-banner-add-branch`);d&&(d.onclick=()=>u());let f=document.getElementById(`admin-add-branch-btn`);f&&(f.onclick=()=>u()),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),o(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),T(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);o(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),T(e)}}),document.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),document.querySelectorAll(`.delete-dish-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-dish-id`),r=a.dishes.find(e=>e.id===n);r&&confirm(`Are you sure you want to delete "${r.name}"?`)&&(a.deleteDish(n),o(`Deleted ${r.name}`,`info`),T(e))}}),document.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),document.querySelectorAll(`.delete-loc-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-loc-id`),r=a.locations.find(e=>e.id===n);if(r&&confirm(`Are you sure you want to delete branch "${r.name}"?`)){let t=a.deleteLocation(n);t.success?(o(`Deleted branch ${r.name}`,`info`),T(e)):o(t.message,`info`)}}})}function E(){document.documentElement.setAttribute(`data-theme`,a.theme),d(),h(),D(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`?(d(),D()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(d(),h()):e===`WISHLIST_UPDATED`?(d(),a.activeView===`wishlist`&&m(document.getElementById(`app-view`)),a.activeView===`menu`&&f(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(d(),h(),a.activeView===`orders`&&_(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`STOCK_UPDATED`?(a.activeView===`menu`&&f(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`LOCATIONS_UPDATED`?(d(),a.activeView===`location`&&w(document.getElementById(`app-view`)),a.activeView===`staff`&&T(document.getElementById(`app-view`))):e===`PROFILE_UPDATED`&&(d(),a.activeView===`account`&&y(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.setView(`staff`)})}function D(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`menu`:f(e);break;case`wishlist`:m(e);break;case`orders`:_(e);break;case`account`:y(e);break;case`location`:w(e);break;case`staff`:T(e);break;default:f(e)}}document.addEventListener(`DOMContentLoaded`,E);
+  `;let i=document.getElementById(`exit-staff-portal-btn`);i&&(i.onclick=()=>a.setView(`menu`));let s=document.getElementById(`admin-banner-add-dish`);s&&(s.onclick=()=>l());let c=document.getElementById(`admin-add-dish-btn`);c&&(c.onclick=()=>l());let d=document.getElementById(`admin-banner-add-branch`);d&&(d.onclick=()=>u());let f=document.getElementById(`admin-add-branch-btn`);f&&(f.onclick=()=>u()),document.querySelectorAll(`.status-change-select`).forEach(t=>{t.onchange=n=>{let r=t.getAttribute(`data-order-status-id`),i=n.target.value;a.updateOrderStatus(r,i),o(`Order #${r} status updated to ${i.toUpperCase()}`,`success`),j(e)}}),document.querySelectorAll(`.stock-toggle-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-stock-dish-id`);a.toggleDishStock(n);let r=a.dishes.find(e=>e.id===n);o(`${r.name} stock toggled: ${r.inStock?`In Stock`:`Out of Stock`}`,`info`),j(e)}}),document.querySelectorAll(`.edit-dish-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-dish-id`),n=a.dishes.find(e=>e.id===t);n&&l(n)}}),document.querySelectorAll(`.delete-dish-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-dish-id`),r=a.dishes.find(e=>e.id===n);r&&confirm(`Are you sure you want to delete "${r.name}"?`)&&(a.deleteDish(n),o(`Deleted ${r.name}`,`info`),j(e))}}),document.querySelectorAll(`.edit-loc-btn`).forEach(e=>{e.onclick=()=>{let t=e.getAttribute(`data-edit-loc-id`),n=a.locations.find(e=>e.id===t);n&&u(n)}}),document.querySelectorAll(`.delete-loc-btn`).forEach(t=>{t.onclick=()=>{let n=t.getAttribute(`data-delete-loc-id`),r=a.locations.find(e=>e.id===n);if(r&&confirm(`Are you sure you want to delete branch "${r.name}"?`)){let t=a.deleteLocation(n);t.success?(o(`Deleted branch ${r.name}`,`info`),j(e)):o(t.message,`info`)}}})}function M(){document.documentElement.setAttribute(`data-theme`,a.theme),d(),x(),N(),a.subscribe((e,t)=>{e===`VIEW_CHANGED`||e===`THEME_CHANGED`||e===`AUTH_CHANGED`?(d(),N()):e===`CART_UPDATED`||e===`COUPON_APPLIED`?(d(),x()):e===`WISHLIST_UPDATED`?(d(),a.activeView===`wishlist`&&b(document.getElementById(`app-view`)),a.activeView===`menu`&&v(document.getElementById(`app-view`))):e===`ORDER_PLACED`||e===`ORDER_STATUS_UPDATED`?(d(),x(),a.activeView===`orders`&&C(document.getElementById(`app-view`)),a.activeView===`admin`&&m(document.getElementById(`app-view`)),a.activeView===`staff`&&j(document.getElementById(`app-view`))):e===`STOCK_UPDATED`?(a.activeView===`menu`&&v(document.getElementById(`app-view`)),a.activeView===`admin`&&m(document.getElementById(`app-view`)),a.activeView===`staff`&&j(document.getElementById(`app-view`))):e===`LOCATIONS_UPDATED`?(d(),a.activeView===`location`&&A(document.getElementById(`app-view`)),a.activeView===`admin`&&m(document.getElementById(`app-view`)),a.activeView===`staff`&&j(document.getElementById(`app-view`))):e===`PROFILE_UPDATED`&&(d(),a.activeView===`account`&&T(document.getElementById(`app-view`)))});let e=document.getElementById(`footer-staff-toggle`);e&&(e.onclick=()=>{a.isAdmin()?a.setView(`admin`):a.setView(`login`)})}function N(){let e=document.getElementById(`app-view`);if(e)switch(a.activeView){case`landing`:f(e);break;case`login`:p(e);break;case`admin`:m(e);break;case`menu`:v(e);break;case`wishlist`:b(e);break;case`orders`:C(e);break;case`account`:T(e);break;case`location`:A(e);break;case`staff`:j(e);break;default:f(e)}}document.addEventListener(`DOMContentLoaded`,M);

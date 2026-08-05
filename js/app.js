@@ -4,6 +4,9 @@
 
 import { state } from './state.js';
 import { renderNavbar } from './components/navbar.js';
+import { renderLandingView } from './views/landing.js';
+import { renderLoginView } from './views/login.js';
+import { renderAdminView } from './views/admin.js';
 import { renderMenuView } from './views/menu.js';
 import { renderWishlistView } from './views/wishlist.js';
 import { renderCartDrawer } from './views/cart.js';
@@ -23,7 +26,7 @@ function initApp() {
 
   // Subscribe to state updates
   state.subscribe((event, payload) => {
-    if (event === 'VIEW_CHANGED' || event === 'THEME_CHANGED') {
+    if (event === 'VIEW_CHANGED' || event === 'THEME_CHANGED' || event === 'AUTH_CHANGED') {
       renderNavbar();
       renderCurrentView();
     } else if (event === 'CART_UPDATED' || event === 'COUPON_APPLIED') {
@@ -37,13 +40,16 @@ function initApp() {
       renderNavbar();
       renderCartDrawer();
       if (state.activeView === 'orders') renderOrdersView(document.getElementById('app-view'));
+      if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'STOCK_UPDATED') {
       if (state.activeView === 'menu') renderMenuView(document.getElementById('app-view'));
+      if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'LOCATIONS_UPDATED') {
       renderNavbar();
       if (state.activeView === 'location') renderLocationView(document.getElementById('app-view'));
+      if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'PROFILE_UPDATED') {
       renderNavbar();
@@ -55,7 +61,11 @@ function initApp() {
   const footerStaffBtn = document.getElementById('footer-staff-toggle');
   if (footerStaffBtn) {
     footerStaffBtn.onclick = () => {
-      state.setView('staff');
+      if (state.isAdmin()) {
+        state.setView('admin');
+      } else {
+        state.setView('login');
+      }
     };
   }
 }
@@ -65,6 +75,15 @@ function renderCurrentView() {
   if (!container) return;
 
   switch (state.activeView) {
+    case 'landing':
+      renderLandingView(container);
+      break;
+    case 'login':
+      renderLoginView(container);
+      break;
+    case 'admin':
+      renderAdminView(container);
+      break;
     case 'menu':
       renderMenuView(container);
       break;
@@ -84,7 +103,7 @@ function renderCurrentView() {
       renderStaffView(container);
       break;
     default:
-      renderMenuView(container);
+      renderLandingView(container);
       break;
   }
 }

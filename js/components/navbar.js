@@ -4,6 +4,7 @@
 
 import { state } from '../state.js';
 import { openDishModal, openLocationModal } from './adminModal.js';
+import { showToast } from './toast.js';
 
 export function renderNavbar() {
   const header = document.getElementById('main-header');
@@ -12,6 +13,8 @@ export function renderNavbar() {
   const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
   const wishlistCount = state.wishlist.length;
   const activeView = state.activeView;
+  const currentUser = state.currentUser;
+  const isAdmin = state.isAdmin();
 
   header.innerHTML = `
     <div class="nav-container">
@@ -23,6 +26,9 @@ export function renderNavbar() {
       </a>
 
       <nav class="nav-links">
+        <button class="nav-link ${activeView === 'landing' ? 'active' : ''}" data-nav="landing">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
         <button class="nav-link ${activeView === 'menu' ? 'active' : ''}" data-nav="menu">
           <i class="fa-solid fa-book-open"></i> Menu
         </button>
@@ -33,23 +39,25 @@ export function renderNavbar() {
         <button class="nav-link ${activeView === 'orders' ? 'active' : ''}" data-nav="orders">
           <i class="fa-solid fa-clock-rotate-left"></i> Track Orders
         </button>
-        <button class="nav-link ${activeView === 'account' ? 'active' : ''}" data-nav="account">
-          <i class="fa-solid fa-user"></i> Account
-        </button>
         <button class="nav-link ${activeView === 'location' ? 'active' : ''}" data-nav="location">
           <i class="fa-solid fa-location-dot"></i> Locations
+        </button>
+        <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Dashboard Page">
+          <i class="fa-solid fa-user-shield"></i> Admin Page
         </button>
       </nav>
 
       <div class="nav-actions">
-        <!-- Quick Admin Action Buttons -->
-        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
-          <i class="fa-solid fa-plus"></i> Add Item
-        </button>
+        ${isAdmin ? `
+          <!-- Quick Admin Action Buttons (Visible for Admin) -->
+          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
+            <i class="fa-solid fa-plus"></i> Add Item
+          </button>
 
-        <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
-          <i class="fa-solid fa-building-circle-check"></i> Add Branch
-        </button>
+          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+            <i class="fa-solid fa-building-circle-check"></i> Add Branch
+          </button>
+        ` : ''}
 
         <button class="btn-icon" id="theme-toggle-btn" title="Toggle Theme">
           <i class="fa-solid ${state.theme === 'dark' ? 'fa-sun' : 'fa-moon'}"></i>
@@ -61,10 +69,17 @@ export function renderNavbar() {
           ${cartCount > 0 ? `<span class="badge-counter">${cartCount}</span>` : ''}
         </button>
 
-        <button class="btn ${activeView === 'staff' ? 'btn-primary' : 'btn-outline'} btn-sm" id="staff-portal-nav-btn">
-          <i class="fa-solid fa-kitchen-set"></i>
-          <span>${activeView === 'staff' ? 'Exit Staff Portal' : 'Admin Portal'}</span>
-        </button>
+        <!-- User Authentication & Profile Pill -->
+        ${currentUser ? `
+          <button class="nav-user-pill ${activeView === 'login' ? 'active' : ''}" id="nav-user-btn">
+            <span class="user-role-badge ${currentUser.role}">${currentUser.role.toUpperCase()}</span>
+            <span class="nav-user-name">${currentUser.name}</span>
+          </button>
+        ` : `
+          <button class="btn btn-secondary btn-sm ${activeView === 'login' ? 'active' : ''}" id="nav-login-btn">
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          </button>
+        `}
       </div>
     </div>
   `;
@@ -74,7 +89,12 @@ export function renderNavbar() {
     btn.onclick = (e) => {
       e.preventDefault();
       const targetView = btn.getAttribute('data-nav');
-      state.setView(targetView);
+      if (targetView === 'admin' && !state.isAdmin()) {
+        showToast('Admin permission required. Please log in as Admin.', 'info');
+        state.setView('login');
+      } else {
+        state.setView(targetView);
+      }
     };
   });
 
@@ -82,7 +102,7 @@ export function renderNavbar() {
   if (brandBtn) {
     brandBtn.onclick = (e) => {
       e.preventDefault();
-      state.setView('menu');
+      state.setView('landing');
     };
   }
 
@@ -103,22 +123,35 @@ export function renderNavbar() {
 
   const addDishBtn = document.getElementById('nav-add-dish-btn');
   if (addDishBtn) {
-    addDishBtn.onclick = () => openDishModal();
+    addDishBtn.onclick = () => {
+      if (state.isAdmin()) {
+        openDishModal();
+      } else {
+        showToast('Admin permissions required to add items.', 'info');
+        state.setView('login');
+      }
+    };
   }
 
   const addBranchBtn = document.getElementById('nav-add-branch-btn');
   if (addBranchBtn) {
-    addBranchBtn.onclick = () => openLocationModal();
-  }
-
-  const staffBtn = document.getElementById('staff-portal-nav-btn');
-  if (staffBtn) {
-    staffBtn.onclick = () => {
-      if (state.activeView === 'staff') {
-        state.setView('menu');
+    addBranchBtn.onclick = () => {
+      if (state.isAdmin()) {
+        openLocationModal();
       } else {
-        state.setView('staff');
+        showToast('Admin permissions required to add branch locations.', 'info');
+        state.setView('login');
       }
     };
+  }
+
+  const userBtn = document.getElementById('nav-user-btn');
+  if (userBtn) {
+    userBtn.onclick = () => state.setView('login');
+  }
+
+  const loginBtn = document.getElementById('nav-login-btn');
+  if (loginBtn) {
+    loginBtn.onclick = () => state.setView('login');
   }
 }

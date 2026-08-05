@@ -12,9 +12,18 @@ class AppState {
 
   init() {
     // Load persisted state or defaults
-    this.activeView = 'menu';
+    this.activeView = 'landing';
     this.theme = localStorage.getItem('sb_theme') || 'dark';
     
+    // User Authentication & Roles
+    const savedUser = localStorage.getItem('sb_user');
+    this.currentUser = savedUser ? JSON.parse(savedUser) : {
+      id: 'usr-admin',
+      name: 'Admin Manager',
+      email: 'admin@savorybites.com',
+      role: 'admin' // 'admin' or 'user'
+    };
+
     const savedWishlist = localStorage.getItem('sb_wishlist');
     this.wishlist = savedWishlist ? JSON.parse(savedWishlist) : ['dish-1', 'dish-4'];
 
@@ -58,6 +67,52 @@ class AppState {
 
   notify(event, payload) {
     this.listeners.forEach(fn => fn(event, payload));
+  }
+
+  // Auth & Roles Management
+  login(email, password, role = 'user') {
+    const cleanEmail = email.trim().toLowerCase();
+    const isAdminRole = (role === 'admin' || cleanEmail.includes('admin'));
+    
+    this.currentUser = {
+      id: `usr-${Date.now()}`,
+      name: isAdminRole ? 'Admin Manager' : (cleanEmail.split('@')[0] || 'User'),
+      email: cleanEmail,
+      role: isAdminRole ? 'admin' : 'user'
+    };
+
+    localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+    this.notify('AUTH_CHANGED', this.currentUser);
+    return { success: true, user: this.currentUser };
+  }
+
+  logout() {
+    this.currentUser = null;
+    localStorage.removeItem('sb_user');
+    this.notify('AUTH_CHANGED', null);
+  }
+
+  register(name, email, password) {
+    this.currentUser = {
+      id: `usr-${Date.now()}`,
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      role: 'user'
+    };
+    this.profile.name = name.trim();
+    this.profile.email = email.trim().toLowerCase();
+    this.saveProfile();
+    localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+    this.notify('AUTH_CHANGED', this.currentUser);
+    return { success: true, user: this.currentUser };
+  }
+
+  isAdmin() {
+    return !!(this.currentUser && this.currentUser.role === 'admin');
+  }
+
+  isLoggedIn() {
+    return !!this.currentUser;
   }
 
   // Theme Toggle
@@ -210,15 +265,19 @@ class AppState {
 
   // Stock & Dish Admin Management
   toggleDishStock(dishId) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const dish = this.dishes.find(d => d.id === dishId);
     if (dish) {
       dish.inStock = !dish.inStock;
       this.saveDishes();
       this.notify('STOCK_UPDATED', dish);
+      return { success: true, dish };
     }
+    return { success: false, message: 'Dish not found' };
   }
 
   addDish(dishObj) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const newDish = {
       id: `dish-${Date.now()}`,
       rating: 4.8,
@@ -230,22 +289,27 @@ class AppState {
     this.dishes.unshift(newDish);
     this.saveDishes();
     this.notify('STOCK_UPDATED', newDish);
-    return newDish;
+    return { success: true, dish: newDish };
   }
 
   updateDish(dishId, updatedFields) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const idx = this.dishes.findIndex(d => d.id === dishId);
     if (idx > -1) {
       this.dishes[idx] = { ...this.dishes[idx], ...updatedFields };
       this.saveDishes();
       this.notify('STOCK_UPDATED', this.dishes[idx]);
+      return { success: true, dish: this.dishes[idx] };
     }
+    return { success: false, message: 'Dish not found' };
   }
 
   deleteDish(dishId) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     this.dishes = this.dishes.filter(d => d.id !== dishId);
     this.saveDishes();
     this.notify('STOCK_UPDATED', dishId);
+    return { success: true };
   }
 
   saveDishes() {
@@ -254,6 +318,7 @@ class AppState {
 
   // Location Admin Management
   addLocation(locObj) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const newLoc = {
       id: `loc-${Date.now()}`,
       rating: 4.8,
@@ -265,10 +330,11 @@ class AppState {
     this.locations.push(newLoc);
     this.saveLocations();
     this.notify('LOCATIONS_UPDATED', newLoc);
-    return newLoc;
+    return { success: true, location: newLoc };
   }
 
   updateLocation(locId, updatedFields) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     const idx = this.locations.findIndex(l => l.id === locId);
     if (idx > -1) {
       this.locations[idx] = { ...this.locations[idx], ...updatedFields };
@@ -277,10 +343,13 @@ class AppState {
       }
       this.saveLocations();
       this.notify('LOCATIONS_UPDATED', this.locations[idx]);
+      return { success: true, location: this.locations[idx] };
     }
+    return { success: false, message: 'Branch location not found' };
   }
 
   deleteLocation(locId) {
+    if (!this.isAdmin()) return { success: false, message: 'Admin permissions required!' };
     if (this.locations.length <= 1) {
       return { success: false, message: 'Cannot delete the only branch location!' };
     }

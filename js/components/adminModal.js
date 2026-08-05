@@ -8,6 +8,12 @@ import { openModal, closeModal } from './modal.js';
 import { CATEGORIES } from '../data.js';
 
 export function openDishModal(dishToEdit = null) {
+  if (!state.isAdmin()) {
+    showToast('Admin permission required to manage items. Please log in as Admin.', 'info');
+    state.setView('login');
+    return;
+  }
+
   const isEdit = !!dishToEdit;
   const title = isEdit ? `Edit Menu Item: ${dishToEdit.name}` : 'Add New Menu Item';
 
@@ -154,6 +160,12 @@ export function openDishModal(dishToEdit = null) {
 }
 
 export function openLocationModal(locToEdit = null) {
+  if (!state.isAdmin()) {
+    showToast('Admin permission required to manage locations. Please log in as Admin.', 'info');
+    state.setView('login');
+    return;
+  }
+
   const isEdit = !!locToEdit;
   const title = isEdit ? `Edit Branch: ${locToEdit.name}` : 'Add New Restaurant Branch';
 
