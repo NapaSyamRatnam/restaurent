@@ -43,12 +43,10 @@ class AppState {
     this.currentUser = savedUser ? JSON.parse(savedUser) : null;
 
     const savedWishlist = localStorage.getItem('sb_wishlist');
-    this.wishlist = savedWishlist ? JSON.parse(savedWishlist) : ['dish-1', 'dish-4'];
+    this.wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
 
     const savedCart = localStorage.getItem('sb_cart');
-    this.cart = savedCart ? JSON.parse(savedCart) : [
-      { dishId: 'dish-1', qty: 1, options: 'Extra Fresh Basil', price: 18.99 }
-    ];
+    this.cart = savedCart ? JSON.parse(savedCart) : [];
 
     const savedDishes = localStorage.getItem('sb_dishes');
     this.dishes = savedDishes ? JSON.parse(savedDishes) : INITIAL_DISHES;
@@ -62,10 +60,10 @@ class AppState {
     }
 
     const savedOrders = localStorage.getItem('sb_orders');
-    this.orders = savedOrders ? JSON.parse(savedOrders) : INITIAL_ORDERS;
+    this.orders = savedOrders ? JSON.parse(savedOrders) : [];
 
     const savedReservations = localStorage.getItem('sb_reservations');
-    this.reservations = savedReservations ? JSON.parse(savedReservations) : INITIAL_RESERVATIONS;
+    this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
 
     const savedLocations = localStorage.getItem('sb_locations');
     this.locations = savedLocations ? JSON.parse(savedLocations) : RESTAURANT_LOCATIONS;
@@ -244,27 +242,31 @@ class AppState {
 
   async sendPhoneOTP(phone) {
     const cleanPhone = phone.trim();
+    if (!cleanPhone || cleanPhone.length < 10) {
+      return { success: false, error: 'Please enter a valid 10-digit mobile phone number' };
+    }
+
     if (isSupabaseConfigured()) {
       const res = await supabaseSendPhoneOTP(cleanPhone);
       if (res.error) {
         return { success: false, error: res.error };
       }
-      return { success: true, phone: res.phone };
+      return { success: true, phone: res.phone, message: `Real SMS OTP code sent directly to ${res.phone}` };
     }
-    // Local Demo OTP Mode
-    const formattedPhone = cleanPhone.startsWith('+') ? cleanPhone : `+91 ${cleanPhone}`;
+
     return { 
-      success: true, 
-      phone: formattedPhone, 
-      demoOTP: '123456',
-      message: `Demo OTP [123456] sent to ${formattedPhone}` 
+      success: false, 
+      error: 'Supabase DB is not connected. Click "Connect Supabase DB" at the top of the Login page to enter your Supabase URL & Key to send real SMS OTPs to your mobile.' 
     };
   }
 
   async verifyPhoneOTP(phone, token, role = 'user') {
     const cleanPhone = phone.trim();
     const cleanToken = token.trim();
-    const isAdminRole = (role === 'admin');
+
+    if (!cleanToken || cleanToken.length !== 6) {
+      return { success: false, error: 'Please enter the 6-digit SMS verification code' };
+    }
 
     if (isSupabaseConfigured()) {
       const res = await supabaseVerifyPhoneOTP(cleanPhone, cleanToken, role);
@@ -278,23 +280,10 @@ class AppState {
       }
     }
 
-    // Local Demo Verification Mode (Accept 123456 or any 6-digit code)
-    if (cleanToken.length !== 6) {
-      return { success: false, error: 'Please enter a valid 6-digit OTP code' };
-    }
-
-    const formattedPhone = cleanPhone.startsWith('+') ? cleanPhone : `+91 ${cleanPhone}`;
-    this.currentUser = {
-      id: `usr-phone-${Date.now()}`,
-      name: `User (${formattedPhone.slice(-4)})`,
-      email: `${formattedPhone.replace(/\D/g, '')}@mobile.savorybites.com`,
-      phone: formattedPhone,
-      role: isAdminRole ? 'admin' : 'user'
+    return { 
+      success: false, 
+      error: 'Supabase DB is not connected. Click "Connect Supabase DB" at the top of the Login page to connect your database for real SMS verification.' 
     };
-
-    localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
-    this.notify('AUTH_CHANGED', this.currentUser);
-    return { success: true, user: this.currentUser };
   }
 
   isAdmin() {
@@ -448,6 +437,7 @@ class AppState {
     // Clear cart after order
     this.clearCart();
     this.notify('ORDER_PLACED', newOrder);
+    this.setView('orders');
     return newOrder;
   }
 
@@ -714,6 +704,7 @@ class AppState {
     }
 
     this.notify('RESERVATIONS_UPDATED', newReservation);
+    this.setView('orders');
     return { success: true, reservation: newReservation };
   }
 

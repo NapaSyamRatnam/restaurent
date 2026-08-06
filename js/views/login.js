@@ -369,8 +369,7 @@ export function renderLoginView(container) {
       sentPhone = res.phone || `+91 ${num}`;
       if (sentPhoneDisplay) sentPhoneDisplay.textContent = sentPhone;
       
-      const otpMsg = res.demoOTP ? ` (Demo Code: ${res.demoOTP})` : '';
-      showToast(`Verification OTP sent to ${sentPhone}${otpMsg}`, 'success');
+      showToast(res.message || `Verification OTP sent to ${sentPhone}`, 'success');
 
       if (phoneStep1 && phoneStep2) {
         phoneStep1.style.display = 'none';
@@ -385,8 +384,11 @@ export function renderLoginView(container) {
     resendOtpBtn.onclick = async () => {
       const num = phoneInput ? phoneInput.value.trim() : '';
       const res = await state.sendPhoneOTP(num);
-      const otpMsg = res.demoOTP ? ` (Demo Code: ${res.demoOTP})` : '';
-      showToast(`Resent new OTP code to ${sentPhone}${otpMsg}`, 'success');
+      if (res.error) {
+        showToast(`Failed to resend OTP: ${res.error}`, 'info');
+        return;
+      }
+      showToast(res.message || `Resent new OTP code to ${sentPhone}`, 'success');
       startResendTimer();
     };
   }
