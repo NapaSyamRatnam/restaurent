@@ -16,10 +16,6 @@ export function renderLocationView(container) {
           <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Restaurant Locations & Table Booking</h1>
           <p style="color: var(--text-muted); font-size: 0.95rem;">Find your nearest Savory Bites Bistro branch in Nellore or reserve a dining table online.</p>
         </div>
-
-        <button class="btn btn-outline btn-sm" id="view-add-branch-btn" style="border-color: var(--accent-gold); color: var(--accent-gold);">
-          <i class="fa-solid fa-plus"></i> Add New Branch (Admin)
-        </button>
       </div>
 
       <div class="locations-grid">

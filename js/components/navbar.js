@@ -50,17 +50,6 @@ export function renderNavbar() {
       </nav>
 
       <div class="nav-actions">
-        ${isAdmin ? `
-          <!-- Quick Admin Action Buttons (Visible for Admin) -->
-          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-dish-btn" title="Add New Menu Item (Admin)" style="border-color: var(--primary); color: var(--primary);">
-            <i class="fa-solid fa-plus"></i> Add Item
-          </button>
-
-          <button class="btn btn-outline btn-sm nav-admin-btn" id="nav-add-branch-btn" title="Add New Restaurant Branch (Admin)" style="border-color: var(--accent-gold); color: var(--accent-gold);">
-            <i class="fa-solid fa-building-circle-check"></i> Add Branch
-          </button>
-        ` : ''}
-
         <button class="btn-icon" id="theme-toggle-btn" title="Toggle Theme">
           <i class="fa-solid ${state.theme === 'dark' ? 'fa-sun' : 'fa-moon'}"></i>
         </button>
@@ -138,30 +127,6 @@ export function renderNavbar() {
     };
   }
 
-  const addDishBtn = document.getElementById('nav-add-dish-btn');
-  if (addDishBtn) {
-    addDishBtn.onclick = () => {
-      if (state.isAdmin()) {
-        openDishModal();
-      } else {
-        showToast('Admin permissions required to add items.', 'info');
-        state.setView('login');
-      }
-    };
-  }
-
-  const addBranchBtn = document.getElementById('nav-add-branch-btn');
-  if (addBranchBtn) {
-    addBranchBtn.onclick = () => {
-      if (state.isAdmin()) {
-        openLocationModal();
-      } else {
-        showToast('Admin permissions required to add branch locations.', 'info');
-        state.setView('login');
-      }
-    };
-  }
-
   const userBtn = document.getElementById('nav-user-btn');
   if (userBtn) {
     userBtn.onclick = () => state.setView('login');
@@ -172,4 +137,5 @@ export function renderNavbar() {
     loginBtn.onclick = () => state.setView('login');
   }
 }
+
 

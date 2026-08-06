@@ -63,15 +63,19 @@ export function renderLoginView(container) {
             </button>
           </div>
 
-          <!-- Quick One-Click Demo Logins -->
-          <div class="auth-quick-demo">
-            <span class="quick-demo-title"><i class="fa-solid fa-bolt"></i> One-Click Demo Access:</span>
-            <div class="quick-demo-buttons">
-              <button class="btn btn-outline btn-sm demo-btn" id="demo-user-btn" title="Log in as Customer Syam" style="display: ${activeTab === 'user' ? 'inline-flex' : 'none'};">
-                <i class="fa-solid fa-user"></i> Customer: syam@gmail.com
-              </button>
-              <button class="btn btn-outline btn-sm demo-btn admin-demo-btn" id="demo-admin-btn" title="Log in as Admin Manager" style="display: ${activeTab === 'admin' ? 'inline-flex' : 'none'};">
-                <i class="fa-solid fa-crown"></i> Admin: admin@savorybites.com
+          <!-- Credentials Guidance Banner for Admin -->
+          <div class="auth-credentials-banner" style="background: rgba(255, 107, 53, 0.08); border: 1px solid var(--border-active); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <strong style="font-size: 0.88rem; color: var(--primary); display: flex; align-items: center; gap: 0.4rem;">
+                  <i class="fa-solid fa-key"></i> Administrator Login Credentials
+                </strong>
+                <div style="font-size: 0.82rem; color: var(--text-sub); margin-top: 0.2rem;">
+                  Email: <code style="color: var(--accent-gold); font-weight: 700;">admin@savorybites.com</code> | Password: <code style="color: var(--accent-gold); font-weight: 700;">admin123</code>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-xs" id="quick-fill-admin-btn">
+                <i class="fa-solid fa-bolt"></i> One-Click Admin Login
               </button>
             </div>
           </div>
@@ -85,17 +89,22 @@ export function renderLoginView(container) {
 
             <div class="form-group">
               <label class="form-label"><i class="fa-solid fa-envelope"></i> Email Address *</label>
-              <input type="email" id="auth-email" class="form-input" required placeholder="name@example.com" value="syam@gmail.com">
+              <input type="email" id="auth-email" class="form-input" required placeholder="name@example.com" value="admin@savorybites.com">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="position: relative;">
               <label class="form-label"><i class="fa-solid fa-lock"></i> Password *</label>
-              <input type="password" id="auth-password" class="form-input" required placeholder="••••••••" value="user123">
+              <div style="position: relative;">
+                <input type="password" id="auth-password" class="form-input" required placeholder="••••••••" value="admin123" style="padding-right: 2.5rem;">
+                <button type="button" id="toggle-password-visibility" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer;" title="Toggle Password Visibility">
+                  <i class="fa-solid fa-eye" id="password-eye-icon"></i>
+                </button>
+              </div>
             </div>
 
             <div class="auth-submit-area">
               <button type="submit" class="btn btn-primary btn-full btn-lg" id="auth-submit-btn">
-                <i class="fa-solid fa-right-to-bracket"></i> <span id="auth-btn-text">Sign In as Customer</span>
+                <i class="fa-solid fa-shield-halved"></i> <span id="auth-btn-text">Sign In to Admin Portal</span>
               </button>
             </div>
           </form>
@@ -136,6 +145,34 @@ export function renderLoginView(container) {
       state.login('admin@savorybites.com', 'admin123', 'admin');
       showToast('Logged in as Admin Manager', 'success');
       state.setView('admin');
+    };
+  }
+
+  // One-Click Admin Quick Fill Button
+  const quickFillAdminBtn = document.getElementById('quick-fill-admin-btn');
+  if (quickFillAdminBtn) {
+    quickFillAdminBtn.onclick = async () => {
+      await state.login('admin@savorybites.com', 'admin123', 'admin');
+      showToast('Authenticated as Admin Manager!', 'success');
+      state.setView('admin');
+    };
+  }
+
+  // Password Visibility Toggle Button
+  const togglePassBtn = document.getElementById('toggle-password-visibility');
+  if (togglePassBtn) {
+    togglePassBtn.onclick = () => {
+      const passField = document.getElementById('auth-password');
+      const eyeIcon = document.getElementById('password-eye-icon');
+      if (passField) {
+        if (passField.type === 'password') {
+          passField.type = 'text';
+          if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash';
+        } else {
+          passField.type = 'password';
+          if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye';
+        }
+      }
     };
   }
 
