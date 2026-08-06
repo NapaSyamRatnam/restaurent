@@ -5,12 +5,13 @@
 import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
 import { openModal, closeModal } from '../components/modal.js';
-import { isSupabaseConfigured } from '../supabase.js';
+import { isSupabaseConfigured, getSupabaseConfig, setSupabaseConfig } from '../supabase.js';
 
 export function renderLoginView(container) {
   if (!container) return;
 
   const currentUser = state.currentUser;
+  const supabaseActive = isSupabaseConfigured();
   let activeTab = state.loginTab || 'user'; // 'user', 'phone', 'admin', 'register'
   let sentPhone = '';
   let resendCountdown = 30;
@@ -26,6 +27,11 @@ export function renderLoginView(container) {
           </div>
           <h2>Savory Bites Portal</h2>
           <p id="auth-subtitle">Log in to manage orders, wishlist, and account preferences</p>
+          <div style="margin-top: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm" id="auth-supabase-config-btn" style="border-color: ${supabaseActive ? '#10b981' : 'var(--accent-gold)'}; color: ${supabaseActive ? '#10b981' : 'var(--accent-gold)'}; font-size: 0.8rem; border-radius: var(--radius-full);">
+              <i class="fa-solid ${supabaseActive ? 'fa-database' : 'fa-bolt'}"></i> ${supabaseActive ? 'Live Supabase Connected' : 'Connect Supabase DB'}
+            </button>
+          </div>
         </div>
 
         ${currentUser ? `
@@ -84,7 +90,7 @@ export function renderLoginView(container) {
           <form id="auth-form" class="auth-form-body">
             <div class="form-group" id="group-name" style="display: none;">
               <label class="form-label"><i class="fa-solid fa-signature"></i> Full Name *</label>
-              <input type="text" id="auth-name" class="form-input" placeholder="e.g. Syam Sundar">
+              <input type="text" id="auth-name" class="form-input" placeholder="Enter your full name" value="">
             </div>
 
             <div class="form-group" id="group-email">
@@ -119,7 +125,7 @@ export function renderLoginView(container) {
                 <label class="form-label"><i class="fa-solid fa-mobile-retro"></i> Mobile Phone Number *</label>
                 <div style="display: flex; gap: 0.5rem;">
                   <span style="padding: 0.75rem 0.85rem; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); font-weight: 700; color: var(--primary);">+91</span>
-                  <input type="tel" id="auth-phone-input" class="form-input" placeholder="98765 43210" maxlength="10" value="9876543210">
+                  <input type="tel" id="auth-phone-input" class="form-input" placeholder="Enter 10-digit mobile number" maxlength="10" value="">
                 </div>
                 <small style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.3rem; display: block;">
                   A 6-digit SMS verification code will be sent to your mobile.
@@ -132,7 +138,7 @@ export function renderLoginView(container) {
 
             <div id="phone-step-2" style="display: none; text-align: center;">
               <div style="background: var(--primary-light); padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-active); margin-bottom: 1.25rem;">
-                <span style="font-size: 0.85rem; color: var(--text-sub);">Verification code sent to <strong id="sent-phone-display" style="color: var(--primary);">+91 9876543210</strong></span>
+                <span style="font-size: 0.85rem; color: var(--text-sub);">Verification code sent to <strong id="sent-phone-display" style="color: var(--primary);">+91 ...</strong></span>
               </div>
 
               <label class="form-label"><i class="fa-solid fa-shield-halved"></i> Enter 6-Digit OTP Code</label>
@@ -168,6 +174,12 @@ export function renderLoginView(container) {
       </div>
     </div>
   `;
+
+  // Supabase Config Button Click
+  const supabaseConfigBtn = document.getElementById('auth-supabase-config-btn');
+  if (supabaseConfigBtn) {
+    supabaseConfigBtn.onclick = () => openSupabaseSetupModal(container);
+  }
 
   // Logged-in handlers
   const gotoAdminBtn = document.getElementById('auth-goto-admin-btn');
@@ -243,6 +255,10 @@ export function renderLoginView(container) {
 
     [tabUser, tabPhone, tabAdmin, tabRegister].forEach(t => t && t.classList.remove('active'));
 
+    // Clear all inputs to start completely blank
+    if (emailInput) emailInput.value = '';
+    if (passInput) passInput.value = '';
+
     if (selectedTab === 'user') {
       if (tabUser) tabUser.classList.add('active');
       if (authForm) authForm.style.display = 'flex';
@@ -250,10 +266,8 @@ export function renderLoginView(container) {
       if (nameGroup) nameGroup.style.display = 'none';
       if (emailGroup) emailGroup.style.display = 'block';
       if (passGroup) passGroup.style.display = 'block';
-      if (emailInput) emailInput.value = 'syam@gmail.com';
-      if (passInput) passInput.value = 'user123';
       if (btnText) btnText.textContent = 'Sign In as Customer';
-      if (subtitle) subtitle.textContent = 'Log in to manage orders, wishlist, and account preferences';
+      if (subtitle) subtitle.textContent = 'Enter your email and password to access your account';
     } else if (selectedTab === 'phone') {
       if (tabPhone) tabPhone.classList.add('active');
       if (authForm) authForm.style.display = 'none';
@@ -266,10 +280,8 @@ export function renderLoginView(container) {
       if (nameGroup) nameGroup.style.display = 'none';
       if (emailGroup) emailGroup.style.display = 'block';
       if (passGroup) passGroup.style.display = 'block';
-      if (emailInput) emailInput.value = 'admin@savorybites.com';
-      if (passInput) passInput.value = 'admin123';
       if (btnText) btnText.textContent = 'Sign In to Admin Portal';
-      if (subtitle) subtitle.textContent = 'Restricted access for restaurant managers & item control';
+      if (subtitle) subtitle.textContent = 'Enter Administrator credentials for Bistro item & branch control';
     } else if (selectedTab === 'register') {
       if (tabRegister) tabRegister.classList.add('active');
       if (authForm) authForm.style.display = 'flex';
@@ -277,8 +289,6 @@ export function renderLoginView(container) {
       if (nameGroup) nameGroup.style.display = 'block';
       if (emailGroup) emailGroup.style.display = 'block';
       if (passGroup) passGroup.style.display = 'block';
-      if (emailInput) emailInput.value = '';
-      if (passInput) passInput.value = '';
       if (btnText) btnText.textContent = 'Create Customer Account';
       if (subtitle) subtitle.textContent = 'Join Savory Bites Bistro for rewards, express checkout & tracking';
     }
@@ -483,7 +493,7 @@ function openForgotPasswordModal() {
     <form id="forgot-pass-form">
       <div class="form-group">
         <label class="form-label"><i class="fa-solid fa-envelope"></i> Account Email Address *</label>
-        <input type="email" id="reset-email-input" class="form-input" required placeholder="name@example.com" value="syam@gmail.com">
+        <input type="email" id="reset-email-input" class="form-input" required placeholder="Enter your account email" value="">
       </div>
 
       <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
@@ -524,6 +534,200 @@ function openForgotPasswordModal() {
       } else {
         showToast(res.message || `Password reset link sent to ${email}`, 'success');
         closeModal();
+      }
+    };
+  }
+}
+
+/* ==========================================================================
+   SUPABASE CONNECTION & SQL SCHEMA SETUP MODAL
+   ========================================================================== */
+function openSupabaseSetupModal(viewContainer) {
+  const currentConfig = getSupabaseConfig();
+  const isConnected = isSupabaseConfigured();
+
+  const bodyHTML = `
+    <div style="margin-bottom: 1.25rem;">
+      <div class="config-status-banner ${isConnected ? 'status-connected' : 'status-disconnected'}" style="padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
+        <i class="fa-solid ${isConnected ? 'fa-circle-check' : 'fa-triangle-exclamation'}"></i>
+        <div>
+          <strong style="font-size: 0.95rem;">${isConnected ? 'Supabase Backend Connected' : 'Supabase Not Connected Yet'}</strong>
+          <p style="font-size: 0.82rem; margin-top: 0.2rem; color: var(--text-sub);">
+            ${isConnected ? 'Live authentication, dishes, orders, and reservations are syncing directly with your Supabase database.' : 'Enter your Supabase Project URL and Anon API Key below to connect live backend auth & database storage.'}
+          </p>
+        </div>
+      </div>
+
+      <form id="supabase-modal-form">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-link"></i> Supabase Project URL *</label>
+          <input type="url" id="sb-input-url" class="form-input" placeholder="https://xyzcompany.supabase.co" value="${currentConfig.url || ''}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-key"></i> Supabase Anon / Public API Key *</label>
+          <input type="text" id="sb-input-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." value="${currentConfig.key || ''}">
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fa-solid fa-floppy-disk"></i> Save & Connect Supabase
+          </button>
+          ${isConnected ? `
+            <button type="button" class="btn btn-outline" id="sb-disconnect-btn" style="border-color: var(--danger); color: var(--danger);">
+              Disconnect
+            </button>
+          ` : ''}
+        </div>
+      </form>
+
+      <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <span><i class="fa-solid fa-code" style="color: var(--primary);"></i> Supabase SQL Tables Schema</span>
+          <button type="button" class="btn btn-outline btn-sm" id="copy-sql-schema-btn">
+            <i class="fa-solid fa-copy"></i> Copy SQL Code
+          </button>
+        </h4>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Paste this SQL into your Supabase Dashboard SQL Editor to automatically create the required database tables.
+        </p>
+
+        <textarea id="sql-schema-textarea" readonly style="width: 100%; height: 160px; font-family: monospace; font-size: 0.75rem; padding: 0.75rem; background: var(--bg-dark); color: #3ecf8e; border: 1px solid var(--border-color); border-radius: var(--radius-sm); resize: vertical;">
+-- SAVORY BITES BISTRO - SUPABASE DATABASE TABLES SCHEMA
+CREATE TABLE IF NOT EXISTS public.profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  name TEXT,
+  email TEXT,
+  phone TEXT,
+  role TEXT DEFAULT 'customer',
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.dishes (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  category TEXT NOT NULL,
+  price NUMERIC NOT NULL,
+  description TEXT,
+  prep_time TEXT,
+  calories TEXT,
+  image TEXT,
+  rating NUMERIC DEFAULT 4.8,
+  reviews INTEGER DEFAULT 1,
+  tags TEXT[],
+  in_stock BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.locations (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  address TEXT NOT NULL,
+  phone TEXT,
+  hours TEXT,
+  delivery_radius TEXT,
+  avg_delivery_time TEXT,
+  rating NUMERIC DEFAULT 4.9,
+  features TEXT[],
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.orders (
+  id TEXT PRIMARY KEY,
+  customer_name TEXT,
+  phone TEXT,
+  delivery_address TEXT,
+  items JSONB,
+  subtotal NUMERIC,
+  tax NUMERIC,
+  grand_total NUMERIC,
+  status TEXT DEFAULT 'placed',
+  date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.reservations (
+  id TEXT PRIMARY KEY,
+  customer_name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT,
+  location_id TEXT,
+  location_name TEXT,
+  date TEXT NOT NULL,
+  time TEXT NOT NULL,
+  guests INTEGER NOT NULL,
+  special_requests TEXT,
+  status TEXT DEFAULT 'confirmed',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.dishes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.locations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public Read Access" ON public.dishes FOR SELECT USING (true);
+CREATE POLICY "Public Read Access" ON public.locations FOR SELECT USING (true);
+CREATE POLICY "Public All Access" ON public.profiles FOR ALL USING (true);
+CREATE POLICY "Public All Access" ON public.orders FOR ALL USING (true);
+CREATE POLICY "Public All Access" ON public.reservations FOR ALL USING (true);
+CREATE POLICY "Public Dish Control" ON public.dishes FOR ALL USING (true);
+CREATE POLICY "Public Location Control" ON public.locations FOR ALL USING (true);
+</textarea>
+      </div>
+    </div>
+  `;
+
+  openModal({
+    title: 'Supabase Database Connection',
+    bodyHTML
+  });
+
+  const form = document.getElementById('supabase-modal-form');
+  const disconnectBtn = document.getElementById('sb-disconnect-btn');
+  const copySqlBtn = document.getElementById('copy-sql-schema-btn');
+
+  if (copySqlBtn) {
+    copySqlBtn.onclick = () => {
+      const sqlText = document.getElementById('sql-schema-textarea');
+      if (sqlText) {
+        sqlText.select();
+        navigator.clipboard.writeText(sqlText.value);
+        showToast('SQL Schema code copied to clipboard!', 'success');
+      }
+    };
+  }
+
+  if (disconnectBtn) {
+    disconnectBtn.onclick = () => {
+      setSupabaseConfig('', '');
+      showToast('Supabase disconnected.', 'info');
+      closeModal();
+      renderLoginView(viewContainer);
+    };
+  }
+
+  if (form) {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const urlInput = document.getElementById('sb-input-url');
+      const keyInput = document.getElementById('sb-input-key');
+      const url = urlInput ? urlInput.value.trim() : '';
+      const key = keyInput ? keyInput.value.trim() : '';
+
+      if (!url || !key) {
+        showToast('Please enter both Supabase URL and Anon Key', 'info');
+        return;
+      }
+
+      const success = setSupabaseConfig(url, key);
+      if (success) {
+        showToast('Supabase Database Connected Live!', 'success');
+        closeModal();
+        state.syncWithSupabase();
+        renderLoginView(viewContainer);
+      } else {
+        showToast('Invalid Supabase URL or Key format', 'info');
       }
     };
   }

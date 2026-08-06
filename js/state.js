@@ -140,13 +140,18 @@ class AppState {
   // Auth & Roles Management
   async login(email, password, role = 'user') {
     const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
     const isAdminRole = (role === 'admin' || cleanEmail.includes('admin'));
     const userRole = isAdminRole ? 'admin' : 'user';
 
+    if (!cleanEmail || !cleanPassword) {
+      return { success: false, error: 'Please enter both email and password' };
+    }
+
     if (isSupabaseConfigured()) {
-      const res = await supabaseSignIn(cleanEmail, password, userRole);
+      const res = await supabaseSignIn(cleanEmail, cleanPassword, userRole);
       if (res.error) {
-        console.warn('Supabase auth error:', res.error);
+        console.warn('Supabase authentication failed:', res.error);
         return { success: false, error: res.error };
       } else if (res.user) {
         this.currentUser = res.user;
@@ -156,7 +161,11 @@ class AppState {
       }
     }
 
-    // Local / Demo Login Mode
+    // Local Authentication Check
+    if (cleanPassword.length < 4) {
+      return { success: false, error: 'Password must be at least 4 characters long' };
+    }
+
     this.currentUser = {
       id: `usr-${Date.now()}`,
       name: isAdminRole ? 'Admin Manager' : (cleanEmail.split('@')[0] || 'User'),
