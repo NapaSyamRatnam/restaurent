@@ -499,5 +499,60 @@ export async function supabaseSeedAllData(dishes = [], locations = [], orders = 
   };
 }
 
+export async function supabaseCreateOrSyncAdminManager(email = 'syamratnam123@gmail.com', password = 'Syam@1234') {
+  if (!supabase) return { error: 'Supabase client not configured' };
+
+  const cleanEmail = email.trim().toLowerCase();
+  const name = 'Syam Ratnam (Admin Manager)';
+  const role = 'admin';
+
+  // 1. Try to sign up user in Supabase Auth
+  const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    email: cleanEmail,
+    password,
+    options: {
+      data: { name, role }
+    }
+  });
+
+  // 2. Try to sign in user to verify credentials
+  const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+    email: cleanEmail,
+    password
+  });
+
+  const activeUser = signInData?.user || signUpData?.user;
+
+  if (activeUser) {
+    // 3. Upsert profile into public.profiles database table
+    const { error: profileError } = await supabase.from('profiles').upsert({
+      id: activeUser.id,
+      name,
+      email: cleanEmail,
+      role,
+      updated_at: new Date().toISOString()
+    });
+
+    if (profileError) {
+      console.warn('Profile upsert notice:', profileError.message);
+    }
+
+    return {
+      success: true,
+      message: `Admin Manager (${cleanEmail}) registered & synced in Supabase Auth & DB!`,
+      user: {
+        id: activeUser.id,
+        email: cleanEmail,
+        name,
+        role
+      }
+    };
+  }
+
+  return {
+    error: signInError?.message || signUpError?.message || 'Failed to sync Admin Manager in Supabase'
+  };
+}
+
 export { supabase };
 

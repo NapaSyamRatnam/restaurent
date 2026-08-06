@@ -599,12 +599,15 @@ function openSupabaseSetupModal(viewContainer) {
           <input type="text" id="sb-input-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." value="${currentConfig.key || ''}">
         </div>
 
-        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap;">
           <button type="submit" class="btn btn-primary btn-full">
             <i class="fa-solid fa-floppy-disk"></i> Save & Connect Supabase
           </button>
           ${isConnected ? `
-            <button type="button" class="btn btn-outline" id="sb-disconnect-btn" style="border-color: var(--danger); color: var(--danger);">
+            <button type="button" class="btn btn-accent btn-full" id="sb-sync-admin-btn">
+              <i class="fa-solid fa-user-shield"></i> Create / Sync Admin Manager (syamratnam123@gmail.com) in Supabase
+            </button>
+            <button type="button" class="btn btn-outline btn-full" id="sb-disconnect-btn" style="border-color: var(--danger); color: var(--danger);">
               Disconnect
             </button>
           ` : ''}
@@ -715,7 +718,25 @@ CREATE POLICY "Public Location Control" ON public.locations FOR ALL USING (true)
 
   const form = document.getElementById('supabase-modal-form');
   const disconnectBtn = document.getElementById('sb-disconnect-btn');
+  const syncAdminBtn = document.getElementById('sb-sync-admin-btn');
   const copySqlBtn = document.getElementById('copy-sql-schema-btn');
+
+  if (syncAdminBtn) {
+    syncAdminBtn.onclick = async () => {
+      syncAdminBtn.disabled = true;
+      syncAdminBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Syncing Admin Manager with Supabase...`;
+      const res = await state.createOrSyncAdminManagerInSupabase('syamratnam123@gmail.com', 'Syam@1234');
+      if (res.error) {
+        showToast(`Sync Notice: ${res.error}`, 'info');
+        syncAdminBtn.disabled = false;
+        syncAdminBtn.innerHTML = `<i class="fa-solid fa-user-shield"></i> Create / Sync Admin Manager (syamratnam123@gmail.com) in Supabase`;
+      } else {
+        showToast(res.message || 'Admin Manager created & synced in Supabase Auth & DB!', 'success');
+        closeModal();
+        renderLoginView(viewContainer);
+      }
+    };
+  }
 
   if (copySqlBtn) {
     copySqlBtn.onclick = () => {

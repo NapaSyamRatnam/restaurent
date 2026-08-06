@@ -25,7 +25,8 @@ import {
   supabaseCreateReservation,
   supabaseUpdateReservationStatus,
   supabaseDeleteReservation,
-  supabaseUpdateAdminManagerProfile
+  supabaseUpdateAdminManagerProfile,
+  supabaseCreateOrSyncAdminManager
 } from './supabase.js';
 
 class AppState {
@@ -201,6 +202,19 @@ class AppState {
 
     this.notify('AUTH_CHANGED', this.currentUser);
     return { success: true, user: this.currentUser, supabaseResult };
+  }
+
+  async createOrSyncAdminManagerInSupabase(email = 'syamratnam123@gmail.com', password = 'Syam@1234') {
+    if (!isSupabaseConfigured()) {
+      return { error: 'Supabase DB is not connected. Please connect Supabase URL and key first.' };
+    }
+    const res = await supabaseCreateOrSyncAdminManager(email, password);
+    if (res.success && res.user) {
+      this.currentUser = res.user;
+      localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+      this.notify('AUTH_CHANGED', this.currentUser);
+    }
+    return res;
   }
 
   async logout() {
