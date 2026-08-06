@@ -409,7 +409,7 @@ function renderAdminOrdersTab(container) {
   container.innerHTML = `
     <div class="admin-table-container">
       <div class="table-actions-header">
-        <h3><i class="fa-solid fa-clock-rotate-left"></i> Incoming Customer Orders</h3>
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Incoming Customer Orders (${orders.length})</h3>
       </div>
 
       ${orders.length === 0 ? `
@@ -423,36 +423,46 @@ function renderAdminOrdersTab(container) {
             <thead>
               <tr>
                 <th>Order ID</th>
-                <th>Date</th>
-                <th>Customer</th>
-                <th>Items</th>
+                <th>Date & Time</th>
+                <th>Customer Info</th>
+                <th>Items Summary</th>
+                <th>Fulfillment</th>
                 <th>Total</th>
-                <th>Status</th>
+                <th>Status Control</th>
               </tr>
             </thead>
             <tbody>
               ${orders.map(order => `
                 <tr>
-                  <td><strong>${order.id}</strong></td>
-                  <td>${new Date(order.date).toLocaleDateString()}</td>
+                  <td><span class="order-id-badge">${order.id}</span></td>
+                  <td>
+                    <div style="font-size: 0.85rem; font-weight: 600;">${new Date(order.date).toLocaleDateString()}</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">${new Date(order.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                  </td>
                   <td>
                     <div>
-                      <strong>${order.customerName || 'Syam'}</strong>
-                      <div style="font-size: 0.8rem; color: var(--text-muted);">${order.phone || '+91 9876543210'}</div>
+                      <strong>${order.customerName || order.userName || 'syam'}</strong>
+                      <div style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-phone"></i> ${order.phone || order.customerPhone || '+91 98480 12345'}</div>
+                      <div style="font-size: 0.78rem; color: var(--text-sub);">${order.customerEmail || order.userEmail || ''}</div>
                     </div>
                   </td>
                   <td>
-                    <div style="font-size: 0.85rem;">
-                      ${order.items.map(i => `${i.qty}x ${i.name}`).join(', ')}
+                    <div style="font-size: 0.85rem; max-width: 260px;">
+                      ${(order.items || []).map(i => `<span style="white-space: nowrap;"><strong>${i.qty}x</strong> ${i.name}</span>`).join(', ')}
                     </div>
                   </td>
-                  <td><strong style="color: var(--primary);">₹${(order.grandTotal || 250).toFixed(2)}</strong></td>
                   <td>
-                    <select class="admin-status-select" data-order-id="${order.id}">
-                      <option value="placed" ${order.status === 'placed' ? 'selected' : ''}>Placed</option>
-                      <option value="preparing" ${order.status === 'preparing' ? 'selected' : ''}>Preparing</option>
-                      <option value="delivering" ${order.status === 'delivering' ? 'selected' : ''}>Out for Delivery</option>
-                      <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Completed</option>
+                    <span class="badge badge-gold" style="font-size: 0.78rem;">
+                      ${order.fulfillmentType || 'Delivery'}
+                    </span>
+                  </td>
+                  <td><strong style="color: var(--primary); font-size: 1.05rem;">₹${(order.total || order.grandTotal || 0).toFixed(2)}</strong></td>
+                  <td>
+                    <select class="admin-status-select form-select" data-order-id="${order.id}" style="padding: 0.4rem 0.6rem; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm);">
+                      <option value="placed" ${order.status === 'placed' ? 'selected' : ''}>Placed (New)</option>
+                      <option value="preparing" ${order.status === 'preparing' ? 'selected' : ''}>Preparing 🔥</option>
+                      <option value="ready" ${(order.status === 'ready' || order.status === 'delivering') ? 'selected' : ''}>Out for Delivery driver 🛵</option>
+                      <option value="delivered" ${(order.status === 'delivered' || order.status === 'completed') ? 'selected' : ''}>Delivered / Completed ✅</option>
                     </select>
                   </td>
                 </tr>
@@ -470,7 +480,7 @@ function renderAdminOrdersTab(container) {
       const orderId = select.getAttribute('data-order-id');
       const newStatus = select.value;
       await state.updateOrderStatus(orderId, newStatus);
-      showToast(`Updated ${orderId} status to ${newStatus.toUpperCase()}`, 'success');
+      showToast(`Updated order #${orderId} status to ${newStatus.toUpperCase()}`, 'success');
     };
   });
 }

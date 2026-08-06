@@ -252,11 +252,11 @@ function openCheckoutModal() {
 
   const payBtn = document.getElementById('confirm-pay-btn');
   if (payBtn) {
-    payBtn.onclick = () => {
-      const addressSel = document.getElementById('checkout-address-select').value;
-      const fulfillment = document.querySelector('input[name="fulfillment"]:checked').value;
+    payBtn.onclick = async () => {
+      const addressSel = document.getElementById('checkout-address-select')?.value || 'Nellore, AP';
+      const fulfillment = document.querySelector('input[name="fulfillment"]:checked')?.value || 'Delivery';
 
-      const newOrder = state.placeOrder({
+      const newOrder = await state.placeOrder({
         deliveryAddress: addressSel,
         fulfillmentType: fulfillment,
         subtotal: totals.subtotal,
@@ -264,6 +264,7 @@ function openCheckoutModal() {
         tax: totals.tax,
         deliveryFee: totals.deliveryFee,
         total: totals.grandTotal,
+        grandTotal: totals.grandTotal,
         estimatedEta: '20-25 minutes',
         driverName: 'Srinivas Rao',
         driverPhone: '+91 98480 88990'

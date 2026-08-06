@@ -26,7 +26,8 @@ import {
   supabaseUpdateReservationStatus,
   supabaseDeleteReservation,
   supabaseUpdateAdminManagerProfile,
-  supabaseCreateOrSyncAdminManager
+  supabaseCreateOrSyncAdminManager,
+  subscribeToOrdersChanges
 } from './supabase.js';
 
 class AppState {
@@ -62,7 +63,8 @@ class AppState {
     }
 
     const savedOrders = localStorage.getItem('sb_orders');
-    this.orders = savedOrders ? JSON.parse(savedOrders) : [];
+    const parsedOrders = savedOrders ? JSON.parse(savedOrders) : [];
+    this.orders = (parsedOrders && parsedOrders.length > 0) ? parsedOrders : INITIAL_ORDERS;
 
     const savedReservations = localStorage.getItem('sb_reservations');
     this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
@@ -113,6 +115,16 @@ class AppState {
         localStorage.setItem('sb_orders', JSON.stringify(this.orders));
         this.notify('ORDER_STATUS_UPDATED', this.orders);
       }
+
+      // Subscribe to Supabase Postgres changes on orders table
+      subscribeToOrdersChanges(async () => {
+        const freshOrders = await supabaseGetOrders();
+        if (freshOrders && freshOrders.length > 0) {
+          this.orders = freshOrders;
+          localStorage.setItem('sb_orders', JSON.stringify(this.orders));
+          this.notify('ORDER_STATUS_UPDATED', this.orders);
+        }
+      });
 
       const dbReservations = await supabaseGetReservations();
       if (dbReservations && dbReservations.length > 0) {
@@ -450,7 +462,13 @@ class AppState {
   }
 
   // Order Placement & Live Status Updates
-  async placeOrder(orderData) {
+  async placeOrder(orderData = {}) {
+    const userEmail = this.currentUser ? this.currentUser.email : (this.profile ? this.profile.email : 'syam@gmail.com');
+    const userName = this.currentUser ? this.currentUser.name : (this.profile ? this.profile.name : 'syam');
+    const userId = this.currentUser ? this.currentUser.id : null;
+    const phone = (this.profile && this.profile.phone) || orderData.phone || '+91 98480 12345';
+    const totalAmount = orderData.total || orderData.grandTotal || 0;
+
     const newOrder = {
       id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
       date: new Date().toISOString(),
@@ -462,9 +480,18 @@ class AppState {
           name: dish ? dish.name : 'Gourmet Dish',
           qty: item.qty,
           price: item.price,
-          opts: item.options
+          opts: item.options || ''
         };
       }),
+      userId,
+      userEmail,
+      userName,
+      customerName: userName,
+      customerEmail: userEmail,
+      phone,
+      customerPhone: phone,
+      total: totalAmount,
+      grandTotal: totalAmount,
       ...orderData
     };
 
@@ -472,7 +499,11 @@ class AppState {
     localStorage.setItem('sb_orders', JSON.stringify(this.orders));
 
     if (isSupabaseConfigured()) {
-      await supabaseCreateOrder(newOrder);
+      try {
+        await supabaseCreateOrder(newOrder);
+      } catch (err) {
+        console.warn('Supabase create order error:', err);
+      }
     }
 
     // Clear cart after order

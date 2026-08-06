@@ -7,10 +7,10 @@ import { showToast } from '../components/toast.js';
 import { openDishModal, openLocationModal } from '../components/adminModal.js';
 
 export function renderStaffView(container) {
-  const activeOrders = state.orders.filter(o => o.status !== 'delivered');
+  const activeOrders = state.orders.filter(o => o.status !== 'delivered' && o.status !== 'completed');
   const allOrders = state.orders;
 
-  const totalRevenue = allOrders.reduce((sum, o) => sum + o.total, 0);
+  const totalRevenue = allOrders.reduce((sum, o) => sum + (o.total || o.grandTotal || 0), 0);
   const pendingCount = activeOrders.length;
 
   container.innerHTML = `

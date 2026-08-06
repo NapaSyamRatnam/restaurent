@@ -76,6 +76,9 @@ export function renderAccountView(container) {
               <button class="account-nav-btn" data-tab="reservations">
                 <i class="fa-solid fa-calendar-check"></i> My Table Bookings (${displayReservations.length})
               </button>
+              <button class="account-nav-btn" id="account-goto-orders-btn" style="border-left: 3px solid var(--primary);">
+                <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Track Orders & Receipts
+              </button>
             </div>
           </div>
         </aside>
@@ -238,6 +241,9 @@ export function renderAccountView(container) {
 
   const redeemBtn = document.getElementById('redeem-points-btn');
   if (redeemBtn) redeemBtn.onclick = () => openRedeemPointsModal(container);
+
+  const accountGotoOrdersBtn = document.getElementById('account-goto-orders-btn');
+  if (accountGotoOrdersBtn) accountGotoOrdersBtn.onclick = () => state.setView('orders');
 
   // Tab switching
   document.querySelectorAll('[data-tab]').forEach(btn => {

@@ -50,6 +50,9 @@ export function renderLoginView(container) {
                 <button class="btn btn-primary btn-full" id="auth-goto-admin-btn">
                   <i class="fa-solid fa-gauge-high"></i> Go to Admin Dashboard
                 </button>
+                <button class="btn btn-secondary btn-full" id="auth-goto-orders-btn">
+                  <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Track & Manage Customer Orders
+                </button>
               ` : `
                 <button class="btn btn-primary btn-full" id="auth-goto-menu-btn">
                   <i class="fa-solid fa-utensils"></i> Browse Gourmet Menu

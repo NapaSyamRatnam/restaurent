@@ -397,37 +397,75 @@ export async function supabaseGetOrders() {
   if (error) return null;
   return data.map(o => ({
     ...o,
-    customerName: o.customer_name,
-    deliveryAddress: o.delivery_address,
-    grandTotal: o.grand_total
+    userId: o.user_id || o.userId || null,
+    customerName: o.customer_name || o.customerName || 'Customer',
+    userName: o.customer_name || o.userName || 'Customer',
+    phone: o.phone || '+91 98480 12345',
+    customerPhone: o.phone || '+91 98480 12345',
+    deliveryAddress: o.delivery_address || o.deliveryAddress || 'GT Road, Nellore',
+    grandTotal: o.grand_total || o.grandTotal || o.total || 0,
+    total: o.grand_total || o.total || o.grandTotal || 0,
+    status: o.status || 'placed'
   }));
 }
 
 export async function supabaseCreateOrder(orderObj) {
   if (!supabase) return null;
+
+  // Validate if userId is a valid UUID for Supabase FK constraint
+  const isValidUUID = typeof orderObj.userId === 'string' && 
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderObj.userId);
+
   const dbPayload = {
     id: orderObj.id,
-    customer_name: orderObj.customerName || 'Syam',
-    phone: orderObj.phone || '+91 9876543210',
-    delivery_address: orderObj.deliveryAddress || 'GT Road, Nellore',
-    items: orderObj.items,
-    subtotal: orderObj.subtotal || 200,
-    tax: orderObj.tax || 16,
-    grand_total: orderObj.grandTotal || 250,
+    user_id: isValidUUID ? orderObj.userId : null,
+    customer_name: orderObj.customerName || orderObj.userName || 'syam',
+    phone: orderObj.phone || orderObj.customerPhone || '+91 98480 12345',
+    delivery_address: orderObj.deliveryAddress || 'Nellore, AP',
+    items: orderObj.items || [],
+    subtotal: orderObj.subtotal || 0,
+    tax: orderObj.tax || 0,
+    grand_total: orderObj.grandTotal || orderObj.total || 0,
     status: orderObj.status || 'placed',
     date: orderObj.date || new Date().toISOString()
   };
 
   const { data, error } = await supabase.from('orders').insert(dbPayload).select();
-  if (error) return { error: error.message };
+  if (error) {
+    console.warn('Supabase insert order warning:', error.message);
+    return { error: error.message };
+  }
   return { data: data[0] };
 }
 
 export async function supabaseUpdateOrderStatus(orderId, status) {
   if (!supabase) return null;
   const { error } = await supabase.from('orders').update({ status }).eq('id', orderId);
-  if (error) return { error: error.message };
+  if (error) {
+    console.warn('Supabase update order status warning:', error.message);
+    return { error: error.message };
+  }
   return { success: true };
+}
+
+export function subscribeToOrdersChanges(callback) {
+  if (!supabase) return null;
+  try {
+    const channel = supabase
+      .channel('public:orders')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'orders' },
+        (payload) => {
+          if (callback) callback(payload);
+        }
+      )
+      .subscribe();
+    return channel;
+  } catch (err) {
+    console.warn('Realtime orders subscription error:', err);
+    return null;
+  }
 }
 
 /* --------------------------------------------------------------------------

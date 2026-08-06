@@ -34,8 +34,22 @@ export function renderOrdersView(container) {
     return;
   }
 
-  const activeOrders = state.orders.filter(o => o.status !== 'delivered');
-  const pastOrders = state.orders.filter(o => o.status === 'delivered');
+  const currentUser = state.currentUser;
+  let userOrders = state.orders;
+
+  if (currentUser && currentUser.role !== 'admin') {
+    userOrders = state.orders.filter(o => {
+      if (o.userId && currentUser.id && o.userId === currentUser.id) return true;
+      const orderEmail = (o.customerEmail || o.userEmail || '').toLowerCase();
+      const currEmail = (currentUser.email || '').toLowerCase();
+      if (orderEmail && currEmail && orderEmail === currEmail) return true;
+      if (!o.userId && !orderEmail) return true; // session guest order fallback
+      return false;
+    });
+  }
+
+  const activeOrders = userOrders.filter(o => o.status !== 'delivered' && o.status !== 'completed');
+  const pastOrders = userOrders.filter(o => o.status === 'delivered' || o.status === 'completed');
 
   container.innerHTML = `
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
@@ -63,7 +77,7 @@ export function renderOrdersView(container) {
       <!-- Order History Section -->
       <div style="margin-top: 3rem;">
         <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.25rem;">
-          <i class="fa-solid fa-receipt" style="color: var(--accent-gold);"></i> Completed Past Orders
+          <i class="fa-solid fa-receipt" style="color: var(--accent-gold);"></i> Completed Past Orders (${pastOrders.length})
         </h2>
 
         ${pastOrders.length === 0 ? `
@@ -75,19 +89,19 @@ export function renderOrdersView(container) {
                 <div>
                   <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
                     <span class="order-id-badge">${order.id}</span>
-                    <span class="badge badge-green"><i class="fa-solid fa-check-double"></i> Delivered</span>
+                    <span class="badge badge-green"><i class="fa-solid fa-check-double"></i> Delivered / Completed</span>
                     <span style="font-size: 0.82rem; color: var(--text-muted);">${new Date(order.date).toLocaleDateString()}</span>
                   </div>
                   <div style="font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.3rem;">
-                    ${order.items.map(i => `${i.qty}x ${i.name}`).join(', ')}
+                    ${(order.items || []).map(i => `${i.qty}x ${i.name}`).join(', ')}
                   </div>
                   <div style="font-size: 0.85rem; color: var(--text-muted);">
-                    Address: ${order.deliveryAddress}
+                    Address: ${order.deliveryAddress || 'Nellore, AP'}
                   </div>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 1.5rem;">
-                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${order.total.toFixed(2)}</span>
+                  <span style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">₹${(order.total || order.grandTotal || 0).toFixed(2)}</span>
                   <button class="btn btn-outline btn-sm reorder-btn" data-reorder-id="${order.id}">
                     <i class="fa-solid fa-rotate-right"></i> Reorder Items
                   </button>
@@ -109,7 +123,7 @@ export function renderOrdersView(container) {
     btn.onclick = () => {
       const orderId = btn.getAttribute('data-reorder-id');
       const order = state.orders.find(o => o.id === orderId);
-      if (order) {
+      if (order && order.items) {
         order.items.forEach(item => {
           state.addToCart(item.dishId, item.qty, item.opts || '');
         });
@@ -121,13 +135,29 @@ export function renderOrdersView(container) {
 }
 
 function renderActiveOrderCard(order) {
+  const status = order.status || 'placed';
   const isPlaced = true;
-  const isPrep = order.status === 'preparing' || order.status === 'ready' || order.status === 'delivered';
-  const isReady = order.status === 'ready' || order.status === 'delivered';
-  const isDelivered = order.status === 'delivered';
+  const isPrep = status === 'preparing' || status === 'ready' || status === 'delivering' || status === 'delivered' || status === 'completed';
+  const isReady = status === 'ready' || status === 'delivering' || status === 'delivered' || status === 'completed';
+  const isDelivered = status === 'delivered' || status === 'completed';
+
+  let etaText = '25 Mins';
+  let etaDesc = 'Kitchen is reviewing your order details';
+  if (status === 'preparing') {
+    etaText = '18 Mins';
+    etaDesc = 'Chef is preparing your fresh gourmet meal 🔥';
+  } else if (status === 'ready' || status === 'delivering') {
+    etaText = '10 Mins';
+    etaDesc = 'Delivery partner is on the way! streamlining delivery 🛵';
+  } else if (status === 'delivered' || status === 'completed') {
+    etaText = 'Delivered!';
+    etaDesc = 'Order delivered successfully! Enjoy your meal! ✅';
+  }
+
+  const orderTotal = (order.total || order.grandTotal || 0).toFixed(2);
 
   return `
-    <div class="order-tracker-card">
+    <div class="order-tracker-card" style="margin-bottom: 1.5rem;">
       <div class="tracker-header">
         <div>
           <span class="order-id-badge">${order.id}</span>
@@ -136,16 +166,16 @@ function renderActiveOrderCard(order) {
           </span>
         </div>
         <span class="badge badge-gold" style="font-size: 0.85rem;">
-          <i class="fa-solid fa-truck-ramp-box"></i> ${order.fulfillmentType}
+          <i class="fa-solid fa-truck-ramp-box"></i> ${order.fulfillmentType || 'Delivery'}
         </span>
       </div>
 
       <div class="eta-timer-box">
         <i class="fa-solid fa-fire-burner"></i>
         <div>
-          <div class="eta-time">${order.status === 'placed' ? '25 Mins' : order.status === 'preparing' ? '18 Mins' : order.status === 'ready' ? 'Out for Delivery' : 'Delivered!'}</div>
+          <div class="eta-time">${etaText}</div>
           <div style="font-size: 0.85rem; color: var(--text-sub);">
-            ${order.status === 'placed' ? 'Kitchen is reviewing your order details' : order.status === 'preparing' ? 'Chef is preparing your fresh meal' : order.status === 'ready' ? 'Delivery partner is on the way!' : 'Enjoy your meal!'}
+            ${etaDesc}
           </div>
         </div>
       </div>
@@ -161,19 +191,19 @@ function renderActiveOrderCard(order) {
         <div class="step-item ${isPrep ? (isReady ? 'completed' : 'active') : ''}">
           <div class="step-icon"><i class="fa-solid fa-utensils"></i></div>
           <div class="step-label">Kitchen Prep</div>
-          <div class="step-time">In Progress</div>
+          <div class="step-time">${status === 'preparing' ? 'Preparing 🔥' : isPrep ? 'Done' : 'Pending'}</div>
         </div>
 
         <div class="step-item ${isReady ? (isDelivered ? 'completed' : 'active') : ''}">
           <div class="step-icon"><i class="fa-solid fa-motorcycle"></i></div>
           <div class="step-label">Out for Delivery</div>
-          <div class="step-time">En Route</div>
+          <div class="step-time">${(status === 'ready' || status === 'delivering') ? 'En Route 🛵' : isReady ? 'Delivered' : 'Step 3'}</div>
         </div>
 
         <div class="step-item ${isDelivered ? 'completed' : ''}">
           <div class="step-icon"><i class="fa-solid fa-house-chimney"></i></div>
           <div class="step-label">Delivered</div>
-          <div class="step-time">Step 4</div>
+          <div class="step-time">${isDelivered ? 'Completed ✅' : 'Step 4'}</div>
         </div>
       </div>
 
@@ -182,8 +212,8 @@ function renderActiveOrderCard(order) {
         <div>
           <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-sub);">Ordered Items Summary</h4>
           <ul style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.3rem;">
-            ${order.items.map(item => `
-              <li><strong style="color: var(--text-main);">${item.qty}x</strong> ${item.name} ${item.opts ? `(${item.opts})` : ''} - <strong>₹${(item.price * item.qty).toFixed(2)}</strong></li>
+            ${(order.items || []).map(item => `
+              <li><strong style="color: var(--text-main);">${item.qty}x</strong> ${item.name} ${item.opts ? `(${item.opts})` : ''} - <strong>₹${((item.price || 0) * item.qty).toFixed(2)}</strong></li>
             `).join('')}
           </ul>
         </div>
@@ -191,9 +221,9 @@ function renderActiveOrderCard(order) {
         <div>
           <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-sub);">Delivery Information</h4>
           <div style="font-size: 0.88rem; color: var(--text-muted);">
-            <div><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> ${order.deliveryAddress}</div>
-            <div style="margin-top: 0.4rem;"><i class="fa-solid fa-user-ninja"></i> Driver: <strong>${order.driverName}</strong> (${order.driverPhone})</div>
-            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: ₹${order.total.toFixed(2)}</div>
+            <div><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> ${order.deliveryAddress || 'Nellore, AP'}</div>
+            <div style="margin-top: 0.4rem;"><i class="fa-solid fa-user-ninja"></i> Driver: <strong>${order.driverName || 'Srinivas Rao'}</strong> (${order.driverPhone || '+91 98480 88990'})</div>
+            <div style="margin-top: 0.4rem; font-size: 1.1rem; font-weight: 800; color: var(--primary);">Paid Total: ₹${orderTotal}</div>
           </div>
         </div>
       </div>

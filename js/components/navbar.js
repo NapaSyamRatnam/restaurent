@@ -35,13 +35,13 @@ export function renderNavbar() {
         <button class="nav-link ${activeView === 'location' ? 'active' : ''}" data-nav="location">
           <i class="fa-solid fa-location-dot"></i> Locations
         </button>
+        <button class="nav-link ${activeView === 'orders' ? 'active' : ''}" data-nav="orders">
+          <i class="fa-solid fa-clock-rotate-left"></i> Track Orders
+        </button>
         ${state.isLoggedIn() ? `
           <button class="nav-link ${activeView === 'wishlist' ? 'active' : ''}" data-nav="wishlist">
             <i class="fa-solid fa-heart"></i> Wishlist
             ${wishlistCount > 0 ? `<span class="badge-counter">${wishlistCount}</span>` : ''}
-          </button>
-          <button class="nav-link ${activeView === 'orders' ? 'active' : ''}" data-nav="orders">
-            <i class="fa-solid fa-clock-rotate-left"></i> Track Orders
           </button>
         ` : ''}
         <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
