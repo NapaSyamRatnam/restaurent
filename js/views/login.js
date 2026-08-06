@@ -63,23 +63,6 @@ export function renderLoginView(container) {
             </button>
           </div>
 
-          <!-- Credentials Guidance Banner for Admin -->
-          <div class="auth-credentials-banner" style="background: rgba(255, 107, 53, 0.08); border: 1px solid var(--border-active); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-              <div>
-                <strong style="font-size: 0.88rem; color: var(--primary); display: flex; align-items: center; gap: 0.4rem;">
-                  <i class="fa-solid fa-key"></i> Administrator Login Credentials
-                </strong>
-                <div style="font-size: 0.82rem; color: var(--text-sub); margin-top: 0.2rem;">
-                  Email: <code style="color: var(--accent-gold); font-weight: 700;">admin@savorybites.com</code> | Password: <code style="color: var(--accent-gold); font-weight: 700;">admin123</code>
-                </div>
-              </div>
-              <button type="button" class="btn btn-primary btn-xs" id="quick-fill-admin-btn">
-                <i class="fa-solid fa-bolt"></i> One-Click Admin Login
-              </button>
-            </div>
-          </div>
-
           <!-- Auth Form Body -->
           <form id="auth-form" class="auth-form-body">
             <div class="form-group" id="group-name" style="display: none;">
@@ -89,13 +72,13 @@ export function renderLoginView(container) {
 
             <div class="form-group">
               <label class="form-label"><i class="fa-solid fa-envelope"></i> Email Address *</label>
-              <input type="email" id="auth-email" class="form-input" required placeholder="name@example.com" value="admin@savorybites.com">
+              <input type="email" id="auth-email" class="form-input" required placeholder="name@example.com" value="">
             </div>
 
             <div class="form-group" style="position: relative;">
               <label class="form-label"><i class="fa-solid fa-lock"></i> Password *</label>
               <div style="position: relative;">
-                <input type="password" id="auth-password" class="form-input" required placeholder="••••••••" value="admin123" style="padding-right: 2.5rem;">
+                <input type="password" id="auth-password" class="form-input" required placeholder="••••••••" value="" style="padding-right: 2.5rem;">
                 <button type="button" id="toggle-password-visibility" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer;" title="Toggle Password Visibility">
                   <i class="fa-solid fa-eye" id="password-eye-icon"></i>
                 </button>
@@ -104,7 +87,7 @@ export function renderLoginView(container) {
 
             <div class="auth-submit-area">
               <button type="submit" class="btn btn-primary btn-full btn-lg" id="auth-submit-btn">
-                <i class="fa-solid fa-shield-halved"></i> <span id="auth-btn-text">Sign In to Admin Portal</span>
+                <i class="fa-solid fa-right-to-bracket"></i> <span id="auth-btn-text">Sign In</span>
               </button>
             </div>
           </form>

@@ -12,12 +12,22 @@ export function renderAccountView(container) {
   const addresses = profile.addresses || [];
   const paymentMethods = profile.paymentMethods || [];
 
+  // Filter reservations for current logged-in user or profile
+  const userReservations = state.reservations.filter(r => {
+    const isNameMatch = r.customerName && (r.customerName.toLowerCase() === profile.name.toLowerCase() || (state.currentUser && r.customerName.toLowerCase() === state.currentUser.name.toLowerCase()));
+    const isPhoneMatch = r.phone && profile.phone && r.phone.includes(profile.phone.replace(/[^0-9]/g, '').slice(-8));
+    const isEmailMatch = r.email && (r.email.toLowerCase() === profile.email.toLowerCase() || (state.currentUser && r.email.toLowerCase() === state.currentUser.email.toLowerCase()));
+    return isNameMatch || isPhoneMatch || isEmailMatch;
+  });
+
+  const displayReservations = userReservations.length > 0 ? userReservations : state.reservations;
+
   container.innerHTML = `
     <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <div>
-          <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Account Settings & Address Book</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">Manage your profile details, delivery addresses, payment methods, and loyalty reward cash.</p>
+          <h1 style="font-size: 2.2rem; font-weight: 800;"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Account Settings & Bookings</h1>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">Manage your profile details, delivery addresses, payment methods, and online table bookings.</p>
         </div>
 
         <button class="btn btn-outline btn-sm" id="edit-profile-details-btn" style="border-color: var(--primary); color: var(--primary);">
@@ -61,7 +71,10 @@ export function renderAccountView(container) {
                 <i class="fa-solid fa-map-location-dot"></i> Saved Addresses (${addresses.length})
               </button>
               <button class="account-nav-btn" data-tab="payments">
-                <i class="fa-solid fa-credit-card"></i> Saved Payment Methods (${paymentMethods.length})
+                <i class="fa-solid fa-credit-card"></i> Payment Methods (${paymentMethods.length})
+              </button>
+              <button class="account-nav-btn" data-tab="reservations">
+                <i class="fa-solid fa-calendar-check"></i> My Table Bookings (${displayReservations.length})
               </button>
             </div>
           </div>
@@ -132,36 +145,87 @@ export function renderAccountView(container) {
               </button>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;">
-              ${paymentMethods.map(pm => `
-                <div class="address-card ${pm.isPrimary ? 'default' : ''}">
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                    <i class="fa-solid ${pm.type === 'card' ? 'fa-credit-card' : 'fa-mobile-screen-button'}" style="font-size: 1.8rem; color: var(--primary);"></i>
-                    ${pm.isPrimary ? `<span class="badge badge-primary">Primary</span>` : `
-                      <button class="btn btn-outline btn-sm set-primary-pay-btn" data-primary-pay-id="${pm.id}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+            <div class="address-grid">
+              ${paymentMethods.map(pay => `
+                <div class="address-card ${pay.isPrimary ? 'default' : ''}">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                    <span style="font-weight: 700; font-size: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 0.4rem;">
+                      <i class="fa-solid ${pay.type === 'card' ? 'fa-credit-card' : 'fa-mobile-screen-button'}" style="color: var(--primary);"></i>
+                      ${pay.title}
+                    </span>
+                    ${pay.isPrimary ? `<span class="badge badge-primary">Primary</span>` : `
+                      <button class="btn btn-outline btn-sm set-primary-pay-btn" data-primary-pay-id="${pay.id}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
                         Make Primary
                       </button>
                     `}
                   </div>
 
-                  <div style="font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text-main);">
-                    ${pm.title}
-                  </div>
-
-                  <div style="font-family: monospace; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px; color: var(--text-sub);">
-                    ${pm.cardNumber || pm.upiId}
-                  </div>
+                  <p style="font-size: 0.95rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.5rem;">
+                    ${pay.cardNumber || pay.upiId}
+                  </p>
 
                   <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
-                    <span>${pm.expiry ? `Expires ${pm.expiry}` : 'Verified Instant UPI'}</span>
-
-                    <button class="btn btn-outline btn-sm delete-pay-btn" data-delete-pay-id="${pm.id}" style="color: #ef4444; border-color: #ef4444;" title="Delete Payment Method">
+                    <span>${pay.expiry ? `Expires: ${pay.expiry}` : 'Verified UPI'}</span>
+                    <button class="btn btn-outline btn-sm delete-pay-btn" data-delete-pay-id="${pay.id}" style="color: #ef4444; border-color: #ef4444;" title="Delete Payment Method">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
                 </div>
               `).join('')}
             </div>
+          </div>
+
+          <!-- My Table Reservations Panel -->
+          <div id="account-tab-reservations" style="display: none;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700;"><i class="fa-solid fa-calendar-check" style="color: var(--primary);"></i> My Table Reservations</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">View status of online dining tables reserved at Savory Bites Bistro.</p>
+              </div>
+
+              <button class="btn btn-primary btn-sm" id="book-new-table-user-btn">
+                <i class="fa-solid fa-chair"></i> Book Another Table
+              </button>
+            </div>
+
+            ${displayReservations.length === 0 ? `
+              <div class="empty-state" style="padding: 3rem; text-align: center; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <i class="fa-solid fa-chair" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                <h4 style="font-size: 1.1rem;">No Table Reservations Found</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.4rem;">You haven't reserved a table yet. Book a dining table online at your nearest branch!</p>
+              </div>
+            ` : `
+              <div class="address-grid">
+                ${displayReservations.map(resItem => `
+                  <div class="address-card" style="border-left: 4px solid ${resItem.status === 'confirmed' ? 'var(--accent-green)' : resItem.status === 'pending' ? 'var(--accent-gold)' : 'var(--border-color)'};">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                      <span style="font-weight: 700; font-size: 1rem; color: var(--text-main);">
+                        Booking ID: ${resItem.id}
+                      </span>
+                      <span class="badge ${resItem.status === 'confirmed' ? 'badge-green' : resItem.status === 'completed' ? 'badge-primary' : 'badge-gold'}">
+                        ${resItem.status ? resItem.status.toUpperCase() : 'CONFIRMED'}
+                      </span>
+                    </div>
+
+                    <div style="font-size: 0.9rem; color: var(--text-sub); display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.75rem;">
+                      <div><i class="fa-solid fa-building" style="color: var(--primary);"></i> <strong>${resItem.locationName}</strong></div>
+                      <div><i class="fa-solid fa-calendar-day"></i> Date: <strong>${resItem.date}</strong> at <strong>${resItem.time}</strong></div>
+                      <div><i class="fa-solid fa-users"></i> Guests: <strong>${resItem.guests}</strong></div>
+                      ${resItem.specialRequests ? `<div><i class="fa-solid fa-comment-dots"></i> Request: <em>"${resItem.specialRequests}"</em></div>` : ''}
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
+                      <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-user"></i> ${resItem.customerName} (${resItem.phone})</span>
+                      ${resItem.status !== 'cancelled' ? `
+                        <button class="btn btn-outline btn-xs user-cancel-res-btn" data-user-res-id="${resItem.id}" style="color: #ef4444; border-color: #ef4444;">
+                          Cancel Booking
+                        </button>
+                      ` : '<span style="font-size: 0.8rem; color: #ef4444;">Cancelled</span>'}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
           </div>
         </main>
       </div>
@@ -182,12 +246,29 @@ export function renderAccountView(container) {
       btn.classList.add('active');
 
       const target = btn.getAttribute('data-tab');
-      if (target === 'addresses') {
-        document.getElementById('account-tab-addresses').style.display = 'block';
-        document.getElementById('account-tab-payments').style.display = 'none';
-      } else {
-        document.getElementById('account-tab-addresses').style.display = 'none';
-        document.getElementById('account-tab-payments').style.display = 'block';
+      const addrTab = document.getElementById('account-tab-addresses');
+      const payTab = document.getElementById('account-tab-payments');
+      const resTab = document.getElementById('account-tab-reservations');
+
+      if (addrTab) addrTab.style.display = target === 'addresses' ? 'block' : 'none';
+      if (payTab) payTab.style.display = target === 'payments' ? 'block' : 'none';
+      if (resTab) resTab.style.display = target === 'reservations' ? 'block' : 'none';
+    };
+  });
+
+  // Book Table Redirect
+  const bookTableBtn = document.getElementById('book-new-table-user-btn');
+  if (bookTableBtn) {
+    bookTableBtn.onclick = () => state.setView('location');
+  }
+
+  // Cancel Reservation User Handler
+  container.querySelectorAll('.user-cancel-res-btn').forEach(btn => {
+    btn.onclick = async () => {
+      const resId = btn.getAttribute('data-user-res-id');
+      if (confirm('Are you sure you want to cancel this table booking?')) {
+        await state.updateReservationStatus(resId, 'cancelled');
+        showToast(`Table reservation ${resId} cancelled`, 'info');
       }
     };
   });
