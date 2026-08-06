@@ -17,12 +17,14 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 -- Enable RLS for Profiles
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow users to read their own profile" ON public.profiles;
 CREATE POLICY "Allow users to read their own profile"
     ON public.profiles FOR SELECT
     USING (auth.uid() = id OR EXISTS (
         SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
     ));
 
+DROP POLICY IF EXISTS "Allow users to update their own profile" ON public.profiles;
 CREATE POLICY "Allow users to update their own profile"
     ON public.profiles FOR UPDATE
     USING (auth.uid() = id);
@@ -77,11 +79,11 @@ CREATE TABLE IF NOT EXISTS public.dishes (
 -- Enable RLS for Dishes
 ALTER TABLE public.dishes ENABLE ROW LEVEL SECURITY;
 
--- Everyone can read menu dishes
+DROP POLICY IF EXISTS "Allow public read access to dishes" ON public.dishes;
 CREATE POLICY "Allow public read access to dishes"
     ON public.dishes FOR SELECT USING (true);
 
--- Only Admins can INSERT, UPDATE, DELETE dishes
+DROP POLICY IF EXISTS "Allow admin write access to dishes" ON public.dishes;
 CREATE POLICY "Allow admin write access to dishes"
     ON public.dishes FOR ALL
     USING (
@@ -109,11 +111,11 @@ CREATE TABLE IF NOT EXISTS public.locations (
 -- Enable RLS for Locations
 ALTER TABLE public.locations ENABLE ROW LEVEL SECURITY;
 
--- Everyone can read locations
+DROP POLICY IF EXISTS "Allow public read access to locations" ON public.locations;
 CREATE POLICY "Allow public read access to locations"
     ON public.locations FOR SELECT USING (true);
 
--- Only Admins can modify locations
+DROP POLICY IF EXISTS "Allow admin write access to locations" ON public.locations;
 CREATE POLICY "Allow admin write access to locations"
     ON public.locations FOR ALL
     USING (
@@ -142,7 +144,7 @@ CREATE TABLE IF NOT EXISTS public.orders (
 -- Enable RLS for Orders
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 
--- Users can read their own orders; Admins can read all orders
+DROP POLICY IF EXISTS "Allow users and admins to view orders" ON public.orders;
 CREATE POLICY "Allow users and admins to view orders"
     ON public.orders FOR SELECT
     USING (
@@ -151,12 +153,12 @@ CREATE POLICY "Allow users and admins to view orders"
         ) OR user_id IS NULL
     );
 
--- Anyone can place an order
+DROP POLICY IF EXISTS "Allow order creation" ON public.orders;
 CREATE POLICY "Allow order creation"
     ON public.orders FOR INSERT
     WITH CHECK (true);
 
--- Admins can update order statuses
+DROP POLICY IF EXISTS "Allow admin to update orders" ON public.orders;
 CREATE POLICY "Allow admin to update orders"
     ON public.orders FOR UPDATE
     USING (
@@ -186,12 +188,12 @@ CREATE TABLE IF NOT EXISTS public.reservations (
 -- Enable RLS for Reservations
 ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
 
--- Anyone can insert a reservation
+DROP POLICY IF EXISTS "Allow public reservation creation" ON public.reservations;
 CREATE POLICY "Allow public reservation creation"
     ON public.reservations FOR INSERT
     WITH CHECK (true);
 
--- Users can view their own reservations, admins can view all
+DROP POLICY IF EXISTS "Allow users and admins to view reservations" ON public.reservations;
 CREATE POLICY "Allow users and admins to view reservations"
     ON public.reservations FOR SELECT
     USING (
@@ -200,7 +202,7 @@ CREATE POLICY "Allow users and admins to view reservations"
         ) OR user_id IS NULL
     );
 
--- Admins can update reservations
+DROP POLICY IF EXISTS "Allow admin to update reservations" ON public.reservations;
 CREATE POLICY "Allow admin to update reservations"
     ON public.reservations FOR UPDATE
     USING (
@@ -209,7 +211,7 @@ CREATE POLICY "Allow admin to update reservations"
         )
     );
 
--- Admins can delete reservations
+DROP POLICY IF EXISTS "Allow admin to delete reservations" ON public.reservations;
 CREATE POLICY "Allow admin to delete reservations"
     ON public.reservations FOR DELETE
     USING (
@@ -235,4 +237,3 @@ INSERT INTO public.reservations (id, customer_name, phone, email, location_id, l
 ('RES-101', 'Syam', '+91 98480 12345', 'syam@gmail.com', 'loc-1', 'GT Road Central Branch', '2026-08-07', '19:00', '4 Guests', 'Window table & birthday candle for dessert', 'confirmed'),
 ('RES-102', 'Anitha Reddy', '+91 98765 43210', 'anitha@example.com', 'loc-2', 'Trunk Road Express', '2026-08-08', '20:00', '2 Guests', 'Rooftop seating preferred', 'confirmed')
 ON CONFLICT (id) DO NOTHING;
-

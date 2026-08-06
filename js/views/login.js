@@ -699,6 +699,14 @@ ALTER TABLE public.locations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Public Read Access" ON public.dishes;
+DROP POLICY IF EXISTS "Public Read Access" ON public.locations;
+DROP POLICY IF EXISTS "Public All Access" ON public.profiles;
+DROP POLICY IF EXISTS "Public All Access" ON public.orders;
+DROP POLICY IF EXISTS "Public All Access" ON public.reservations;
+DROP POLICY IF EXISTS "Public Dish Control" ON public.dishes;
+DROP POLICY IF EXISTS "Public Location Control" ON public.locations;
+
 CREATE POLICY "Public Read Access" ON public.dishes FOR SELECT USING (true);
 CREATE POLICY "Public Read Access" ON public.locations FOR SELECT USING (true);
 CREATE POLICY "Public All Access" ON public.profiles FOR ALL USING (true);
