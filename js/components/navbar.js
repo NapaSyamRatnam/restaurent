@@ -44,9 +44,15 @@ export function renderNavbar() {
             ${wishlistCount > 0 ? `<span class="badge-counter">${wishlistCount}</span>` : ''}
           </button>
         ` : ''}
-        <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
-          <i class="fa-solid fa-user-shield"></i> ${isAdmin ? 'Admin Page' : 'Admin Portal'}
-        </button>
+        ${isAdmin ? `
+          <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
+            <i class="fa-solid fa-user-shield"></i> Admin Page
+          </button>
+        ` : !state.isLoggedIn() ? `
+          <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
+            <i class="fa-solid fa-user-shield"></i> Admin Portal
+          </button>
+        ` : ''}
       </nav>
 
       <div class="nav-actions">
