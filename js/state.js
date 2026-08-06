@@ -5,9 +5,13 @@
 import { INITIAL_DISHES, RESTAURANT_LOCATIONS, DEFAULT_USER_PROFILE, INITIAL_ORDERS, INITIAL_RESERVATIONS } from './data.js';
 import { 
   isSupabaseConfigured, 
+  supabaseGetCurrentUser,
   supabaseSignIn, 
   supabaseSignUp, 
   supabaseSignOut, 
+  supabaseResetPassword,
+  supabaseSendPhoneOTP,
+  supabaseVerifyPhoneOTP,
   supabaseGetDishes, 
   supabaseSaveDish, 
   supabaseDeleteDish, 
@@ -34,14 +38,9 @@ class AppState {
     this.activeView = 'landing';
     this.theme = localStorage.getItem('sb_theme') || 'dark';
     
-    // User Authentication & Roles
+    // User Authentication & Roles - unauthenticated by default (null) unless explicitly logged in
     const savedUser = localStorage.getItem('sb_user');
-    this.currentUser = savedUser ? JSON.parse(savedUser) : {
-      id: 'usr-admin',
-      name: 'Admin Manager',
-      email: 'admin@savorybites.com',
-      role: 'admin' // 'admin' or 'user'
-    };
+    this.currentUser = savedUser ? JSON.parse(savedUser) : null;
 
     const savedWishlist = localStorage.getItem('sb_wishlist');
     this.wishlist = savedWishlist ? JSON.parse(savedWishlist) : ['dish-1', 'dish-4'];
@@ -85,6 +84,14 @@ class AppState {
   async syncWithSupabase() {
     if (!isSupabaseConfigured()) return;
     try {
+      // Sync active auth user session from Supabase
+      const sbUser = await supabaseGetCurrentUser();
+      if (sbUser) {
+        this.currentUser = sbUser;
+        localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+        this.notify('AUTH_CHANGED', this.currentUser);
+      }
+
       const dbDishes = await supabaseGetDishes();
       if (dbDishes && dbDishes.length > 0) {
         this.dishes = dbDishes;
@@ -134,12 +141,13 @@ class AppState {
   async login(email, password, role = 'user') {
     const cleanEmail = email.trim().toLowerCase();
     const isAdminRole = (role === 'admin' || cleanEmail.includes('admin'));
+    const userRole = isAdminRole ? 'admin' : 'user';
 
     if (isSupabaseConfigured()) {
-      const res = await supabaseSignIn(cleanEmail, password);
+      const res = await supabaseSignIn(cleanEmail, password, userRole);
       if (res.error) {
-        // Fallback to local mode with warning if Supabase user fails
         console.warn('Supabase auth error:', res.error);
+        return { success: false, error: res.error };
       } else if (res.user) {
         this.currentUser = res.user;
         localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
@@ -153,7 +161,7 @@ class AppState {
       id: `usr-${Date.now()}`,
       name: isAdminRole ? 'Admin Manager' : (cleanEmail.split('@')[0] || 'User'),
       email: cleanEmail,
-      role: isAdminRole ? 'admin' : 'user'
+      role: userRole
     };
 
     localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
@@ -204,6 +212,77 @@ class AppState {
     this.profile.name = cleanName;
     this.profile.email = cleanEmail;
     this.saveProfile();
+    localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+    this.notify('AUTH_CHANGED', this.currentUser);
+    return { success: true, user: this.currentUser };
+  }
+
+  async requestPasswordReset(email) {
+    const cleanEmail = email.trim().toLowerCase();
+    if (isSupabaseConfigured()) {
+      const res = await supabaseResetPassword(cleanEmail);
+      if (res.error) {
+        return { success: false, error: res.error };
+      }
+      return { success: true, message: `Password reset instructions sent to ${cleanEmail}` };
+    }
+    // Local Demo Reset Mode
+    return { 
+      success: true, 
+      message: `Demo password reset link generated for ${cleanEmail}! Please check your email inbox.` 
+    };
+  }
+
+  async sendPhoneOTP(phone) {
+    const cleanPhone = phone.trim();
+    if (isSupabaseConfigured()) {
+      const res = await supabaseSendPhoneOTP(cleanPhone);
+      if (res.error) {
+        return { success: false, error: res.error };
+      }
+      return { success: true, phone: res.phone };
+    }
+    // Local Demo OTP Mode
+    const formattedPhone = cleanPhone.startsWith('+') ? cleanPhone : `+91 ${cleanPhone}`;
+    return { 
+      success: true, 
+      phone: formattedPhone, 
+      demoOTP: '123456',
+      message: `Demo OTP [123456] sent to ${formattedPhone}` 
+    };
+  }
+
+  async verifyPhoneOTP(phone, token, role = 'user') {
+    const cleanPhone = phone.trim();
+    const cleanToken = token.trim();
+    const isAdminRole = (role === 'admin');
+
+    if (isSupabaseConfigured()) {
+      const res = await supabaseVerifyPhoneOTP(cleanPhone, cleanToken, role);
+      if (res.error) {
+        return { success: false, error: res.error };
+      } else if (res.user) {
+        this.currentUser = res.user;
+        localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+        this.notify('AUTH_CHANGED', this.currentUser);
+        return { success: true, user: this.currentUser };
+      }
+    }
+
+    // Local Demo Verification Mode (Accept 123456 or any 6-digit code)
+    if (cleanToken.length !== 6) {
+      return { success: false, error: 'Please enter a valid 6-digit OTP code' };
+    }
+
+    const formattedPhone = cleanPhone.startsWith('+') ? cleanPhone : `+91 ${cleanPhone}`;
+    this.currentUser = {
+      id: `usr-phone-${Date.now()}`,
+      name: `User (${formattedPhone.slice(-4)})`,
+      email: `${formattedPhone.replace(/\D/g, '')}@mobile.savorybites.com`,
+      phone: formattedPhone,
+      role: isAdminRole ? 'admin' : 'user'
+    };
+
     localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
     this.notify('AUTH_CHANGED', this.currentUser);
     return { success: true, user: this.currentUser };

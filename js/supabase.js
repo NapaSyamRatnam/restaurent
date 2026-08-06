@@ -80,31 +80,83 @@ export async function supabaseSignUp(email, password, name, role = 'customer') {
   return { data: user };
 }
 
-export async function supabaseSignIn(email, password) {
-  if (!supabase) return { error: 'Supabase client not configured' };
+export async function supabaseGetCurrentUser() {
+  if (!supabase) return null;
+  try {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) return null;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) return { error: error.message };
-
-  const user = data.user;
-  if (user) {
-    // Fetch profile role from database
     const { data: profile } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single();
 
+    const role = profile?.role || user.user_metadata?.role || (user.email.includes('admin') ? 'admin' : 'customer');
+    const name = profile?.name || user.user_metadata?.name || (role === 'admin' ? 'Admin Manager' : user.email.split('@')[0]);
+
+    return {
+      id: user.id,
+      email: user.email,
+      name,
+      role
+    };
+  } catch (err) {
+    console.warn('Error getting Supabase current user:', err);
+    return null;
+  }
+}
+
+export async function supabaseSignIn(email, password, role = 'user') {
+  if (!supabase) return { error: 'Supabase client not configured' };
+
+  let { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  // If user doesn't exist yet in Supabase Auth, attempt sign up with the requested role
+  if (error && (error.message.includes('Invalid login credentials') || error.message.includes('User not found'))) {
+    const defaultName = role === 'admin' || email.includes('admin') ? 'Admin Manager' : email.split('@')[0];
+    const signUpRes = await supabaseSignUp(email, password, defaultName, role === 'admin' ? 'admin' : 'customer');
+    if (!signUpRes.error) {
+      const secondTry = await supabase.auth.signInWithPassword({ email, password });
+      if (secondTry.data?.user) {
+        data = secondTry.data;
+        error = null;
+      }
+    }
+  }
+
+  if (error) return { error: error.message };
+
+  const user = data.user;
+  if (user) {
+    // Fetch profile role from Supabase database
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+    const finalRole = profile?.role || user.user_metadata?.role || (role === 'admin' || email.includes('admin') ? 'admin' : 'customer');
+    const finalName = profile?.name || user.user_metadata?.name || (finalRole === 'admin' ? 'Admin Manager' : email.split('@')[0]);
+
+    // Save & upsert user authentication & profile in Supabase table
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      name: finalName,
+      email: user.email,
+      role: finalRole,
+      updated_at: new Date().toISOString()
+    });
+
     return {
       user: {
         id: user.id,
         email: user.email,
-        name: profile?.name || user.user_metadata?.name || email.split('@')[0],
-        role: profile?.role || user.user_metadata?.role || (email.includes('admin') ? 'admin' : 'customer')
+        name: finalName,
+        role: finalRole
       }
     };
   }
@@ -115,6 +167,59 @@ export async function supabaseSignIn(email, password) {
 export async function supabaseSignOut() {
   if (!supabase) return;
   await supabase.auth.signOut();
+}
+
+export async function supabaseResetPassword(email) {
+  if (!supabase) return { error: 'Supabase client not configured' };
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin
+  });
+  if (error) return { error: error.message };
+  return { success: true, message: 'Password reset link sent to ' + email };
+}
+
+export async function supabaseSendPhoneOTP(phone) {
+  if (!supabase) return { error: 'Supabase client not configured' };
+  const formattedPhone = phone.startsWith('+') ? phone : `+91${phone.replace(/\D/g, '')}`;
+  const { data, error } = await supabase.auth.signInWithOtp({
+    phone: formattedPhone
+  });
+  if (error) return { error: error.message };
+  return { success: true, phone: formattedPhone };
+}
+
+export async function supabaseVerifyPhoneOTP(phone, token, role = 'user') {
+  if (!supabase) return { error: 'Supabase client not configured' };
+  const formattedPhone = phone.startsWith('+') ? phone : `+91${phone.replace(/\D/g, '')}`;
+  const { data, error } = await supabase.auth.verifyOtp({
+    phone: formattedPhone,
+    token,
+    type: 'sms'
+  });
+  if (error) return { error: error.message };
+
+  const user = data.user;
+  if (user) {
+    const userRole = role === 'admin' ? 'admin' : 'customer';
+    const userName = `User (${formattedPhone.slice(-4)})`;
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      phone: formattedPhone,
+      name: userName,
+      role: userRole,
+      updated_at: new Date().toISOString()
+    });
+
+    return {
+      user: {
+        id: user.id,
+        phone: formattedPhone,
+        name: userName,
+        role: userRole
+      }
+    };
+  }
+  return { error: 'Phone verification failed' };
 }
 
 /* --------------------------------------------------------------------------

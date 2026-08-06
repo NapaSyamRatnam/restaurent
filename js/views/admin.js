@@ -33,7 +33,7 @@ export function renderAdminView(container) {
     `;
 
     const loginBtn = document.getElementById('admin-login-redirect-btn');
-    if (loginBtn) loginBtn.onclick = () => state.setView('login');
+    if (loginBtn) loginBtn.onclick = () => state.setView('login', 'admin');
 
     const backBtn = document.getElementById('admin-back-menu-btn');
     if (backBtn) backBtn.onclick = () => state.setView('menu');

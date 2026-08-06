@@ -42,11 +42,9 @@ export function renderNavbar() {
         <button class="nav-link ${activeView === 'location' ? 'active' : ''}" data-nav="location">
           <i class="fa-solid fa-location-dot"></i> Locations
         </button>
-        ${isAdmin ? `
-          <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Dashboard Page">
-            <i class="fa-solid fa-user-shield"></i> Admin Page
-          </button>
-        ` : ''}
+        <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
+          <i class="fa-solid fa-user-shield"></i> ${isAdmin ? 'Admin Page' : 'Admin Portal'}
+        </button>
       </nav>
 
       <div class="nav-actions">
@@ -89,7 +87,7 @@ export function renderNavbar() {
       const targetView = btn.getAttribute('data-nav');
       if (targetView === 'admin' && !state.isAdmin()) {
         showToast('Admin permission required. Please log in as Admin.', 'info');
-        state.setView('login');
+        state.setView('login', 'admin');
       } else {
         state.setView(targetView);
       }
