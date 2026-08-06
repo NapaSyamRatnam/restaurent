@@ -55,6 +55,7 @@ function initApp() {
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'RESERVATIONS_UPDATED') {
       if (state.activeView === 'location') renderLocationView(document.getElementById('app-view'));
+      if (state.activeView === 'account') renderAccountView(document.getElementById('app-view'));
       if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'PROFILE_UPDATED') {
