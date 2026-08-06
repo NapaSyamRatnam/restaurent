@@ -92,8 +92,9 @@ export async function supabaseGetCurrentUser() {
       .eq('id', user.id)
       .single();
 
-    const role = profile?.role || user.user_metadata?.role || (user.email.includes('admin') || user.email === 'syamratnam123@gmail.com' ? 'admin' : 'customer');
-    const name = profile?.name || user.user_metadata?.name || (role === 'admin' ? 'Syam Ratnam (Admin)' : user.email.split('@')[0]);
+    const isExplicitAdmin = user.email.toLowerCase() === 'syamratnam123@gmail.com' || user.email.includes('admin');
+    const role = profile?.role || user.user_metadata?.role || (isExplicitAdmin ? 'admin' : 'customer');
+    const name = profile?.name || user.user_metadata?.name || (isExplicitAdmin ? 'Syam Ratnam (Admin Manager)' : user.email.split('@')[0]);
 
     return {
       id: user.id,
@@ -110,18 +111,21 @@ export async function supabaseGetCurrentUser() {
 export async function supabaseSignIn(email, password, role = 'user') {
   if (!supabase) return { error: 'Supabase client not configured' };
 
+  const cleanEmail = email.trim().toLowerCase();
+  const isAdminManager = cleanEmail === 'syamratnam123@gmail.com' || cleanEmail.includes('admin') || role === 'admin';
+  const defaultAdminName = 'Syam Ratnam (Admin Manager)';
+
   let { data, error } = await supabase.auth.signInWithPassword({
-    email,
+    email: cleanEmail,
     password
   });
 
   // If user doesn't exist yet in Supabase Auth, attempt sign up with the requested role
   if (error && (error.message.includes('Invalid login credentials') || error.message.includes('User not found'))) {
-    const isTargetAdmin = role === 'admin' || email.includes('admin') || email === 'syamratnam123@gmail.com';
-    const defaultName = isTargetAdmin ? 'Syam Ratnam (Admin)' : email.split('@')[0];
-    const signUpRes = await supabaseSignUp(email, password, defaultName, isTargetAdmin ? 'admin' : 'customer');
+    const signUpName = isAdminManager ? defaultAdminName : cleanEmail.split('@')[0];
+    const signUpRes = await supabaseSignUp(cleanEmail, password, signUpName, isAdminManager ? 'admin' : 'customer');
     if (!signUpRes.error) {
-      const secondTry = await supabase.auth.signInWithPassword({ email, password });
+      const secondTry = await supabase.auth.signInWithPassword({ email: cleanEmail, password });
       if (secondTry.data?.user) {
         data = secondTry.data;
         error = null;
@@ -140,8 +144,8 @@ export async function supabaseSignIn(email, password, role = 'user') {
       .eq('id', user.id)
       .single();
 
-    const finalRole = profile?.role || user.user_metadata?.role || (role === 'admin' || email.includes('admin') || email === 'syamratnam123@gmail.com' ? 'admin' : 'customer');
-    const finalName = profile?.name || user.user_metadata?.name || (finalRole === 'admin' ? 'Syam Ratnam (Admin)' : email.split('@')[0]);
+    const finalRole = isAdminManager ? 'admin' : (profile?.role || user.user_metadata?.role || 'customer');
+    const finalName = profile?.name || user.user_metadata?.name || (isAdminManager ? defaultAdminName : cleanEmail.split('@')[0]);
 
     // Save & upsert user authentication & profile in Supabase table
     await supabase.from('profiles').upsert({
@@ -165,6 +169,39 @@ export async function supabaseSignIn(email, password, role = 'user') {
   return { error: 'Sign in failed' };
 }
 
+export async function supabaseUpdateAdminManagerProfile(details = {}) {
+  if (!supabase) return { error: 'Supabase client not configured' };
+
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    const email = details.email || 'syamratnam123@gmail.com';
+    const name = details.name || 'Syam Ratnam (Admin Manager)';
+    const phone = details.phone || '+91 98480 12345';
+    const role = 'admin';
+
+    const payload = {
+      name,
+      email,
+      phone,
+      role,
+      updated_at: new Date().toISOString()
+    };
+
+    if (user) {
+      payload.id = user.id;
+    }
+
+    const { data, error } = await supabase.from('profiles').upsert(payload).select();
+    if (error) {
+      console.error('Error updating admin manager profile in Supabase:', error);
+      return { error: error.message };
+    }
+    return { success: true, data: data[0] };
+  } catch (err) {
+    return { error: err.message };
+  }
+}
+
 export async function supabaseSignOut() {
   if (!supabase) return;
   await supabase.auth.signOut();
@@ -175,8 +212,24 @@ export async function supabaseResetPassword(email) {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: window.location.origin
   });
-  if (error) return { error: error.message };
+  if (error) {
+    if (error.message.toLowerCase().includes('rate limit') || error.message.toLowerCase().includes('limit exceeded')) {
+      return { 
+        error: 'Supabase email rate limit exceeded. Too many reset emails sent recently from Supabase. You can log in directly using your password (e.g. Syam@1234 for syamratnam123@gmail.com) or wait a few minutes before trying again.' 
+      };
+    }
+    return { error: error.message };
+  }
   return { success: true, message: 'Password reset link sent to ' + email };
+}
+
+export async function supabaseUpdatePassword(newPassword) {
+  if (!supabase) return { error: 'Supabase client not configured' };
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword
+  });
+  if (error) return { error: error.message };
+  return { success: true, message: 'Password updated successfully in Supabase Auth' };
 }
 
 export async function supabaseSendPhoneOTP(phone) {

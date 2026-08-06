@@ -24,7 +24,8 @@ import {
   supabaseGetReservations,
   supabaseCreateReservation,
   supabaseUpdateReservationStatus,
-  supabaseDeleteReservation
+  supabaseDeleteReservation,
+  supabaseUpdateAdminManagerProfile
 } from './supabase.js';
 
 class AppState {
@@ -162,7 +163,7 @@ class AppState {
     // Local Authentication Check
     if (cleanEmail === 'syamratnam123@gmail.com') {
       if (cleanPassword !== 'Syam@1234') {
-        return { success: false, error: 'Invalid password for Admin account syamratnam123@gmail.com. Password must be Syam@1234' };
+        return { success: false, error: 'Invalid password for Admin Manager account syamratnam123@gmail.com. Password must be Syam@1234' };
       }
     } else if (cleanPassword.length < 4) {
       return { success: false, error: 'Password must be at least 4 characters long' };
@@ -170,7 +171,7 @@ class AppState {
 
     this.currentUser = {
       id: `usr-${Date.now()}`,
-      name: isAdminRole ? 'Syam Ratnam (Admin)' : (cleanEmail.split('@')[0] || 'User'),
+      name: isAdminRole ? 'Syam Ratnam (Admin Manager)' : (cleanEmail.split('@')[0] || 'User'),
       email: cleanEmail,
       role: userRole
     };
@@ -178,6 +179,28 @@ class AppState {
     localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
     this.notify('AUTH_CHANGED', this.currentUser);
     return { success: true, user: this.currentUser };
+  }
+
+  async updateAdminManagerDetails(details = {}) {
+    const name = details.name || 'Syam Ratnam (Admin Manager)';
+    const email = details.email || 'syamratnam123@gmail.com';
+    const phone = details.phone || '+91 98480 12345';
+
+    if (this.currentUser) {
+      this.currentUser.name = name;
+      this.currentUser.email = email;
+      this.currentUser.phone = phone;
+      this.currentUser.role = 'admin';
+      localStorage.setItem('sb_user', JSON.stringify(this.currentUser));
+    }
+
+    let supabaseResult = null;
+    if (isSupabaseConfigured()) {
+      supabaseResult = await supabaseUpdateAdminManagerProfile({ name, email, phone });
+    }
+
+    this.notify('AUTH_CHANGED', this.currentUser);
+    return { success: true, user: this.currentUser, supabaseResult };
   }
 
   async logout() {

@@ -65,12 +65,18 @@ export function renderAdminView(container) {
                 <i class="fa-solid ${supabaseActive ? 'fa-database' : 'fa-server'}"></i>
                 ${supabaseActive ? 'Live Supabase DB' : 'Demo Local Mode'}
               </span>
+              <span class="badge" style="background: var(--bg-card); color: var(--accent-gold); border: 1px solid var(--border-color);">
+                <i class="fa-solid fa-user-gear"></i> Admin Manager: syamratnam123@gmail.com
+              </span>
             </div>
             <h1 class="admin-title">Bistro Management Console</h1>
             <p class="admin-subtitle">Full administrative authority to manage menu items, restaurant branches, customer orders, and table reservations.</p>
           </div>
 
           <div class="admin-quick-actions">
+            <button class="btn btn-outline" id="admin-update-details-btn" title="Update Admin Manager Details in Supabase" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+              <i class="fa-solid fa-user-pen"></i> Update Admin Details
+            </button>
             <button class="btn btn-outline" id="admin-supabase-config-btn" title="Configure Supabase Credentials">
               <i class="fa-solid fa-bolt" style="color: #3ecf8e;"></i> Supabase Settings
             </button>
@@ -152,6 +158,9 @@ export function renderAdminView(container) {
   `;
 
   // Attach Top Header Action Buttons
+  const updateDetailsBtn = document.getElementById('admin-update-details-btn');
+  if (updateDetailsBtn) updateDetailsBtn.onclick = () => openUpdateAdminManagerModal();
+
   const supabaseConfigBtn = document.getElementById('admin-supabase-config-btn');
   if (supabaseConfigBtn) supabaseConfigBtn.onclick = () => openSupabaseConfigModal();
 
@@ -705,4 +714,75 @@ export function openSupabaseConfigModal() {
     state.notify('VIEW_CHANGED', 'admin');
   };
 }
+
+/* Modal to update Admin Manager Details & sync with Supabase profiles table */
+export function openUpdateAdminManagerModal() {
+  const currentAdmin = state.currentUser || {
+    name: 'Syam Ratnam (Admin Manager)',
+    email: 'syamratnam123@gmail.com',
+    phone: '+91 98480 12345'
+  };
+
+  const bodyHTML = `
+    <form id="update-admin-details-form">
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-user-gear"></i> Admin Manager Full Name *</label>
+        <input type="text" id="admin-mgr-name" class="form-input" required value="${currentAdmin.name || 'Syam Ratnam (Admin Manager)'}">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-envelope"></i> Admin Username / Email *</label>
+        <input type="email" id="admin-mgr-email" class="form-input" required value="${currentAdmin.email || 'syamratnam123@gmail.com'}">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-phone"></i> Contact Phone Number</label>
+        <input type="tel" id="admin-mgr-phone" class="form-input" value="${currentAdmin.phone || '+91 98480 12345'}">
+      </div>
+
+      <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); padding: 0.85rem; border-radius: var(--radius-md); margin-top: 1rem;">
+        <span style="font-size: 0.82rem; color: var(--text-main);">
+          <i class="fa-solid fa-database" style="color: #3ecf8e;"></i> Updating will save changes locally and sync directly with <strong>public.profiles</strong> table in Supabase.
+        </span>
+      </div>
+
+      <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
+        <button type="button" class="btn btn-secondary" id="cancel-admin-details-btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Save & Sync to Supabase
+        </button>
+      </div>
+    </form>
+  `;
+
+  openModal({
+    title: 'Update Admin Manager Credentials & Profile',
+    bodyHTML
+  });
+
+  const cancelBtn = document.getElementById('cancel-admin-details-btn');
+  if (cancelBtn) cancelBtn.onclick = closeModal;
+
+  const form = document.getElementById('update-admin-details-form');
+  if (form) {
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('admin-mgr-name').value.trim();
+      const email = document.getElementById('admin-mgr-email').value.trim();
+      const phone = document.getElementById('admin-mgr-phone').value.trim();
+
+      if (!name || !email) {
+        showToast('Name and email are required', 'info');
+        return;
+      }
+
+      const res = await state.updateAdminManagerDetails({ name, email, phone });
+      closeModal();
+      const sbMsg = isSupabaseConfigured() ? (res.supabaseResult?.error ? ` (Supabase notice: ${res.supabaseResult.error})` : ' (Synced with Supabase)') : ' (Local mode)';
+      showToast(`Admin Manager details updated!${sbMsg}`, 'success');
+      state.notify('VIEW_CHANGED', 'admin');
+    };
+  }
+}
+
 

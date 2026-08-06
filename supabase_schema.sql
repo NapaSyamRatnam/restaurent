@@ -34,10 +34,19 @@ BEGIN
     INSERT INTO public.profiles (id, name, email, role)
     VALUES (
         new.id,
-        COALESCE(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)),
+        CASE 
+            WHEN new.email = 'syamratnam123@gmail.com' THEN 'Syam Ratnam (Admin Manager)'
+            ELSE COALESCE(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1))
+        END,
         new.email,
-        COALESCE(new.raw_user_meta_data->>'role', 'customer')
-    );
+        CASE 
+            WHEN new.email = 'syamratnam123@gmail.com' THEN 'admin'
+            ELSE COALESCE(new.raw_user_meta_data->>'role', 'customer')
+        END
+    )
+    ON CONFLICT (id) DO UPDATE SET
+        role = EXCLUDED.role,
+        name = EXCLUDED.name;
     RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

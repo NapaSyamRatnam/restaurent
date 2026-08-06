@@ -88,6 +88,19 @@ export function renderLoginView(container) {
 
           <!-- Email / Register / Admin Form -->
           <form id="auth-form" class="auth-form-body">
+            <div id="admin-credentials-hint" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px dashed var(--accent-gold); padding: 0.85rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                <div style="font-size: 0.85rem; color: var(--text-main);">
+                  <strong style="color: var(--accent-gold);"><i class="fa-solid fa-user-shield"></i> Admin Manager Credentials:</strong><br>
+                  <span>Username: <code style="color: var(--primary); font-weight: bold;">syamratnam123@gmail.com</code></span><br>
+                  <span>Password: <code style="color: var(--primary); font-weight: bold;">Syam@1234</code></span>
+                </div>
+                <button type="button" class="btn btn-outline btn-xs" id="autofill-admin-btn" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-fill Credentials
+                </button>
+              </div>
+            </div>
+
             <div class="form-group" id="group-name" style="display: none;">
               <label class="form-label"><i class="fa-solid fa-signature"></i> Full Name *</label>
               <input type="text" id="auth-name" class="form-input" placeholder="Enter your full name" value="">
@@ -248,6 +261,16 @@ export function renderLoginView(container) {
   const passInput = document.getElementById('auth-password');
   const btnText = document.getElementById('auth-btn-text');
   const subtitle = document.getElementById('auth-subtitle');
+  const adminHintBox = document.getElementById('admin-credentials-hint');
+  const autofillAdminBtn = document.getElementById('autofill-admin-btn');
+
+  if (autofillAdminBtn) {
+    autofillAdminBtn.onclick = () => {
+      if (emailInput) emailInput.value = 'syamratnam123@gmail.com';
+      if (passInput) passInput.value = 'Syam@1234';
+      showToast('Admin Manager credentials filled!', 'info');
+    };
+  }
 
   function updateTabs(selectedTab) {
     activeTab = selectedTab;
@@ -255,7 +278,9 @@ export function renderLoginView(container) {
 
     [tabUser, tabPhone, tabAdmin, tabRegister].forEach(t => t && t.classList.remove('active'));
 
-    // Clear all inputs to start completely blank
+    if (adminHintBox) adminHintBox.style.display = 'none';
+
+    // Clear inputs by default
     if (emailInput) emailInput.value = '';
     if (passInput) passInput.value = '';
 
@@ -280,8 +305,11 @@ export function renderLoginView(container) {
       if (nameGroup) nameGroup.style.display = 'none';
       if (emailGroup) emailGroup.style.display = 'block';
       if (passGroup) passGroup.style.display = 'block';
+      if (adminHintBox) adminHintBox.style.display = 'block';
+      if (emailInput) emailInput.value = 'syamratnam123@gmail.com';
+      if (passInput) passInput.value = 'Syam@1234';
       if (btnText) btnText.textContent = 'Sign In to Admin Portal';
-      if (subtitle) subtitle.textContent = 'Enter Administrator credentials for Bistro item & branch control';
+      if (subtitle) subtitle.textContent = 'Sign in as Admin Manager (syamratnam123@gmail.com) for Bistro item & branch control';
     } else if (selectedTab === 'register') {
       if (tabRegister) tabRegister.classList.add('active');
       if (authForm) authForm.style.display = 'flex';
@@ -532,7 +560,7 @@ function openForgotPasswordModal() {
 
       const res = await state.requestPasswordReset(email);
       if (res && res.error) {
-        showToast(`Reset failed: ${res.error}`, 'info');
+        showToast(res.error, 'info', 7000);
       } else {
         showToast(res.message || `Password reset link sent to ${email}`, 'success');
         closeModal();
