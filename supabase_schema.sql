@@ -157,6 +157,59 @@ CREATE POLICY "Allow admin to update orders"
     );
 
 
+-- 5. Create Table Reservations Table
+CREATE TABLE IF NOT EXISTS public.reservations (
+    id TEXT PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+    customer_name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT,
+    location_id TEXT REFERENCES public.locations(id) ON DELETE SET NULL,
+    location_name TEXT NOT NULL,
+    date DATE NOT NULL,
+    time TEXT NOT NULL,
+    guests TEXT NOT NULL,
+    special_requests TEXT,
+    status TEXT NOT NULL DEFAULT 'confirmed' CHECK (status IN ('pending', 'confirmed', 'cancelled', 'completed')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Enable RLS for Reservations
+ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
+
+-- Anyone can insert a reservation
+CREATE POLICY "Allow public reservation creation"
+    ON public.reservations FOR INSERT
+    WITH CHECK (true);
+
+-- Users can view their own reservations, admins can view all
+CREATE POLICY "Allow users and admins to view reservations"
+    ON public.reservations FOR SELECT
+    USING (
+        auth.uid() = user_id OR EXISTS (
+            SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
+        ) OR user_id IS NULL
+    );
+
+-- Admins can update reservations
+CREATE POLICY "Allow admin to update reservations"
+    ON public.reservations FOR UPDATE
+    USING (
+        EXISTS (
+            SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
+        )
+    );
+
+-- Admins can delete reservations
+CREATE POLICY "Allow admin to delete reservations"
+    ON public.reservations FOR DELETE
+    USING (
+        EXISTS (
+            SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
+        )
+    );
+
+
 -- Insert Sample Data
 INSERT INTO public.dishes (id, name, category, price, description, prep_time, calories, image, tags, in_stock) VALUES
 ('dish-1', 'Artisanal Wood-Fired Margherita', 'mains', 350.00, 'Hand-stretched sourdough topped with San Marzano tomatoes, fresh buffalo mozzarella, and sweet basil leaves.', '15-20 min', '780 kcal', './assets/woodfired-pizza.png', ARRAY['chefSpecial', 'veg'], true),
@@ -168,3 +221,9 @@ INSERT INTO public.locations (id, name, address, phone, hours, delivery_radius, 
 ('loc-1', 'GT Road Central Branch', 'GT Road Plaza, Opposite District Court, Nellore 524001', '+91 861 234 5678', 'Daily: 11:00 AM - 11:00 PM', '8 km', '20-30 min', ARRAY['AC Dining', 'Valet Parking', 'Family Lounge']),
 ('loc-2', 'Trunk Road Express', 'Near VRC Centre, Trunk Road, Nellore 524002', '+91 861 876 5432', 'Daily: 10:30 AM - 11:30 PM', '6 km', '15-25 min', ARRAY['Rooftop Dining', 'Live Kitchen'])
 ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO public.reservations (id, customer_name, phone, email, location_id, location_name, date, time, guests, special_requests, status) VALUES
+('RES-101', 'Syam', '+91 98480 12345', 'syam@gmail.com', 'loc-1', 'GT Road Central Branch', '2026-08-07', '19:00', '4 Guests', 'Window table & birthday candle for dessert', 'confirmed'),
+('RES-102', 'Anitha Reddy', '+91 98765 43210', 'anitha@example.com', 'loc-2', 'Trunk Road Express', '2026-08-08', '20:00', '2 Guests', 'Rooftop seating preferred', 'confirmed')
+ON CONFLICT (id) DO NOTHING;
+

@@ -4,7 +4,7 @@
 
 import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
-import { openDishModal, openLocationModal } from '../components/adminModal.js';
+import { openDishModal, openLocationModal, openReservationModal } from '../components/adminModal.js';
 import { openModal, closeModal } from '../components/modal.js';
 import { CATEGORIES } from '../data.js';
 import { isSupabaseConfigured, getSupabaseConfig, setSupabaseConfig, supabaseSeedAllData } from '../supabase.js';
@@ -19,7 +19,7 @@ export function renderAdminView(container) {
         <div class="auth-restricted-card">
           <div class="restricted-icon"><i class="fa-solid fa-lock"></i></div>
           <h2>Admin Access Restricted</h2>
-          <p>You need Administrator permissions to view and manage restaurant items, locations, and orders.</p>
+          <p>You need Administrator permissions to view and manage restaurant items, locations, orders, and table reservations.</p>
           <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
             <button class="btn btn-primary" id="admin-login-redirect-btn">
               <i class="fa-solid fa-user-shield"></i> Log In as Admin
@@ -41,7 +41,7 @@ export function renderAdminView(container) {
     return;
   }
 
-  // Active sub-tab inside Admin Page: 'items', 'locations', 'orders'
+  // Active sub-tab inside Admin Page: 'items', 'locations', 'orders', 'reservations'
   let activeTab = 'items';
   const supabaseActive = isSupabaseConfigured();
 
@@ -50,6 +50,7 @@ export function renderAdminView(container) {
   const inStockDishes = state.dishes.filter(d => d.inStock).length;
   const totalLocations = state.locations.length;
   const totalOrders = state.orders.length;
+  const totalReservations = state.reservations.length;
   const totalRevenue = state.orders.reduce((sum, o) => sum + (o.grandTotal || 0), 0).toFixed(2);
 
   container.innerHTML = `
@@ -66,24 +67,27 @@ export function renderAdminView(container) {
               </span>
             </div>
             <h1 class="admin-title">Bistro Management Console</h1>
-            <p class="admin-subtitle">Full administrative authority to manage menu items, restaurant branches, and kitchen orders.</p>
+            <p class="admin-subtitle">Full administrative authority to manage menu items, restaurant branches, customer orders, and table reservations.</p>
           </div>
 
           <div class="admin-quick-actions">
             <button class="btn btn-outline" id="admin-supabase-config-btn" title="Configure Supabase Credentials">
               <i class="fa-solid fa-bolt" style="color: #3ecf8e;"></i> Supabase Settings
             </button>
+            <button class="btn btn-outline" id="admin-add-reservation-btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">
+              <i class="fa-solid fa-chair"></i> Add Reservation
+            </button>
             <button class="btn btn-primary" id="admin-add-item-btn">
-              <i class="fa-solid fa-plus"></i> Add New Menu Item
+              <i class="fa-solid fa-plus"></i> Add Menu Item
             </button>
             <button class="btn btn-accent" id="admin-add-branch-btn">
-              <i class="fa-solid fa-building-circle-check"></i> Add New Branch Location
+              <i class="fa-solid fa-building-circle-check"></i> Add Branch
             </button>
           </div>
         </div>
 
         <!-- Metric Cards Grid -->
-        <div class="admin-metrics-grid">
+        <div class="admin-metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
           <div class="metric-card">
             <div class="metric-icon icon-primary"><i class="fa-solid fa-utensils"></i></div>
             <div class="metric-info">
@@ -96,7 +100,7 @@ export function renderAdminView(container) {
             <div class="metric-icon icon-gold"><i class="fa-solid fa-store"></i></div>
             <div class="metric-info">
               <span class="metric-value">${totalLocations}</span>
-              <span class="metric-label">Active Restaurant Branches</span>
+              <span class="metric-label">Active Branches</span>
             </div>
           </div>
 
@@ -104,7 +108,15 @@ export function renderAdminView(container) {
             <div class="metric-icon icon-blue"><i class="fa-solid fa-basket-shopping"></i></div>
             <div class="metric-info">
               <span class="metric-value">${totalOrders}</span>
-              <span class="metric-label">Total Customer Orders</span>
+              <span class="metric-label">Customer Orders</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green);"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="metric-info">
+              <span class="metric-value">${totalReservations}</span>
+              <span class="metric-label">Table Reservations</span>
             </div>
           </div>
 
@@ -128,6 +140,9 @@ export function renderAdminView(container) {
           <button class="admin-tab" id="tab-admin-orders" data-tab="orders">
             <i class="fa-solid fa-clock-rotate-left"></i> Live Orders (${totalOrders})
           </button>
+          <button class="admin-tab" id="tab-admin-reservations" data-tab="reservations">
+            <i class="fa-solid fa-calendar-check"></i> Table Reservations (${totalReservations})
+          </button>
         </div>
 
         <!-- Admin Content Section -->
@@ -149,14 +164,18 @@ export function renderAdminView(container) {
   const addBranchBtn = document.getElementById('admin-add-branch-btn');
   if (addBranchBtn) addBranchBtn.onclick = () => openLocationModal();
 
+  const addResBtn = document.getElementById('admin-add-reservation-btn');
+  if (addResBtn) addResBtn.onclick = () => openReservationModal();
+
   // Sub-tab Navigation logic
   const itemsTabBtn = document.getElementById('tab-admin-items');
   const locationsTabBtn = document.getElementById('tab-admin-locations');
   const ordersTabBtn = document.getElementById('tab-admin-orders');
+  const reservationsTabBtn = document.getElementById('tab-admin-reservations');
 
   function renderSubTab(tabName) {
     activeTab = tabName;
-    [itemsTabBtn, locationsTabBtn, ordersTabBtn].forEach(b => b && b.classList.remove('active'));
+    [itemsTabBtn, locationsTabBtn, ordersTabBtn, reservationsTabBtn].forEach(b => b && b.classList.remove('active'));
 
     const contentBox = document.getElementById('admin-tab-content');
     if (!contentBox) return;
@@ -170,12 +189,16 @@ export function renderAdminView(container) {
     } else if (tabName === 'orders') {
       if (ordersTabBtn) ordersTabBtn.classList.add('active');
       renderAdminOrdersTab(contentBox);
+    } else if (tabName === 'reservations') {
+      if (reservationsTabBtn) reservationsTabBtn.classList.add('active');
+      renderAdminReservationsTab(contentBox);
     }
   }
 
   if (itemsTabBtn) itemsTabBtn.onclick = () => renderSubTab('items');
   if (locationsTabBtn) locationsTabBtn.onclick = () => renderSubTab('locations');
   if (ordersTabBtn) ordersTabBtn.onclick = () => renderSubTab('orders');
+  if (reservationsTabBtn) reservationsTabBtn.onclick = () => renderSubTab('reservations');
 
   // Initial render of default sub-tab
   renderSubTab('items');
@@ -443,6 +466,120 @@ function renderAdminOrdersTab(container) {
   });
 }
 
+/* Sub-Tab 4: Table Reservations Management */
+function renderAdminReservationsTab(container) {
+  const reservations = state.reservations;
+
+  container.innerHTML = `
+    <div class="admin-table-container">
+      <div class="table-actions-header">
+        <h3><i class="fa-solid fa-calendar-check"></i> Customer Table Reservations</h3>
+        <button class="btn btn-primary btn-sm" id="tab-add-res-btn">
+          <i class="fa-solid fa-plus"></i> Add Table Reservation
+        </button>
+      </div>
+
+      ${reservations.length === 0 ? `
+        <div class="empty-state">
+          <i class="fa-solid fa-chair empty-icon"></i>
+          <h3>No Table Reservations Yet</h3>
+        </div>
+      ` : `
+        <div class="table-responsive">
+          <table class="admin-data-table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Date & Time</th>
+                <th>Customer</th>
+                <th>Branch Location</th>
+                <th>Guests</th>
+                <th>Special Requests</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${reservations.map(resItem => `
+                <tr>
+                  <td><strong>${resItem.id}</strong></td>
+                  <td>
+                    <div>
+                      <strong>${resItem.date}</strong>
+                      <div style="font-size: 0.8rem; color: var(--text-muted);">${resItem.time}</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <strong>${resItem.customerName}</strong>
+                      <div style="font-size: 0.8rem; color: var(--text-muted);">${resItem.phone}</div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-gold"><i class="fa-solid fa-building"></i> ${resItem.locationName}</span></td>
+                  <td><span class="badge badge-primary">${resItem.guests}</span></td>
+                  <td><span style="font-size: 0.85rem; color: var(--text-sub);">${resItem.specialRequests || 'None'}</span></td>
+                  <td>
+                    <select class="admin-res-status-select" data-res-id="${resItem.id}">
+                      <option value="pending" ${resItem.status === 'pending' ? 'selected' : ''}>Pending</option>
+                      <option value="confirmed" ${resItem.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                      <option value="completed" ${resItem.status === 'completed' ? 'selected' : ''}>Completed</option>
+                      <option value="cancelled" ${resItem.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                    </select>
+                  </td>
+                  <td>
+                    <div class="action-buttons-group">
+                      <button class="btn btn-outline btn-xs edit-res-btn" data-res-id="${resItem.id}" title="Edit Reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      <button class="btn btn-outline btn-xs delete-res-btn" data-res-id="${resItem.id}" style="color: var(--danger); border-color: var(--danger);" title="Cancel Reservation">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `}
+    </div>
+  `;
+
+  const addBtn = document.getElementById('tab-add-res-btn');
+  if (addBtn) addBtn.onclick = () => openReservationModal();
+
+  // Status handler
+  container.querySelectorAll('.admin-res-status-select').forEach(select => {
+    select.onchange = async () => {
+      const resId = select.getAttribute('data-res-id');
+      const newStatus = select.value;
+      await state.updateReservationStatus(resId, newStatus);
+      showToast(`Updated reservation ${resId} status to ${newStatus.toUpperCase()}`, 'success');
+    };
+  });
+
+  // Edit handler
+  container.querySelectorAll('.edit-res-btn').forEach(btn => {
+    btn.onclick = () => {
+      const resId = btn.getAttribute('data-res-id');
+      const resItem = state.reservations.find(r => r.id === resId);
+      if (resItem) openReservationModal(resItem);
+    };
+  });
+
+  // Delete handler
+  container.querySelectorAll('.delete-res-btn').forEach(btn => {
+    btn.onclick = async () => {
+      const resId = btn.getAttribute('data-res-id');
+      const resItem = state.reservations.find(r => r.id === resId);
+      if (resItem && confirm(`Cancel reservation for ${resItem.customerName}?`)) {
+        await state.deleteReservation(resId);
+        showToast(`Cancelled reservation ${resId}`, 'info');
+      }
+    };
+  });
+}
+
 /* Supabase Configuration & Setup Modal */
 export function openSupabaseConfigModal() {
   const currentConfig = getSupabaseConfig();
@@ -458,7 +595,7 @@ export function openSupabaseConfigModal() {
           <strong>Status: ${configured ? 'Connected to Supabase DB' : 'Local Demo Mode Active'}</strong>
           <p style="margin: 0.2rem 0 0 0; font-size: 0.82rem;">
             ${configured 
-              ? 'Your bistro app is storing authentication, dishes, locations, and orders in your live Supabase cloud database.' 
+              ? 'Your bistro app is storing authentication, dishes, locations, orders, and table reservations in your live Supabase cloud database.' 
               : 'Enter your Supabase URL & Anon Key below to link your live database and authentication service.'}
           </p>
         </div>
@@ -478,7 +615,7 @@ export function openSupabaseConfigModal() {
         <div class="form-group" style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md);">
           <strong style="font-size: 0.88rem; color: var(--primary);"><i class="fa-solid fa-code"></i> Database Setup SQL Script</strong>
           <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.3rem 0 0.75rem 0;">
-            A complete <code>supabase_schema.sql</code> file has been created at your project root containing table schemas for <code>profiles</code>, <code>dishes</code>, <code>locations</code>, and <code>orders</code> with Row-Level Security policies.
+            A complete <code>supabase_schema.sql</code> file has been created at your project root containing table schemas for <code>profiles</code>, <code>dishes</code>, <code>locations</code>, <code>orders</code>, and <code>reservations</code> with Row-Level Security policies.
           </p>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
             <button type="button" class="btn btn-outline btn-xs" id="copy-sql-guide-btn">
@@ -519,7 +656,7 @@ export function openSupabaseConfigModal() {
   const copySqlBtn = document.getElementById('copy-sql-guide-btn');
   if (copySqlBtn) {
     copySqlBtn.onclick = () => {
-      alert(`Supabase Setup Instructions:\n\n1. Open your Supabase Dashboard (https://app.supabase.com).\n2. Navigate to SQL Editor.\n3. Copy the SQL script from "supabase_schema.sql" in your workspace and paste it into the editor.\n4. Click Run to create tables (profiles, dishes, locations, orders) and security policies!`);
+      alert(`Supabase Setup Instructions:\n\n1. Open your Supabase Dashboard (https://app.supabase.com).\n2. Navigate to SQL Editor.\n3. Copy the SQL script from "supabase_schema.sql" in your workspace and paste it into the editor.\n4. Click Run to create tables (profiles, dishes, locations, orders, reservations) and security policies!`);
     };
   }
 
@@ -528,9 +665,9 @@ export function openSupabaseConfigModal() {
     seedBtn.onclick = async () => {
       seedBtn.disabled = true;
       seedBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Uploading Data to Supabase...`;
-      const res = await supabaseSeedAllData(state.dishes, state.locations, state.orders);
+      const res = await supabaseSeedAllData(state.dishes, state.locations, state.orders, state.reservations);
       if (res && res.success) {
-        showToast(`Successfully seeded Supabase! (${res.seededDishes} Dishes, ${res.seededLocations} Branches, ${res.seededOrders} Orders uploaded)`, 'success', 5000);
+        showToast(`Successfully seeded Supabase! (${res.seededDishes} Dishes, ${res.seededLocations} Branches, ${res.seededOrders} Orders, ${res.seededReservations} Bookings uploaded)`, 'success', 5000);
         closeModal();
         await state.syncWithSupabase();
         state.notify('VIEW_CHANGED', 'admin');

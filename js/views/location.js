@@ -78,11 +78,22 @@ export function renderLocationView(container) {
             <form id="reservation-form">
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
-                  <label class="form-label">Date</label>
-                  <input type="date" id="res-date" class="form-input" required value="2026-08-05">
+                  <label class="form-label">Customer Name *</label>
+                  <input type="text" id="res-name" class="form-input" required value="${state.profile?.name || state.currentUser?.name || 'Syam'}" placeholder="Your Full Name">
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Time</label>
+                  <label class="form-label">Phone Number *</label>
+                  <input type="tel" id="res-phone" class="form-input" required value="${state.profile?.phone || '+91 98480 12345'}" placeholder="+91 Mobile Number">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                  <label class="form-label">Date *</label>
+                  <input type="date" id="res-date" class="form-input" required value="${new Date().toISOString().split('T')[0]}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Time *</label>
                   <select id="res-time" class="form-select">
                     <option value="18:00">6:00 PM</option>
                     <option value="19:00" selected>7:00 PM</option>
@@ -149,14 +160,32 @@ export function renderLocationView(container) {
   // Form submission
   const form = document.getElementById('reservation-form');
   if (form) {
-    form.onsubmit = (e) => {
+    form.onsubmit = async (e) => {
       e.preventDefault();
+      const customerName = document.getElementById('res-name').value.trim();
+      const phone = document.getElementById('res-phone').value.trim();
       const date = document.getElementById('res-date').value;
       const time = document.getElementById('res-time').value;
       const guests = document.getElementById('res-guests').value;
+      const notes = document.getElementById('res-notes').value.trim();
 
-      showToast(`Table Reserved for ${guests} at ${selectedLoc.name} on ${date} @ ${time}!`, 'success', 5000);
-      form.reset();
+      const res = await state.addReservation({
+        customerName,
+        phone,
+        email: state.currentUser?.email || 'customer@gmail.com',
+        locationId: selectedLoc.id,
+        locationName: selectedLoc.name,
+        date,
+        time,
+        guests,
+        specialRequests: notes
+      });
+
+      if (res && res.success) {
+        showToast(`Table Reserved for ${customerName} (${guests}) at ${selectedLoc.name} on ${date} @ ${time}!`, 'success', 6000);
+        form.reset();
+      }
     };
   }
 }
+

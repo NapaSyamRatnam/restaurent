@@ -245,12 +245,71 @@ export async function supabaseUpdateOrderStatus(orderId, status) {
   return { success: true };
 }
 
-export async function supabaseSeedAllData(dishes = [], locations = [], orders = []) {
+/* --------------------------------------------------------------------------
+   RESERVATIONS CRUD METHODS
+   -------------------------------------------------------------------------- */
+export async function supabaseGetReservations() {
+  if (!supabase) return null;
+  const { data, error } = await supabase.from('reservations').select('*').order('created_at', { ascending: false });
+  if (error) {
+    console.error('Error fetching reservations from Supabase:', error);
+    return null;
+  }
+  return data.map(r => ({
+    ...r,
+    customerName: r.customer_name,
+    locationId: r.location_id,
+    locationName: r.location_name,
+    specialRequests: r.special_requests,
+    createdAt: r.created_at
+  }));
+}
+
+export async function supabaseCreateReservation(resObj) {
+  if (!supabase) return null;
+  const dbPayload = {
+    id: resObj.id,
+    customer_name: resObj.customerName,
+    phone: resObj.phone,
+    email: resObj.email || null,
+    location_id: resObj.locationId || null,
+    location_name: resObj.locationName,
+    date: resObj.date,
+    time: resObj.time,
+    guests: resObj.guests,
+    special_requests: resObj.specialRequests || '',
+    status: resObj.status || 'confirmed'
+  };
+
+  const { data, error } = await supabase.from('reservations').insert(dbPayload).select();
+  if (error) {
+    console.error('Error creating reservation in Supabase:', error);
+    return { error: error.message };
+  }
+  return { data: data[0] };
+}
+
+export async function supabaseUpdateReservationStatus(resId, status) {
+  if (!supabase) return null;
+  const { error } = await supabase.from('reservations').update({ status }).eq('id', resId);
+  if (error) return { error: error.message };
+  return { success: true };
+}
+
+export async function supabaseDeleteReservation(resId) {
+  if (!supabase) return null;
+  const { error } = await supabase.from('reservations').delete().eq('id', resId);
+  if (error) return { error: error.message };
+  return { success: true };
+}
+
+export async function supabaseSeedAllData(dishes = [], locations = [], orders = [], reservations = []) {
   if (!supabase) return { error: 'Supabase client not configured' };
 
   let seededDishes = 0;
   let seededLocations = 0;
   let seededOrders = 0;
+  let seededReservations = 0;
 
   for (const d of dishes) {
     const res = await supabaseSaveDish(d);
@@ -267,12 +326,19 @@ export async function supabaseSeedAllData(dishes = [], locations = [], orders = 
     if (!res?.error) seededOrders++;
   }
 
+  for (const r of reservations) {
+    const res = await supabaseCreateReservation(r);
+    if (!res?.error) seededReservations++;
+  }
+
   return {
     success: true,
     seededDishes,
     seededLocations,
-    seededOrders
+    seededOrders,
+    seededReservations
   };
 }
 
 export { supabase };
+

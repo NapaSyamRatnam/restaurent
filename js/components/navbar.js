@@ -25,7 +25,7 @@ export function renderNavbar() {
         <span>SAVORY BITES <span class="brand-accent">BISTRO</span></span>
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" id="main-nav-links">
         <button class="nav-link ${activeView === 'landing' ? 'active' : ''}" data-nav="landing">
           <i class="fa-solid fa-house"></i> Home
         </button>
@@ -67,7 +67,7 @@ export function renderNavbar() {
 
         <button class="btn btn-primary" id="open-cart-btn">
           <i class="fa-solid fa-basket-shopping"></i>
-          <span>Cart</span>
+          <span class="nav-cart-text">Cart</span>
           ${cartCount > 0 ? `<span class="badge-counter">${cartCount}</span>` : ''}
         </button>
 
@@ -82,14 +82,21 @@ export function renderNavbar() {
             <i class="fa-solid fa-right-to-bracket"></i> Login
           </button>
         `}
+
+        <button class="btn-icon mobile-menu-toggle-btn" id="mobile-menu-toggle-btn" title="Toggle Mobile Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
   `;
 
   // Attach navbar event listeners
+  const navLinksElem = document.getElementById('main-nav-links');
+
   document.querySelectorAll('[data-nav]').forEach(btn => {
     btn.onclick = (e) => {
       e.preventDefault();
+      if (navLinksElem) navLinksElem.classList.remove('nav-links-mobile-open');
       const targetView = btn.getAttribute('data-nav');
       if (targetView === 'admin' && !state.isAdmin()) {
         showToast('Admin permission required. Please log in as Admin.', 'info');
@@ -100,10 +107,18 @@ export function renderNavbar() {
     };
   });
 
+  const mobileToggleBtn = document.getElementById('mobile-menu-toggle-btn');
+  if (mobileToggleBtn && navLinksElem) {
+    mobileToggleBtn.onclick = () => {
+      navLinksElem.classList.toggle('nav-links-mobile-open');
+    };
+  }
+
   const brandBtn = document.getElementById('nav-brand-btn');
   if (brandBtn) {
     brandBtn.onclick = (e) => {
       e.preventDefault();
+      if (navLinksElem) navLinksElem.classList.remove('nav-links-mobile-open');
       state.setView('landing');
     };
   }
@@ -157,3 +172,4 @@ export function renderNavbar() {
     loginBtn.onclick = () => state.setView('login');
   }
 }
+

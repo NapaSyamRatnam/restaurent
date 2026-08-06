@@ -2,7 +2,7 @@
    APPLICATION STATE MANAGEMENT & LOCAL STORAGE PERSISTENCE
    ========================================================================== */
 
-import { INITIAL_DISHES, RESTAURANT_LOCATIONS, DEFAULT_USER_PROFILE, INITIAL_ORDERS } from './data.js';
+import { INITIAL_DISHES, RESTAURANT_LOCATIONS, DEFAULT_USER_PROFILE, INITIAL_ORDERS, INITIAL_RESERVATIONS } from './data.js';
 import { 
   isSupabaseConfigured, 
   supabaseSignIn, 
@@ -16,7 +16,11 @@ import {
   supabaseDeleteLocation, 
   supabaseGetOrders, 
   supabaseCreateOrder, 
-  supabaseUpdateOrderStatus 
+  supabaseUpdateOrderStatus,
+  supabaseGetReservations,
+  supabaseCreateReservation,
+  supabaseUpdateReservationStatus,
+  supabaseDeleteReservation
 } from './supabase.js';
 
 class AppState {
@@ -61,6 +65,9 @@ class AppState {
     const savedOrders = localStorage.getItem('sb_orders');
     this.orders = savedOrders ? JSON.parse(savedOrders) : INITIAL_ORDERS;
 
+    const savedReservations = localStorage.getItem('sb_reservations');
+    this.reservations = savedReservations ? JSON.parse(savedReservations) : INITIAL_RESERVATIONS;
+
     const savedLocations = localStorage.getItem('sb_locations');
     this.locations = savedLocations ? JSON.parse(savedLocations) : RESTAURANT_LOCATIONS;
     this.selectedLocation = this.locations[0] || RESTAURANT_LOCATIONS[0];
@@ -98,6 +105,13 @@ class AppState {
         this.orders = dbOrders;
         localStorage.setItem('sb_orders', JSON.stringify(this.orders));
         this.notify('ORDER_STATUS_UPDATED', this.orders);
+      }
+
+      const dbReservations = await supabaseGetReservations();
+      if (dbReservations && dbReservations.length > 0) {
+        this.reservations = dbReservations;
+        this.saveReservations();
+        this.notify('RESERVATIONS_UPDATED', this.reservations);
       }
     } catch (err) {
       console.warn('Supabase sync error:', err);
@@ -586,6 +600,63 @@ class AppState {
   saveProfile() {
     localStorage.setItem('sb_profile', JSON.stringify(this.profile));
   }
+
+  // Table Reservations Management
+  async addReservation(resObj) {
+    const newReservation = {
+      id: `RES-${Math.floor(1000 + Math.random() * 9000)}`,
+      customerName: resObj.customerName || (this.currentUser?.name || 'Guest'),
+      phone: resObj.phone || '+91 98480 12345',
+      email: resObj.email || (this.currentUser?.email || ''),
+      locationId: resObj.locationId || (this.selectedLocation?.id || 'loc-1'),
+      locationName: resObj.locationName || (this.selectedLocation?.name || 'GT Road Central'),
+      date: resObj.date || new Date().toISOString().split('T')[0],
+      time: resObj.time || '19:00',
+      guests: resObj.guests || '2 Guests',
+      specialRequests: resObj.specialRequests || resObj.notes || '',
+      status: 'confirmed',
+      createdAt: new Date().toISOString()
+    };
+
+    this.reservations.unshift(newReservation);
+    this.saveReservations();
+
+    if (isSupabaseConfigured()) {
+      await supabaseCreateReservation(newReservation);
+    }
+
+    this.notify('RESERVATIONS_UPDATED', newReservation);
+    return { success: true, reservation: newReservation };
+  }
+
+  async updateReservationStatus(resId, newStatus) {
+    const resItem = this.reservations.find(r => r.id === resId);
+    if (resItem) {
+      resItem.status = newStatus;
+      this.saveReservations();
+      if (isSupabaseConfigured()) {
+        await supabaseUpdateReservationStatus(resId, newStatus);
+      }
+      this.notify('RESERVATIONS_UPDATED', resItem);
+      return { success: true, reservation: resItem };
+    }
+    return { success: false, message: 'Reservation not found' };
+  }
+
+  async deleteReservation(resId) {
+    this.reservations = this.reservations.filter(r => r.id !== resId);
+    this.saveReservations();
+    if (isSupabaseConfigured()) {
+      await supabaseDeleteReservation(resId);
+    }
+    this.notify('RESERVATIONS_UPDATED', resId);
+    return { success: true };
+  }
+
+  saveReservations() {
+    localStorage.setItem('sb_reservations', JSON.stringify(this.reservations));
+  }
 }
 
 export const state = new AppState();
+

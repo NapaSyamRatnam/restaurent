@@ -262,3 +262,35 @@ export const INITIAL_ORDERS = [
     driverPhone: '+91 98480 77112'
   }
 ];
+
+export const INITIAL_RESERVATIONS = [
+  {
+    id: 'RES-101',
+    customerName: 'Syam',
+    phone: '+91 98480 12345',
+    email: 'syam@gmail.com',
+    locationId: 'loc-1',
+    locationName: 'GT Road Central (Flagship)',
+    date: '2026-08-07',
+    time: '19:00',
+    guests: '4 Guests',
+    specialRequests: 'Window table & birthday candle for dessert',
+    status: 'confirmed',
+    createdAt: '2026-08-05T10:00:00.000Z'
+  },
+  {
+    id: 'RES-102',
+    customerName: 'Anitha Reddy',
+    phone: '+91 98765 43210',
+    email: 'anitha@example.com',
+    locationId: 'loc-2',
+    locationName: 'Magunta Layout Bistro',
+    date: '2026-08-08',
+    time: '20:00',
+    guests: '2 Guests',
+    specialRequests: 'Rooftop seating preferred',
+    status: 'confirmed',
+    createdAt: '2026-08-05T14:30:00.000Z'
+  }
+];
+

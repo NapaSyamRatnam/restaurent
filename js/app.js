@@ -43,11 +43,17 @@ function initApp() {
       if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'STOCK_UPDATED') {
+      if (state.activeView === 'landing') renderLandingView(document.getElementById('app-view'));
       if (state.activeView === 'menu') renderMenuView(document.getElementById('app-view'));
       if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
     } else if (event === 'LOCATIONS_UPDATED') {
       renderNavbar();
+      if (state.activeView === 'landing') renderLandingView(document.getElementById('app-view'));
+      if (state.activeView === 'location') renderLocationView(document.getElementById('app-view'));
+      if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
+      if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));
+    } else if (event === 'RESERVATIONS_UPDATED') {
       if (state.activeView === 'location') renderLocationView(document.getElementById('app-view'));
       if (state.activeView === 'admin') renderAdminView(document.getElementById('app-view'));
       if (state.activeView === 'staff') renderStaffView(document.getElementById('app-view'));

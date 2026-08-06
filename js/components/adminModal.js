@@ -285,3 +285,160 @@ export function openLocationModal(locToEdit = null) {
     closeModal();
   };
 }
+
+export function openReservationModal(resToEdit = null) {
+  if (!state.isAdmin()) {
+    showToast('Admin permission required. Please log in as Admin.', 'info');
+    state.setView('login');
+    return;
+  }
+
+  const isEdit = !!resToEdit;
+  const title = isEdit ? `Manage Reservation: ${resToEdit.id}` : 'Create New Table Reservation';
+
+  const bodyHTML = `
+    <form id="admin-reservation-form">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Customer Name *</label>
+          <input type="text" id="admin-res-name" class="form-input" required value="${isEdit ? resToEdit.customerName : ''}" placeholder="Customer full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input type="tel" id="admin-res-phone" class="form-input" required value="${isEdit ? resToEdit.phone : ''}" placeholder="+91 Mobile number">
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Restaurant Branch *</label>
+          <select id="admin-res-branch" class="form-select">
+            ${state.locations.map(loc => `
+              <option value="${loc.id}" ${isEdit && resToEdit.locationId === loc.id ? 'selected' : ''}>${loc.name}</option>
+            `).join('')}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Status *</label>
+          <select id="admin-res-status" class="form-select">
+            <option value="pending" ${isEdit && resToEdit.status === 'pending' ? 'selected' : ''}>Pending</option>
+            <option value="confirmed" ${!isEdit || (isEdit && resToEdit.status === 'confirmed') ? 'selected' : ''}>Confirmed</option>
+            <option value="completed" ${isEdit && resToEdit.status === 'completed' ? 'selected' : ''}>Completed</option>
+            <option value="cancelled" ${isEdit && resToEdit.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Date *</label>
+          <input type="date" id="admin-res-date" class="form-input" required value="${isEdit ? resToEdit.date : new Date().toISOString().split('T')[0]}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Time *</label>
+          <select id="admin-res-time" class="form-select">
+            <option value="18:00" ${isEdit && resToEdit.time === '18:00' ? 'selected' : ''}>6:00 PM</option>
+            <option value="19:00" ${!isEdit || (isEdit && resToEdit.time === '19:00') ? 'selected' : ''}>7:00 PM</option>
+            <option value="20:00" ${isEdit && resToEdit.time === '20:00' ? 'selected' : ''}>8:00 PM</option>
+            <option value="21:00" ${isEdit && resToEdit.time === '21:00' ? 'selected' : ''}>9:00 PM</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Guests *</label>
+          <select id="admin-res-guests" class="form-select">
+            <option value="2 Guests" ${isEdit && resToEdit.guests === '2 Guests' ? 'selected' : ''}>2 Guests</option>
+            <option value="4 Guests" ${!isEdit || (isEdit && resToEdit.guests === '4 Guests') ? 'selected' : ''}>4 Guests</option>
+            <option value="6 Guests" ${isEdit && resToEdit.guests === '6 Guests' ? 'selected' : ''}>6 Guests</option>
+            <option value="8+ Guests" ${isEdit && resToEdit.guests === '8+ Guests' ? 'selected' : ''}>8+ Guests</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Special Requests (Optional)</label>
+        <input type="text" id="admin-res-notes" class="form-input" value="${isEdit ? (resToEdit.specialRequests || '') : ''}" placeholder="Window table, birthday, allergy notes...">
+      </div>
+    </form>
+  `;
+
+  const footerHTML = `
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+      ${isEdit ? `
+        <button class="btn btn-outline" id="modal-delete-res-btn" style="color: #ef4444; border-color: #ef4444;">
+          <i class="fa-solid fa-trash"></i> Cancel Reservation
+        </button>
+      ` : '<div></div>'}
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-secondary" id="modal-cancel-res">Close</button>
+        <button class="btn btn-primary" id="modal-save-res">${isEdit ? 'Update Reservation' : 'Create Reservation'}</button>
+      </div>
+    </div>
+  `;
+
+  openModal({ title, bodyHTML, footerHTML });
+
+  document.getElementById('modal-cancel-res').onclick = closeModal;
+
+  if (isEdit) {
+    const delBtn = document.getElementById('modal-delete-res-btn');
+    if (delBtn) {
+      delBtn.onclick = async () => {
+        if (confirm(`Cancel reservation for ${resToEdit.customerName}?`)) {
+          await state.deleteReservation(resToEdit.id);
+          closeModal();
+          showToast(`Cancelled reservation ${resToEdit.id}`, 'info');
+        }
+      };
+    }
+  }
+
+  document.getElementById('modal-save-res').onclick = async () => {
+    const customerName = document.getElementById('admin-res-name').value.trim();
+    const phone = document.getElementById('admin-res-phone').value.trim();
+    const locId = document.getElementById('admin-res-branch').value;
+    const locObj = state.locations.find(l => l.id === locId) || state.locations[0];
+    const status = document.getElementById('admin-res-status').value;
+    const date = document.getElementById('admin-res-date').value;
+    const time = document.getElementById('admin-res-time').value;
+    const guests = document.getElementById('admin-res-guests').value;
+    const notes = document.getElementById('admin-res-notes').value.trim();
+
+    if (!customerName || !phone) {
+      showToast('Please enter customer name and phone number', 'info');
+      return;
+    }
+
+    if (isEdit) {
+      resToEdit.customerName = customerName;
+      resToEdit.phone = phone;
+      resToEdit.locationId = locObj.id;
+      resToEdit.locationName = locObj.name;
+      resToEdit.date = date;
+      resToEdit.time = time;
+      resToEdit.guests = guests;
+      resToEdit.specialRequests = notes;
+      await state.updateReservationStatus(resToEdit.id, status);
+      showToast(`Updated reservation for ${customerName}`, 'success');
+    } else {
+      await state.addReservation({
+        customerName,
+        phone,
+        locationId: locObj.id,
+        locationName: locObj.name,
+        date,
+        time,
+        guests,
+        specialRequests: notes,
+        status
+      });
+      showToast(`Created table reservation for ${customerName}`, 'success');
+    }
+
+    closeModal();
+  };
+}
+
