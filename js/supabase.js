@@ -92,8 +92,8 @@ export async function supabaseGetCurrentUser() {
       .eq('id', user.id)
       .single();
 
-    const role = profile?.role || user.user_metadata?.role || (user.email.includes('admin') ? 'admin' : 'customer');
-    const name = profile?.name || user.user_metadata?.name || (role === 'admin' ? 'Admin Manager' : user.email.split('@')[0]);
+    const role = profile?.role || user.user_metadata?.role || (user.email.includes('admin') || user.email === 'syamratnam123@gmail.com' ? 'admin' : 'customer');
+    const name = profile?.name || user.user_metadata?.name || (role === 'admin' ? 'Syam Ratnam (Admin)' : user.email.split('@')[0]);
 
     return {
       id: user.id,
@@ -117,8 +117,9 @@ export async function supabaseSignIn(email, password, role = 'user') {
 
   // If user doesn't exist yet in Supabase Auth, attempt sign up with the requested role
   if (error && (error.message.includes('Invalid login credentials') || error.message.includes('User not found'))) {
-    const defaultName = role === 'admin' || email.includes('admin') ? 'Admin Manager' : email.split('@')[0];
-    const signUpRes = await supabaseSignUp(email, password, defaultName, role === 'admin' ? 'admin' : 'customer');
+    const isTargetAdmin = role === 'admin' || email.includes('admin') || email === 'syamratnam123@gmail.com';
+    const defaultName = isTargetAdmin ? 'Syam Ratnam (Admin)' : email.split('@')[0];
+    const signUpRes = await supabaseSignUp(email, password, defaultName, isTargetAdmin ? 'admin' : 'customer');
     if (!signUpRes.error) {
       const secondTry = await supabase.auth.signInWithPassword({ email, password });
       if (secondTry.data?.user) {
@@ -139,8 +140,8 @@ export async function supabaseSignIn(email, password, role = 'user') {
       .eq('id', user.id)
       .single();
 
-    const finalRole = profile?.role || user.user_metadata?.role || (role === 'admin' || email.includes('admin') ? 'admin' : 'customer');
-    const finalName = profile?.name || user.user_metadata?.name || (finalRole === 'admin' ? 'Admin Manager' : email.split('@')[0]);
+    const finalRole = profile?.role || user.user_metadata?.role || (role === 'admin' || email.includes('admin') || email === 'syamratnam123@gmail.com' ? 'admin' : 'customer');
+    const finalName = profile?.name || user.user_metadata?.name || (finalRole === 'admin' ? 'Syam Ratnam (Admin)' : email.split('@')[0]);
 
     // Save & upsert user authentication & profile in Supabase table
     await supabase.from('profiles').upsert({

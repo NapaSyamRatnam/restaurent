@@ -139,7 +139,7 @@ class AppState {
   async login(email, password, role = 'user') {
     const cleanEmail = email.trim().toLowerCase();
     const cleanPassword = password.trim();
-    const isAdminRole = (role === 'admin' || cleanEmail.includes('admin'));
+    const isAdminRole = (role === 'admin' || cleanEmail.includes('admin') || cleanEmail === 'syamratnam123@gmail.com');
     const userRole = isAdminRole ? 'admin' : 'user';
 
     if (!cleanEmail || !cleanPassword) {
@@ -166,7 +166,7 @@ class AppState {
 
     this.currentUser = {
       id: `usr-${Date.now()}`,
-      name: isAdminRole ? 'Admin Manager' : (cleanEmail.split('@')[0] || 'User'),
+      name: isAdminRole ? 'Syam Ratnam (Admin)' : (cleanEmail.split('@')[0] || 'User'),
       email: cleanEmail,
       role: userRole
     };
