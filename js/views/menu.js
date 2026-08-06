@@ -230,6 +230,11 @@ export function renderMenuView(container) {
   document.querySelectorAll('[data-wishlist-id]').forEach(btn => {
     btn.onclick = (e) => {
       e.stopPropagation();
+      if (!state.isLoggedIn()) {
+        showToast('Please log in to save items to your Wishlist.', 'info');
+        state.setView('login');
+        return;
+      }
       const dishId = btn.getAttribute('data-wishlist-id');
       state.toggleWishlist(dishId);
       const isNowWishlisted = state.isWishlisted(dishId);

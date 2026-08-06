@@ -6,6 +6,34 @@ import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
 
 export function renderWishlistView(container) {
+  if (!state.isLoggedIn()) {
+    container.innerHTML = `
+      <div class="container" style="padding: 4rem 1.5rem; text-align: center;">
+        <div class="auth-restricted-card">
+          <div class="restricted-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--accent-red);"><i class="fa-solid fa-heart"></i></div>
+          <h2>Authentication Required</h2>
+          <p>Please log in to your account to view and manage your saved wishlist items.</p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+            <button class="btn btn-primary" id="wishlist-login-redirect-btn">
+              <i class="fa-solid fa-right-to-bracket"></i> Log In Now
+            </button>
+            <button class="btn btn-outline" id="wishlist-back-menu-btn">
+              <i class="fa-solid fa-utensils"></i> Browse Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const loginBtn = document.getElementById('wishlist-login-redirect-btn');
+    if (loginBtn) loginBtn.onclick = () => state.setView('login');
+
+    const backBtn = document.getElementById('wishlist-back-menu-btn');
+    if (backBtn) backBtn.onclick = () => state.setView('menu');
+
+    return;
+  }
+
   const wishlistedDishes = state.dishes.filter(dish => state.wishlist.includes(dish.id));
 
   container.innerHTML = `

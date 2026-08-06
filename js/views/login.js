@@ -48,6 +48,15 @@ export function renderLoginView(container) {
                 <button class="btn btn-primary btn-full" id="auth-goto-menu-btn">
                   <i class="fa-solid fa-utensils"></i> Browse Gourmet Menu
                 </button>
+                <button class="btn btn-secondary btn-full" id="auth-goto-wishlist-btn">
+                  <i class="fa-solid fa-heart" style="color: var(--accent-red);"></i> My Saved Wishlist (${state.wishlist.length})
+                </button>
+                <button class="btn btn-secondary btn-full" id="auth-goto-orders-btn">
+                  <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Track Active Orders
+                </button>
+                <button class="btn btn-outline btn-full" id="auth-goto-account-btn">
+                  <i class="fa-solid fa-user-gear"></i> Account Profile & Reservations
+                </button>
               `}
               <button class="btn btn-outline btn-full" id="auth-logout-btn" style="border-color: var(--danger); color: var(--danger);">
                 <i class="fa-solid fa-right-from-bracket"></i> Switch Account / Logout
@@ -166,6 +175,15 @@ export function renderLoginView(container) {
 
   const gotoMenuBtn = document.getElementById('auth-goto-menu-btn');
   if (gotoMenuBtn) gotoMenuBtn.onclick = () => state.setView('menu');
+
+  const gotoWishlistBtn = document.getElementById('auth-goto-wishlist-btn');
+  if (gotoWishlistBtn) gotoWishlistBtn.onclick = () => state.setView('wishlist');
+
+  const gotoOrdersBtn = document.getElementById('auth-goto-orders-btn');
+  if (gotoOrdersBtn) gotoOrdersBtn.onclick = () => state.setView('orders');
+
+  const gotoAccountBtn = document.getElementById('auth-goto-account-btn');
+  if (gotoAccountBtn) gotoAccountBtn.onclick = () => state.setView('account');
 
   const logoutBtn = document.getElementById('auth-logout-btn');
   if (logoutBtn) {

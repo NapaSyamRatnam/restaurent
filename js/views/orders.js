@@ -6,6 +6,34 @@ import { state } from '../state.js';
 import { showToast } from '../components/toast.js';
 
 export function renderOrdersView(container) {
+  if (!state.isLoggedIn()) {
+    container.innerHTML = `
+      <div class="container" style="padding: 4rem 1.5rem; text-align: center;">
+        <div class="auth-restricted-card">
+          <div class="restricted-icon" style="background: var(--primary-light); color: var(--primary);"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <h2>Authentication Required</h2>
+          <p>Please log in to your account to view live order tracking and past dining receipts.</p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+            <button class="btn btn-primary" id="orders-login-redirect-btn">
+              <i class="fa-solid fa-right-to-bracket"></i> Log In Now
+            </button>
+            <button class="btn btn-outline" id="orders-back-menu-btn">
+              <i class="fa-solid fa-utensils"></i> Browse Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const loginBtn = document.getElementById('orders-login-redirect-btn');
+    if (loginBtn) loginBtn.onclick = () => state.setView('login');
+
+    const backBtn = document.getElementById('orders-back-menu-btn');
+    if (backBtn) backBtn.onclick = () => state.setView('menu');
+
+    return;
+  }
+
   const activeOrders = state.orders.filter(o => o.status !== 'delivered');
   const pastOrders = state.orders.filter(o => o.status === 'delivered');
 

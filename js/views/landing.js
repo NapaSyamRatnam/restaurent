@@ -231,6 +231,11 @@ export function renderLandingView(container) {
   // Wishlist listener for featured dishes
   document.querySelectorAll('.dish-wishlist-btn').forEach(btn => {
     btn.onclick = () => {
+      if (!state.isLoggedIn()) {
+        showToast('Please log in to save items to your Wishlist.', 'info');
+        state.setView('login');
+        return;
+      }
       const id = btn.getAttribute('data-wishlist-id');
       state.toggleWishlist(id);
       renderLandingView(container);
