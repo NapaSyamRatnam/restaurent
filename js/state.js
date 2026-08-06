@@ -160,7 +160,11 @@ class AppState {
     }
 
     // Local Authentication Check
-    if (cleanPassword.length < 4) {
+    if (cleanEmail === 'syamratnam123@gmail.com') {
+      if (cleanPassword !== 'Syam@1234') {
+        return { success: false, error: 'Invalid password for Admin account syamratnam123@gmail.com. Password must be Syam@1234' };
+      }
+    } else if (cleanPassword.length < 4) {
       return { success: false, error: 'Password must be at least 4 characters long' };
     }
 
