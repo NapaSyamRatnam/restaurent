@@ -667,6 +667,7 @@ CREATE TABLE IF NOT EXISTS public.locations (
 
 CREATE TABLE IF NOT EXISTS public.orders (
   id TEXT PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   customer_name TEXT,
   phone TEXT,
   delivery_address TEXT,
@@ -678,8 +679,11 @@ CREATE TABLE IF NOT EXISTS public.orders (
   date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
+
 CREATE TABLE IF NOT EXISTS public.reservations (
   id TEXT PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   customer_name TEXT NOT NULL,
   phone TEXT NOT NULL,
   email TEXT,
@@ -692,6 +696,8 @@ CREATE TABLE IF NOT EXISTS public.reservations (
   status TEXT DEFAULT 'confirmed',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+ALTER TABLE public.reservations ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.dishes ENABLE ROW LEVEL SECURITY;

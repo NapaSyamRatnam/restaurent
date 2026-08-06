@@ -14,6 +14,9 @@ CREATE TABLE IF NOT EXISTS public.profiles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS phone TEXT;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS reward_points INT DEFAULT 100;
+
 -- Enable RLS for Profiles
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
@@ -76,6 +79,10 @@ CREATE TABLE IF NOT EXISTS public.dishes (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+ALTER TABLE public.dishes ADD COLUMN IF NOT EXISTS prep_time TEXT DEFAULT '15-20 min';
+ALTER TABLE public.dishes ADD COLUMN IF NOT EXISTS calories TEXT DEFAULT '500 kcal';
+ALTER TABLE public.dishes ADD COLUMN IF NOT EXISTS in_stock BOOLEAN DEFAULT TRUE;
+
 -- Enable RLS for Dishes
 ALTER TABLE public.dishes ENABLE ROW LEVEL SECURITY;
 
@@ -107,6 +114,8 @@ CREATE TABLE IF NOT EXISTS public.locations (
     features TEXT[] DEFAULT '{}',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+ALTER TABLE public.locations ADD COLUMN IF NOT EXISTS features TEXT[] DEFAULT '{}';
 
 -- Enable RLS for Locations
 ALTER TABLE public.locations ENABLE ROW LEVEL SECURITY;
@@ -141,6 +150,9 @@ CREATE TABLE IF NOT EXISTS public.orders (
     date TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- Ensure user_id column exists if table was created previously without it
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
+
 -- Enable RLS for Orders
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 
@@ -148,9 +160,9 @@ DROP POLICY IF EXISTS "Allow users and admins to view orders" ON public.orders;
 CREATE POLICY "Allow users and admins to view orders"
     ON public.orders FOR SELECT
     USING (
-        auth.uid() = user_id OR EXISTS (
+        user_id IS NULL OR auth.uid() = user_id OR EXISTS (
             SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
-        ) OR user_id IS NULL
+        )
     );
 
 DROP POLICY IF EXISTS "Allow order creation" ON public.orders;
@@ -185,6 +197,12 @@ CREATE TABLE IF NOT EXISTS public.reservations (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- Ensure user_id and other columns exist if table was created previously without them
+ALTER TABLE public.reservations ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
+ALTER TABLE public.reservations ADD COLUMN IF NOT EXISTS email TEXT;
+ALTER TABLE public.reservations ADD COLUMN IF NOT EXISTS location_id TEXT REFERENCES public.locations(id) ON DELETE SET NULL;
+ALTER TABLE public.reservations ADD COLUMN IF NOT EXISTS special_requests TEXT;
+
 -- Enable RLS for Reservations
 ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
 
@@ -197,9 +215,9 @@ DROP POLICY IF EXISTS "Allow users and admins to view reservations" ON public.re
 CREATE POLICY "Allow users and admins to view reservations"
     ON public.reservations FOR SELECT
     USING (
-        auth.uid() = user_id OR EXISTS (
+        user_id IS NULL OR auth.uid() = user_id OR EXISTS (
             SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
-        ) OR user_id IS NULL
+        )
     );
 
 DROP POLICY IF EXISTS "Allow admin to update reservations" ON public.reservations;
