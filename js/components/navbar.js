@@ -48,10 +48,6 @@ export function renderNavbar() {
           <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
             <i class="fa-solid fa-user-shield"></i> Admin Page
           </button>
-        ` : !state.isLoggedIn() ? `
-          <button class="nav-link nav-admin-link ${activeView === 'admin' ? 'active' : ''}" data-nav="admin" title="Admin Portal">
-            <i class="fa-solid fa-user-shield"></i> Admin Portal
-          </button>
         ` : ''}
       </nav>
 

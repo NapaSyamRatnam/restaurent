@@ -27,11 +27,6 @@ export function renderLoginView(container) {
           </div>
           <h2>Savory Bites Portal</h2>
           <p id="auth-subtitle">Log in to manage orders, wishlist, and account preferences</p>
-          <div style="margin-top: 0.75rem;">
-            <button type="button" class="btn btn-outline btn-sm" id="auth-supabase-config-btn" style="border-color: ${supabaseActive ? '#10b981' : 'var(--accent-gold)'}; color: ${supabaseActive ? '#10b981' : 'var(--accent-gold)'}; font-size: 0.8rem; border-radius: var(--radius-full);">
-              <i class="fa-solid ${supabaseActive ? 'fa-database' : 'fa-bolt'}"></i> ${supabaseActive ? 'Live Supabase Connected' : 'Connect Supabase DB'}
-            </button>
-          </div>
         </div>
 
         ${currentUser ? `
